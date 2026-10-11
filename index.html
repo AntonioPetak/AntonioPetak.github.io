@@ -334,6 +334,69 @@
                     </div>
                 </div>
 
+                <!-- Projekt 3 -->
+
+                <div class="bg-cardBg border border-slate-800 rounded-2xl p-6 shadow-xl" x-data="{ currentSlide: 0, totalSlides: 10 }">
+                <div class="mb-4">
+                    <h3 class="text-xl font-bold text-white">Designer Clothing Budgeting Dashboard</h3>
+                    <p class="text-sm text-slate-400">A comprehensive Power BI financial and budgeting dashboard built for a luxury fashion brand to monitor revenue, sales orders, and budget iterations.
+                        The report tracks key financial metrics (Actual Total $14M vs. Budget 1st/2nd Pass up to $23M), client-level order distributions across major retail partners (e.g., Harrods, Galeries Lafayette, Saks Fifth Avenue), and detailed budget-to-actual variance reports categorized by company groups.
+                        Features dynamic drill-downs via Decomposition Trees for regional sales breakdown analysis and custom slicer panels for filtering by season, collection, and geography.</p>
+                </div>
+
+                <!-- Karusel kontejner -->
+                <div class="relative overflow-hidden rounded-xl border border-slate-700/80 bg-slate-900 group">
+                    <div class="flex transition-transform duration-300 ease-in-out" :style="'transform: translateX(-' + (currentSlide * 100) + '%)'">
+                        <!-- Slika 1 -->
+                        <div class="w-full flex-shrink-0">
+                            <img src="Social Metrics/1" alt="Social Metrics" class="w-full h-auto object-cover">
+                        </div>
+                        <!-- Slika 2 -->
+                        <div class="w-full flex-shrink-0">
+                            <img src="Social Metrics/11" alt="Social Metrics" class="w-full h-auto object-cover">
+                        </div>
+                        <div class="w-full flex-shrink-0">
+                            <img src="Social Metrics/2" alt="Social Metrics" class="w-full h-auto object-cover">
+                        </div>
+                        <div class="w-full flex-shrink-0">
+                            <img src="Social Metrics/3" alt="Social Metrics" class="w-full h-auto object-cover">
+                        </div>
+                        <div class="w-full flex-shrink-0">
+                            <img src="Social Metrics/4" alt="Social Metrics" class="w-full h-auto object-cover">
+                        </div>
+                        <div class="w-full flex-shrink-0">
+                            <img src="Social Metrics/5" alt="Social Metrics" class="w-full h-auto object-cover">
+                        </div>
+                        <div class="w-full flex-shrink-0">
+                            <img src="Social Metrics/6" alt="Social Metrics" class="w-full h-auto object-cover">
+                        </div>
+                        <div class="w-full flex-shrink-0">
+                            <img src="Social Metrics/66" alt="Social Metrics" class="w-full h-auto object-cover">
+                        </div>
+                        <div class="w-full flex-shrink-0">
+                            <img src="Social Metrics/7" alt="Social Metrics" class="w-full h-auto object-cover">
+                        </div>
+                        <div class="w-full flex-shrink-0">
+                            <img src="Social Metrics/8" alt="Social Metrics" class="w-full h-auto object-cover">
+                        </div>
+                    </div>
+
+                    <!-- Lijevi gumb -->
+                    <button @click="currentSlide = (currentSlide - 1 + totalSlides) % totalSlides" class="absolute left-3 top-1/2 -translate-y-1/2 bg-slate-900/80 hover:bg-slate-800 text-white w-10 h-10 rounded-full flex items-center justify-center border border-slate-700 transition opacity-80 hover:opacity-100">
+                        <i class="fa-solid fa-chevron-left"></i>
+                    </button>
+
+                    <!-- Desni gumb -->
+                    <button @click="currentSlide = (currentSlide + 1) % totalSlides" class="absolute right-3 top-1/2 -translate-y-1/2 bg-slate-900/80 hover:bg-slate-800 text-white w-10 h-10 rounded-full flex items-center justify-center border border-slate-700 transition opacity-80 hover:opacity-100">
+                        <i class="fa-solid fa-chevron-right"></i>
+                    </button>
+
+                    <!-- Indikator stranica -->
+                    <div class="absolute bottom-3 left-1/2 -translate-x-1/2 bg-slate-900/80 px-3 py-1 rounded-full text-xs text-slate-300 border border-slate-700">
+                        Page <span x-text="currentSlide + 1"></span> / <span x-text="totalSlides"></span>
+                    </div>
+                </div>
+
                 <!-- Oznake i Preuzimanje -->
                 <div class="mt-6 flex flex-wrap items-center justify-between gap-4">
                     <div class="flex gap-2">
