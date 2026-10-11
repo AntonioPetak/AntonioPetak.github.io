@@ -169,12 +169,12 @@
                     <span class="absolute -left-[31px] top-1.5 w-4 h-4 rounded-full bg-accent ring-4 ring-darkBg"></span>
                     <div class="bg-cardBg border border-slate-800 rounded-2xl p-6 shadow-sm">
                         <div class="flex flex-col sm:flex-row sm:items-center justify-between mb-2">
-                            <h3 class="text-lg font-bold text-white">Senior Key Account / BI Consultant</h3>
-                            <span class="text-xs font-medium px-2.5 py-1 rounded-full bg-accent/10 text-accent w-fit mt-1 sm:mt-0">2023. – Danas</span>
+                            <h3 class="text-lg font-bold text-white">Key Account Manager / BI Consultant</h3>
+                            <span class="text-xs font-medium px-2.5 py-1 rounded-full bg-accent/10 text-accent w-fit mt-1 sm:mt-0">2026. – Danas</span>
                         </div>
-                        <div class="text-sm text-slate-400 mb-4">Naziv Tvrtke</div>
+                        <div class="text-sm text-slate-400 mb-4">Media-soft d.o.o.</div>
                         <p class="text-sm text-slate-300 leading-relaxed">
-                            Vođenje relacija s ključnim klijentima, izrada i implementacija Power BI analitičkih sustava te optimizacija poslovnog izvještavanja.
+                            Sudjelovanje u implementaciji CRM sustava, testiranju i izradi tehničke dokumentacije, te vođenju odnosa s ključnim klijentima.
                         </p>
                     </div>
                 </div>
@@ -184,12 +184,12 @@
                     <span class="absolute -left-[31px] top-1.5 w-4 h-4 rounded-full bg-slate-700 ring-4 ring-darkBg"></span>
                     <div class="bg-cardBg border border-slate-800 rounded-2xl p-6 shadow-sm">
                         <div class="flex flex-col sm:flex-row sm:items-center justify-between mb-2">
-                            <h3 class="text-lg font-bold text-white">Data Analyst</h3>
-                            <span class="text-xs font-medium px-2.5 py-1 rounded-full bg-slate-800 text-slate-300 w-fit mt-1 sm:mt-0">2021. – 2023.</span>
+                            <h3 class="text-lg font-bold text-white">Freelance BI Consultant & Owner</h3>
+                            <span class="text-xs font-medium px-2.5 py-1 rounded-full bg-slate-800 text-slate-300 w-fit mt-1 sm:mt-0">Prethodno razdoblje</span>
                         </div>
-                        <div class="text-sm text-slate-400 mb-4">Prethodna Tvrtka</div>
+                        <div class="text-sm text-slate-400 mb-4">Petak BI Solutions / Decision Crew B.V.</div>
                         <p class="text-sm text-slate-300 leading-relaxed">
-                            Priprema i obrada podataka u SQL-u, razvoj interaktivnih izvještaja i automatizacija ponavljajućih analiza.
+                            Razvoj poslovne inteligencije, ETL cjevovoda, naprednih Power BI izvještaja i podatkovnih modela za klijente.
                         </p>
                     </div>
                 </div>
@@ -197,199 +197,218 @@
         </section>
 
         <!-- TAB 3: PROJEKTI -->
-        <section x-show="activeTab === 'projects'" x-transition.opacity.duration.300ms class="space-y-10" style="display: none;">
+        <section x-show="activeTab === 'projects'" x-transition.opacity.duration.300ms class="space-y-12" style="display: none;">
             <div>
                 <h2 class="text-3xl font-extrabold text-white mb-2">Power BI Projects</h2>
+                <p class="text-slate-400">Pregled realiziranih analitičkih rješenja i nadzornih ploča.</p>
             </div>
 
-            <!-- PROJEKT 1: Slajder -->
+            <!-- PROJEKT 1: Project 1 (Prazni predložak na vrhu) -->
+            <div class="bg-cardBg border border-slate-800 rounded-2xl p-6 shadow-xl" x-data="{ currentSlide: 0, totalSlides: 3 }">
+                <div class="mb-4">
+                    <h3 class="text-xl font-bold text-white">Project 1</h3>
+                    <p class="text-sm text-slate-400">Opis novog projekta. Ovdje upiši detalje, ciljeve i funkcionalnosti tvog prva projekta.</p>
+                </div>
+
+                <div class="relative overflow-hidden rounded-xl border border-slate-700/80 bg-slate-900 group">
+                    <div class="flex transition-transform duration-300 ease-in-out" :style="'transform: translateX(-' + (currentSlide * 100) + '%)'">
+                        <div class="w-full flex-shrink-0"><img src="images/Project 1/1.png" alt="Project 1" class="w-full h-auto object-cover"></div>
+                        <div class="w-full flex-shrink-0"><img src="images/Project 1/2.png" alt="Project 1" class="w-full h-auto object-cover"></div>
+                        <div class="w-full flex-shrink-0"><img src="images/Project 1/3.png" alt="Project 1" class="w-full h-auto object-cover"></div>
+                    </div>
+
+                    <button @click="currentSlide = (currentSlide - 1 + totalSlides) % totalSlides" class="absolute left-3 top-1/2 -translate-y-1/2 bg-slate-900/80 hover:bg-slate-800 text-white w-10 h-10 rounded-full flex items-center justify-center border border-slate-700 transition opacity-80 hover:opacity-100">
+                        <i class="fa-solid fa-chevron-left"></i>
+                    </button>
+                    <button @click="currentSlide = (currentSlide + 1) % totalSlides" class="absolute right-3 top-1/2 -translate-y-1/2 bg-slate-900/80 hover:bg-slate-800 text-white w-10 h-10 rounded-full flex items-center justify-center border border-slate-700 transition opacity-80 hover:opacity-100">
+                        <i class="fa-solid fa-chevron-right"></i>
+                    </button>
+
+                    <div class="absolute bottom-3 left-1/2 -translate-x-1/2 bg-slate-900/80 px-3 py-1 rounded-full text-xs text-slate-300 border border-slate-700">
+                        Page <span x-text="currentSlide + 1"></span> / <span x-text="totalSlides"></span>
+                    </div>
+                </div>
+
+                <div class="mt-6 flex gap-2">
+                    <span class="px-2.5 py-1 bg-blue-500/10 text-blue-400 text-xs font-semibold rounded-md border border-blue-500/20">Power BI</span>
+                    <span class="px-2.5 py-1 bg-cyan-500/10 text-cyan-400 text-xs font-semibold rounded-md border border-cyan-500/20">DAX</span>
+                </div>
+            </div>
+
+            <!-- PROJEKT 2: Insurance Claims Dashboard -->
             <div class="bg-cardBg border border-slate-800 rounded-2xl p-6 shadow-xl" x-data="{ currentSlide: 0, totalSlides: 9 }">
                 <div class="mb-4">
                     <h3 class="text-xl font-bold text-white">Insurance Claims Dashboard</h3>
-                    <p class="text-sm text-slate-400">An end-to-end Power BI reporting solution designed to track, analyze, and optimize insurance claim handling processes.
-                        The dashboard provides executive-level visibility into financial metrics (Total Payable, ACV vs. RCV, Deductibles), loss locations across Croatia, adjuster performance, and line-item cost breakdowns.
-                        Features interactive root-cause analysis via Decomposition Trees and custom anomaly detection for operational risk management.</p>
+                    <p class="text-sm text-slate-400">An end-to-end Power BI reporting solution designed to track, analyze, and optimize insurance claim handling processes. The dashboard provides executive-level visibility into financial metrics, loss locations, adjuster performance, and line-item cost breakdowns.</p>
                 </div>
 
-                <!-- Karusel kontejner -->
                 <div class="relative overflow-hidden rounded-xl border border-slate-700/80 bg-slate-900 group">
                     <div class="flex transition-transform duration-300 ease-in-out" :style="'transform: translateX(-' + (currentSlide * 100) + '%)'">
-                        <!-- Slika 1 -->
-                        <div class="w-full flex-shrink-0">
-                            <img src="images/Insurance Claims/1.png" alt="Insurance Claims" class="w-full h-auto object-cover">
-                        </div>
-                        <!-- Slika 2 -->
-                        <div class="w-full flex-shrink-0">
-                            <img src="images/Insurance Claims/2.png" alt="Insurance Claims" class="w-full h-auto object-cover">
-                        </div>
-                        <!-- Slika 3 -->
-                        <div class="w-full flex-shrink-0">
-                            <img src="images/Insurance Claims/3.png" alt="Insurance Claims" class="w-full h-auto object-cover">
-                        </div>
-                        <div class="w-full flex-shrink-0">
-                            <img src="images/Insurance Claims/4.png" alt="Insurance Claims" class="w-full h-auto object-cover">
-                        </div>
-                        <div class="w-full flex-shrink-0">
-                            <img src="images/Insurance Claims/5.png" alt="Insurance Claims" class="w-full h-auto object-cover">
-                        </div>
-                        <div class="w-full flex-shrink-0">
-                            <img src="images/Insurance Claims/6.png" alt="Insurance Claims" class="w-full h-auto object-cover">
-                        </div>
-                        <div class="w-full flex-shrink-0">
-                            <img src="images/Insurance Claims/7.png" alt="Insurance Claims" class="w-full h-auto object-cover">
-                        </div>
-                        <div class="w-full flex-shrink-0">
-                            <img src="images/Insurance Claims/8.png" alt="Insurance Claims" class="w-full h-auto object-cover">
-                        </div>
-                        <div class="w-full flex-shrink-0">
-                            <img src="images/Insurance Claims/9.png" alt="Insurance Claims" class="w-full h-auto object-cover">
-                        </div>
+                        <template x-for="i in totalSlides">
+                            <div class="w-full flex-shrink-0">
+                                <img :src="'images/Insurance Claims/' + i + '.png'" alt="Insurance Claims" class="w-full h-auto object-cover">
+                            </div>
+                        </template>
                     </div>
 
-                    <!-- Lijevi gumb -->
                     <button @click="currentSlide = (currentSlide - 1 + totalSlides) % totalSlides" class="absolute left-3 top-1/2 -translate-y-1/2 bg-slate-900/80 hover:bg-slate-800 text-white w-10 h-10 rounded-full flex items-center justify-center border border-slate-700 transition opacity-80 hover:opacity-100">
                         <i class="fa-solid fa-chevron-left"></i>
                     </button>
-
-                    <!-- Desni gumb -->
                     <button @click="currentSlide = (currentSlide + 1) % totalSlides" class="absolute right-3 top-1/2 -translate-y-1/2 bg-slate-900/80 hover:bg-slate-800 text-white w-10 h-10 rounded-full flex items-center justify-center border border-slate-700 transition opacity-80 hover:opacity-100">
                         <i class="fa-solid fa-chevron-right"></i>
                     </button>
 
-                    <!-- Indikator stranica -->
                     <div class="absolute bottom-3 left-1/2 -translate-x-1/2 bg-slate-900/80 px-3 py-1 rounded-full text-xs text-slate-300 border border-slate-700">
                         Page <span x-text="currentSlide + 1"></span> / <span x-text="totalSlides"></span>
                     </div>
                 </div>
 
-                <!-- Oznake i Preuzimanje -->
-                <div class="mt-6 flex flex-wrap items-center justify-between gap-4">
-                    <div class="flex gap-2">
-                        <span class="px-2.5 py-1 bg-blue-500/10 text-blue-400 text-xs font-semibold rounded-md border border-blue-500/20">Power BI</span>
-                        <span class="px-2.5 py-1 bg-cyan-500/10 text-cyan-400 text-xs font-semibold rounded-md border border-cyan-500/20">DAX</span>
-                        <span class="px-2.5 py-1 bg-emerald-500/10 text-emerald-400 text-xs font-semibold rounded-md border border-emerald-500/20">SQL</span>
-                    </div>
+                <div class="mt-6 flex gap-2">
+                    <span class="px-2.5 py-1 bg-blue-500/10 text-blue-400 text-xs font-semibold rounded-md border border-blue-500/20">Power BI</span>
+                    <span class="px-2.5 py-1 bg-cyan-500/10 text-cyan-400 text-xs font-semibold rounded-md border border-cyan-500/20">DAX</span>
+                    <span class="px-2.5 py-1 bg-emerald-500/10 text-emerald-400 text-xs font-semibold rounded-md border border-emerald-500/20">SQL</span>
                 </div>
             </div>
 
-            <!-- PROJEKT 2: Slajder -->
+            <!-- PROJEKT 3: Social Metrics Dashboard -->
             <div class="bg-cardBg border border-slate-800 rounded-2xl p-6 shadow-xl" x-data="{ currentSlide: 0, totalSlides: 10 }">
                 <div class="mb-4">
                     <h3 class="text-xl font-bold text-white">Social Metrics Dashboard</h3>
-                    <p class="text-sm text-slate-400">A comprehensive Power BI marketing and social analytics suite tracking cross-channel performance across LinkedIn, CRM Lead Generation, and Google Analytics.
-                        Features real-time KPI tracking for impressions, engagement rates, and content performance, coupled with sales pipeline funnel conversion metrics (Volume & Revenue) and web traffic source analysis.
-                        Built with dynamic parameter switching, geographic heatmaps, and customizable metric selections for seamless data exploration.</p>
+                    <p class="text-sm text-slate-400">A comprehensive Power BI marketing and social analytics suite tracking cross-channel performance across LinkedIn, CRM Lead Generation, and Google Analytics with dynamic parameter switching and geographic heatmaps.</p>
                 </div>
 
-                <!-- Karusel kontejner -->
                 <div class="relative overflow-hidden rounded-xl border border-slate-700/80 bg-slate-900 group">
                     <div class="flex transition-transform duration-300 ease-in-out" :style="'transform: translateX(-' + (currentSlide * 100) + '%)'">
-                        <!-- Slika 1 -->
-                        <div class="w-full flex-shrink-0">
-                            <img src="Social Metrics/1" alt="Social Metrics" class="w-full h-auto object-cover">
-                        </div>
-                        <!-- Slika 2 -->
-                        <div class="w-full flex-shrink-0">
-                            <img src="images/Social Metrics/11" alt="Social Metrics" class="w-full h-auto object-cover">
-                        </div>
-                        <div class="w-full flex-shrink-0">
-                            <img src="images/Social Metrics/2" alt="Social Metrics" class="w-full h-auto object-cover">
-                        </div>
-                        <div class="w-full flex-shrink-0">
-                            <img src="images/Social Metrics/3" alt="Social Metrics" class="w-full h-auto object-cover">
-                        </div>
-                        <div class="w-full flex-shrink-0">
-                            <img src="images/Social Metrics/4" alt="Social Metrics" class="w-full h-auto object-cover">
-                        </div>
-                        <div class="w-full flex-shrink-0">
-                            <img src="images/Social Metrics/5" alt="Social Metrics" class="w-full h-auto object-cover">
-                        </div>
-                        <div class="w-full flex-shrink-0">
-                            <img src="images/Social Metrics/6" alt="Social Metrics" class="w-full h-auto object-cover">
-                        </div>
-                        <div class="w-full flex-shrink-0">
-                            <img src="images/Social Metrics/66" alt="Social Metrics" class="w-full h-auto object-cover">
-                        </div>
-                        <div class="w-full flex-shrink-0">
-                            <img src="images/Social Metrics/7" alt="Social Metrics" class="w-full h-auto object-cover">
-                        </div>
-                        <div class="w-full flex-shrink-0">
-                            <img src="images/Social Metrics/8" alt="Social Metrics" class="w-full h-auto object-cover">
-                        </div>
+                        <div class="w-full flex-shrink-0"><img src="images/Social Metrics/1.png" alt="Social Metrics" class="w-full h-auto object-cover"></div>
+                        <div class="w-full flex-shrink-0"><img src="images/Social Metrics/11.png" alt="Social Metrics" class="w-full h-auto object-cover"></div>
+                        <div class="w-full flex-shrink-0"><img src="images/Social Metrics/2.png" alt="Social Metrics" class="w-full h-auto object-cover"></div>
+                        <div class="w-full flex-shrink-0"><img src="images/Social Metrics/3.png" alt="Social Metrics" class="w-full h-auto object-cover"></div>
+                        <div class="w-full flex-shrink-0"><img src="images/Social Metrics/4.png" alt="Social Metrics" class="w-full h-auto object-cover"></div>
+                        <div class="w-full flex-shrink-0"><img src="images/Social Metrics/5.png" alt="Social Metrics" class="w-full h-auto object-cover"></div>
+                        <div class="w-full flex-shrink-0"><img src="images/Social Metrics/6.png" alt="Social Metrics" class="w-full h-auto object-cover"></div>
+                        <div class="w-full flex-shrink-0"><img src="images/Social Metrics/66.png" alt="Social Metrics" class="w-full h-auto object-cover"></div>
+                        <div class="w-full flex-shrink-0"><img src="images/Social Metrics/7.png" alt="Social Metrics" class="w-full h-auto object-cover"></div>
+                        <div class="w-full flex-shrink-0"><img src="images/Social Metrics/8.png" alt="Social Metrics" class="w-full h-auto object-cover"></div>
                     </div>
 
-                    <!-- Lijevi gumb -->
                     <button @click="currentSlide = (currentSlide - 1 + totalSlides) % totalSlides" class="absolute left-3 top-1/2 -translate-y-1/2 bg-slate-900/80 hover:bg-slate-800 text-white w-10 h-10 rounded-full flex items-center justify-center border border-slate-700 transition opacity-80 hover:opacity-100">
                         <i class="fa-solid fa-chevron-left"></i>
                     </button>
-
-                    <!-- Desni gumb -->
                     <button @click="currentSlide = (currentSlide + 1) % totalSlides" class="absolute right-3 top-1/2 -translate-y-1/2 bg-slate-900/80 hover:bg-slate-800 text-white w-10 h-10 rounded-full flex items-center justify-center border border-slate-700 transition opacity-80 hover:opacity-100">
                         <i class="fa-solid fa-chevron-right"></i>
                     </button>
 
-                    <!-- Indikator stranica -->
                     <div class="absolute bottom-3 left-1/2 -translate-x-1/2 bg-slate-900/80 px-3 py-1 rounded-full text-xs text-slate-300 border border-slate-700">
                         Page <span x-text="currentSlide + 1"></span> / <span x-text="totalSlides"></span>
                     </div>
                 </div>
 
-                <!-- Projekt 3 -->
-
-                <div class="bg-cardBg border border-slate-800 rounded-2xl p-6 shadow-xl" x-data="{ currentSlide: 0, totalSlides: 10 }">
-                <div class="mb-4">
-                    <h3 class="text-xl font-bold text-white">Designer Clothing Budgeting Dashboard</h3>
-                    <p class="text-sm text-slate-400">A comprehensive Power BI financial and budgeting dashboard built for a luxury fashion brand to monitor revenue, sales orders, and budget iterations.
-                        The report tracks key financial metrics (Actual Total $14M vs. Budget 1st/2nd Pass up to $23M), client-level order distributions across major retail partners (e.g., Harrods, Galeries Lafayette, Saks Fifth Avenue), and detailed budget-to-actual variance reports categorized by company groups.
-                        Features dynamic drill-downs via Decomposition Trees for regional sales breakdown analysis and custom slicer panels for filtering by season, collection, and geography.</p>
-                </div>
-
-                <!-- Karusel kontejner -->
-                <div class="relative overflow-hidden rounded-xl border border-slate-700/80 bg-slate-900 group">
-                    <div class="flex transition-transform duration-300 ease-in-out" :style="'transform: translateX(-' + (currentSlide * 100) + '%)'">
-                        <!-- Slika 1 -->
-                        <div class="w-full flex-shrink-0">
-                            <img src="images/Designer Clothing Budgeting/1" alt="Designer Clothing Budgeting" class="w-full h-auto object-cover">
-                        </div>
-                        <!-- Slika 2 -->
-                        <div class="w-full flex-shrink-0">
-                            <img src="images/Designer Clothing Budgeting/2" alt="Designer Clothing Budgeting" class="w-full h-auto object-cover">
-                        </div>
-                        <div class="w-full flex-shrink-0">
-                            <img src="images/Designer Clothing Budgeting/3" alt="Designer Clothing Budgeting" class="w-full h-auto object-cover">
-                        </div>
-                        <div class="w-full flex-shrink-0">
-                            <img src="images/Designer Clothing Budgeting/4" alt="Designer Clothing Budgeting" class="w-full h-auto object-cover">
-                        </div>
-                        <div class="w-full flex-shrink-0">
-                            <img src="images/Designer Clothing Budgeting/5" alt="Designer Clothing Budgeting" class="w-full h-auto object-cover">
-                        </div>
-                    </div>
-
-                    <!-- Lijevi gumb -->
-                    <button @click="currentSlide = (currentSlide - 1 + totalSlides) % totalSlides" class="absolute left-3 top-1/2 -translate-y-1/2 bg-slate-900/80 hover:bg-slate-800 text-white w-10 h-10 rounded-full flex items-center justify-center border border-slate-700 transition opacity-80 hover:opacity-100">
-                        <i class="fa-solid fa-chevron-left"></i>
-                    </button>
-
-                    <!-- Desni gumb -->
-                    <button @click="currentSlide = (currentSlide + 1) % totalSlides" class="absolute right-3 top-1/2 -translate-y-1/2 bg-slate-900/80 hover:bg-slate-800 text-white w-10 h-10 rounded-full flex items-center justify-center border border-slate-700 transition opacity-80 hover:opacity-100">
-                        <i class="fa-solid fa-chevron-right"></i>
-                    </button>
-
-                    <!-- Indikator stranica -->
-                    <div class="absolute bottom-3 left-1/2 -translate-x-1/2 bg-slate-900/80 px-3 py-1 rounded-full text-xs text-slate-300 border border-slate-700">
-                        Page <span x-text="currentSlide + 1"></span> / <span x-text="totalSlides"></span>
-                    </div>
-                </div>
-
-                <!-- Oznake i Preuzimanje -->
-                <div class="mt-6 flex flex-wrap items-center justify-between gap-4">
-                    <div class="flex gap-2">
-                        <span class="px-2.5 py-1 bg-blue-500/10 text-blue-400 text-xs font-semibold rounded-md border border-blue-500/20">Power BI</span>
-                        <span class="px-2.5 py-1 bg-purple-500/10 text-purple-400 text-xs font-semibold rounded-md border border-purple-500/20">Power Query</span>
-                    </div>
+                <div class="mt-6 flex gap-2">
+                    <span class="px-2.5 py-1 bg-blue-500/10 text-blue-400 text-xs font-semibold rounded-md border border-blue-500/20">Power BI</span>
+                    <span class="px-2.5 py-1 bg-purple-500/10 text-purple-400 text-xs font-semibold rounded-md border border-purple-500/20">Power Query</span>
                 </div>
             </div>
+
+            <!-- PROJEKT 4: Designer Clothing Budgeting Dashboard -->
+            <div class="bg-cardBg border border-slate-800 rounded-2xl p-6 shadow-xl" x-data="{ currentSlide: 0, totalSlides: 5 }">
+                <div class="mb-4">
+                    <h3 class="text-xl font-bold text-white">Designer Clothing Budgeting Dashboard</h3>
+                    <p class="text-sm text-slate-400">A comprehensive Power BI financial and budgeting dashboard built for a luxury fashion brand to monitor revenue, sales orders, budget iterations, and client-level order distributions across major retail partners.</p>
+                </div>
+
+                <div class="relative overflow-hidden rounded-xl border border-slate-700/80 bg-slate-900 group">
+                    <div class="flex transition-transform duration-300 ease-in-out" :style="'transform: translateX(-' + (currentSlide * 100) + '%)'">
+                        <div class="w-full flex-shrink-0"><img src="images/Designer Clothing Budgeting/1.png" alt="Designer Clothing Budgeting" class="w-full h-auto object-cover"></div>
+                        <div class="w-full flex-shrink-0"><img src="images/Designer Clothing Budgeting/2.png" alt="Designer Clothing Budgeting" class="w-full h-auto object-cover"></div>
+                        <div class="w-full flex-shrink-0"><img src="images/Designer Clothing Budgeting/3.png" alt="Designer Clothing Budgeting" class="w-full h-auto object-cover"></div>
+                        <div class="w-full flex-shrink-0"><img src="images/Designer Clothing Budgeting/4.png" alt="Designer Clothing Budgeting" class="w-full h-auto object-cover"></div>
+                        <div class="w-full flex-shrink-0"><img src="images/Designer Clothing Budgeting/5.png" alt="Designer Clothing Budgeting" class="w-full h-auto object-cover"></div>
+                    </div>
+
+                    <button @click="currentSlide = (currentSlide - 1 + totalSlides) % totalSlides" class="absolute left-3 top-1/2 -translate-y-1/2 bg-slate-900/80 hover:bg-slate-800 text-white w-10 h-10 rounded-full flex items-center justify-center border border-slate-700 transition opacity-80 hover:opacity-100">
+                        <i class="fa-solid fa-chevron-left"></i>
+                    </button>
+                    <button @click="currentSlide = (currentSlide + 1) % totalSlides" class="absolute right-3 top-1/2 -translate-y-1/2 bg-slate-900/80 hover:bg-slate-800 text-white w-10 h-10 rounded-full flex items-center justify-center border border-slate-700 transition opacity-80 hover:opacity-100">
+                        <i class="fa-solid fa-chevron-right"></i>
+                    </button>
+
+                    <div class="absolute bottom-3 left-1/2 -translate-x-1/2 bg-slate-900/80 px-3 py-1 rounded-full text-xs text-slate-300 border border-slate-700">
+                        Page <span x-text="currentSlide + 1"></span> / <span x-text="totalSlides"></span>
+                    </div>
+                </div>
+
+                <div class="mt-6 flex gap-2">
+                    <span class="px-2.5 py-1 bg-blue-500/10 text-blue-400 text-xs font-semibold rounded-md border border-blue-500/20">Power BI</span>
+                    <span class="px-2.5 py-1 bg-emerald-500/10 text-emerald-400 text-xs font-semibold rounded-md border border-emerald-500/20">SQL</span>
+                </div>
+            </div>
+
+            <!-- PROJEKT 5: Insurance Risk & Actuarial Analytics Dashboard -->
+            <div class="bg-cardBg border border-slate-800 rounded-2xl p-6 shadow-xl" x-data="{ currentSlide: 0, totalSlides: 5 }">
+                <div class="mb-4">
+                    <h3 class="text-xl font-bold text-white">Insurance Risk & Actuarial Analytics Dashboard</h3>
+                    <p class="text-sm text-slate-400">An advanced Power BI actuarial and underwriting risk assessment suite designed for property insurance risk profiling, ad-hoc reporting, and spatial analysis via ArcGIS.</p>
+                </div>
+
+                <div class="relative overflow-hidden rounded-xl border border-slate-700/80 bg-slate-900 group">
+                    <div class="flex transition-transform duration-300 ease-in-out" :style="'transform: translateX(-' + (currentSlide * 100) + '%)'">
+                        <div class="w-full flex-shrink-0"><img src="images/ClaimSafe/1.png" alt="ClaimSafe" class="w-full h-auto object-cover"></div>
+                        <div class="w-full flex-shrink-0"><img src="images/ClaimSafe/2.png" alt="ClaimSafe" class="w-full h-auto object-cover"></div>
+                        <div class="w-full flex-shrink-0"><img src="images/ClaimSafe/3.png" alt="ClaimSafe" class="w-full h-auto object-cover"></div>
+                        <div class="w-full flex-shrink-0"><img src="images/ClaimSafe/4.png" alt="ClaimSafe" class="w-full h-auto object-cover"></div>
+                        <div class="w-full flex-shrink-0"><img src="images/ClaimSafe/5.png" alt="ClaimSafe" class="w-full h-auto object-cover"></div>
+                    </div>
+
+                    <button @click="currentSlide = (currentSlide - 1 + totalSlides) % totalSlides" class="absolute left-3 top-1/2 -translate-y-1/2 bg-slate-900/80 hover:bg-slate-800 text-white w-10 h-10 rounded-full flex items-center justify-center border border-slate-700 transition opacity-80 hover:opacity-100">
+                        <i class="fa-solid fa-chevron-left"></i>
+                    </button>
+                    <button @click="currentSlide = (currentSlide + 1) % totalSlides" class="absolute right-3 top-1/2 -translate-y-1/2 bg-slate-900/80 hover:bg-slate-800 text-white w-10 h-10 rounded-full flex items-center justify-center border border-slate-700 transition opacity-80 hover:opacity-100">
+                        <i class="fa-solid fa-chevron-right"></i>
+                    </button>
+
+                    <div class="absolute bottom-3 left-1/2 -translate-x-1/2 bg-slate-900/80 px-3 py-1 rounded-full text-xs text-slate-300 border border-slate-700">
+                        Page <span x-text="currentSlide + 1"></span> / <span x-text="totalSlides"></span>
+                    </div>
+                </div>
+
+                <div class="mt-6 flex gap-2">
+                    <span class="px-2.5 py-1 bg-blue-500/10 text-blue-400 text-xs font-semibold rounded-md border border-blue-500/20">Power BI</span>
+                    <span class="px-2.5 py-1 bg-amber-500/10 text-amber-400 text-xs font-semibold rounded-md border border-amber-500/20">ArcGIS</span>
+                </div>
+            </div>
+
+            <!-- PROJEKT 6: Project 6 (Prazni predložak na dnu) -->
+            <div class="bg-cardBg border border-slate-800 rounded-2xl p-6 shadow-xl" x-data="{ currentSlide: 0, totalSlides: 3 }">
+                <div class="mb-4">
+                    <h3 class="text-xl font-bold text-white">Project 6</h3>
+                    <p class="text-sm text-slate-400">Opis novog projekta. Ovdje upiši detalje, ciljeve i funkcionalnosti tvog šestog projekta.</p>
+                </div>
+
+                <div class="relative overflow-hidden rounded-xl border border-slate-700/80 bg-slate-900 group">
+                    <div class="flex transition-transform duration-300 ease-in-out" :style="'transform: translateX(-' + (currentSlide * 100) + '%)'">
+                        <div class="w-full flex-shrink-0"><img src="images/Project 6/1.png" alt="Project 6" class="w-full h-auto object-cover"></div>
+                        <div class="w-full flex-shrink-0"><img src="images/Project 6/2.png" alt="Project 6" class="w-full h-auto object-cover"></div>
+                        <div class="w-full flex-shrink-0"><img src="images/Project 6/3.png" alt="Project 6" class="w-full h-auto object-cover"></div>
+                    </div>
+
+                    <button @click="currentSlide = (currentSlide - 1 + totalSlides) % totalSlides" class="absolute left-3 top-1/2 -translate-y-1/2 bg-slate-900/80 hover:bg-slate-800 text-white w-10 h-10 rounded-full flex items-center justify-center border border-slate-700 transition opacity-80 hover:opacity-100">
+                        <i class="fa-solid fa-chevron-left"></i>
+                    </button>
+                    <button @click="currentSlide = (currentSlide + 1) % totalSlides" class="absolute right-3 top-1/2 -translate-y-1/2 bg-slate-900/80 hover:bg-slate-800 text-white w-10 h-10 rounded-full flex items-center justify-center border border-slate-700 transition opacity-80 hover:opacity-100">
+                        <i class="fa-solid fa-chevron-right"></i>
+                    </button>
+
+                    <div class="absolute bottom-3 left-1/2 -translate-x-1/2 bg-slate-900/80 px-3 py-1 rounded-full text-xs text-slate-300 border border-slate-700">
+                        Page <span x-text="currentSlide + 1"></span> / <span x-text="totalSlides"></span>
+                    </div>
+                </div>
+
+                <div class="mt-6 flex gap-2">
+                    <span class="px-2.5 py-1 bg-blue-500/10 text-blue-400 text-xs font-semibold rounded-md border border-blue-500/20">Power BI</span>
+                    <span class="px-2.5 py-1 bg-cyan-500/10 text-cyan-400 text-xs font-semibold rounded-md border border-cyan-500/20">DAX</span>
+                </div>
+            </div>
+
         </section>
 
     </main>
