@@ -203,10 +203,12 @@
             </div>
 
             <!-- PROJEKT 1: Slajder -->
-            <div class="bg-cardBg border border-slate-800 rounded-2xl p-6 shadow-xl" x-data="{ currentSlide: 0, totalSlides: 3 }">
+            <div class="bg-cardBg border border-slate-800 rounded-2xl p-6 shadow-xl" x-data="{ currentSlide: 0, totalSlides: 9 }">
                 <div class="mb-4">
                     <h3 class="text-xl font-bold text-white">Insurance Claims Dashboard</h3>
-                    <p class="text-sm text-slate-400">Sveobuhvatna analiza prodajnih rezultata i profitabilnosti po regijama.</p>
+                    <p class="text-sm text-slate-400">An end-to-end Power BI reporting solution designed to track, analyze, and optimize insurance claim handling processes.
+                        The dashboard provides executive-level visibility into financial metrics (Total Payable, ACV vs. RCV, Deductibles), loss locations across Croatia, adjuster performance, and line-item cost breakdowns.
+                        Features interactive root-cause analysis via Decomposition Trees and custom anomaly detection for operational risk management.</p>
                 </div>
 
                 <!-- Karusel kontejner -->
@@ -256,7 +258,7 @@
 
                     <!-- Indikator stranica -->
                     <div class="absolute bottom-3 left-1/2 -translate-x-1/2 bg-slate-900/80 px-3 py-1 rounded-full text-xs text-slate-300 border border-slate-700">
-                        Stranica <span x-text="currentSlide + 1"></span> / <span x-text="totalSlides"></span>
+                        Page <span x-text="currentSlide + 1"></span> / <span x-text="totalSlides"></span>
                     </div>
                 </div>
 
@@ -271,10 +273,12 @@
             </div>
 
             <!-- PROJEKT 2: Slajder -->
-            <div class="bg-cardBg border border-slate-800 rounded-2xl p-6 shadow-xl" x-data="{ currentSlide: 0, totalSlides: 2 }">
+            <div class="bg-cardBg border border-slate-800 rounded-2xl p-6 shadow-xl" x-data="{ currentSlide: 0, totalSlides: 10 }">
                 <div class="mb-4">
-                    <h3 class="text-xl font-bold text-white">Analiza Opskrbnog Lanca & Zaliha</h3>
-                    <p class="text-sm text-slate-400">Pratite KPI pokazatelje dostave, zalihu i koeficijent obrtaja robe.</p>
+                    <h3 class="text-xl font-bold text-white">Social Metrics Dashboard</h3>
+                    <p class="text-sm text-slate-400">A comprehensive Power BI marketing and social analytics suite tracking cross-channel performance across LinkedIn, CRM Lead Generation, and Google Analytics.
+                        Features real-time KPI tracking for impressions, engagement rates, and content performance, coupled with sales pipeline funnel conversion metrics (Volume & Revenue) and web traffic source analysis.
+                        Built with dynamic parameter switching, geographic heatmaps, and customizable metric selections for seamless data exploration.</p>
                 </div>
 
                 <!-- Karusel kontejner -->
@@ -282,11 +286,35 @@
                     <div class="flex transition-transform duration-300 ease-in-out" :style="'transform: translateX(-' + (currentSlide * 100) + '%)'">
                         <!-- Slika 1 -->
                         <div class="w-full flex-shrink-0">
-                            <img src="https://via.placeholder.com/1200x675/0f172a/3b82f6?text=Power+BI+Stranica+1+-+Inventory+Overview" alt="Stranica 1" class="w-full h-auto object-cover">
+                            <img src="Social Metrics/1" alt="Social Metrics" class="w-full h-auto object-cover">
                         </div>
                         <!-- Slika 2 -->
                         <div class="w-full flex-shrink-0">
-                            <img src="https://via.placeholder.com/1200x675/1e293b/3b82f6?text=Power+BI+Stranica+2+-+Supplier+Performance" alt="Stranica 2" class="w-full h-auto object-cover">
+                            <img src="Social Metrics/11" alt="Social Metrics" class="w-full h-auto object-cover">
+                        </div>
+                        <div class="w-full flex-shrink-0">
+                            <img src="Social Metrics/2" alt="Social Metrics" class="w-full h-auto object-cover">
+                        </div>
+                        <div class="w-full flex-shrink-0">
+                            <img src="Social Metrics/3" alt="Social Metrics" class="w-full h-auto object-cover">
+                        </div>
+                        <div class="w-full flex-shrink-0">
+                            <img src="Social Metrics/4" alt="Social Metrics" class="w-full h-auto object-cover">
+                        </div>
+                        <div class="w-full flex-shrink-0">
+                            <img src="Social Metrics/5" alt="Social Metrics" class="w-full h-auto object-cover">
+                        </div>
+                        <div class="w-full flex-shrink-0">
+                            <img src="Social Metrics/6" alt="Social Metrics" class="w-full h-auto object-cover">
+                        </div>
+                        <div class="w-full flex-shrink-0">
+                            <img src="Social Metrics/66" alt="Social Metrics" class="w-full h-auto object-cover">
+                        </div>
+                        <div class="w-full flex-shrink-0">
+                            <img src="Social Metrics/7" alt="Social Metrics" class="w-full h-auto object-cover">
+                        </div>
+                        <div class="w-full flex-shrink-0">
+                            <img src="Social Metrics/8" alt="Social Metrics" class="w-full h-auto object-cover">
                         </div>
                     </div>
 
@@ -302,7 +330,7 @@
 
                     <!-- Indikator stranica -->
                     <div class="absolute bottom-3 left-1/2 -translate-x-1/2 bg-slate-900/80 px-3 py-1 rounded-full text-xs text-slate-300 border border-slate-700">
-                        Stranica <span x-text="currentSlide + 1"></span> / <span x-text="totalSlides"></span>
+                        Page <span x-text="currentSlide + 1"></span> / <span x-text="totalSlides"></span>
                     </div>
                 </div>
 
