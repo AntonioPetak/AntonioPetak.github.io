@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="hr" class="dark">
+<html lang="hr" class="dark scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -52,7 +52,7 @@
                 <button @click="activeTab = 'projects'" 
                     :class="activeTab === 'projects' ? 'bg-accent text-white shadow-lg shadow-accent/20' : 'text-slate-400 hover:text-white hover:bg-slate-800'"
                     class="px-3 sm:px-4 py-2 rounded-lg text-xs sm:text-sm font-medium transition-all duration-200">
-                    <i class="fa-solid fa-code mr-1.5"></i> Projekti
+                    <i class="fa-solid fa-chart-pie mr-1.5"></i> Projekti
                 </button>
             </nav>
         </div>
@@ -66,13 +66,13 @@
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8 items-center">
                 <div class="md:col-span-2 space-y-4">
                     <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-accent/10 text-accent text-xs font-semibold uppercase tracking-wider">
-                        <span class="w-2 h-2 rounded-full bg-accent animate-pulse"></span> Dostupan za nove projekte
+                        <span class="w-2 h-2 rounded-full bg-accent animate-pulse"></span> Dostupan za nove prilike
                     </div>
                     <h1 class="text-4xl sm:text-5xl font-extrabold tracking-tight text-white">
                         Bok, ja sam <span class="text-accent">Antonio</span>
                     </h1>
                     <p class="text-lg text-slate-300 leading-relaxed">
-                        Strastveni stručnjak s fokusom na analitiku, poslovne procese i razvoj modernih rješenja. Spajam tehničko znanje s poslovnom logikom kako bih rješavao kompleksne izazove.
+                        BI konsultant i analitičar usmjeren na razvoj naprednih Power BI izvještaja, optiku modeliranja podataka (DAX/SQL) i automatizaciju poslovnih procesa.
                     </p>
                     <div class="flex items-center space-x-4 pt-2">
                         <a href="https://linkedin.com" target="_blank" class="w-10 h-10 rounded-lg bg-cardBg border border-slate-700 flex items-center justify-center text-slate-300 hover:text-accent hover:border-accent transition-colors">
@@ -89,7 +89,7 @@
                 <div class="flex justify-center">
                     <div class="relative w-48 h-48 sm:w-60 sm:h-60 rounded-2xl bg-gradient-to-tr from-accent to-indigo-500 p-1 shadow-xl shadow-accent/10">
                         <div class="w-full h-full bg-cardBg rounded-2xl flex items-center justify-center text-slate-500">
-                            <i class="fa-solid fa-user-astronaut text-6xl text-accent"></i>
+                            <i class="fa-solid fa-user-check text-6xl text-accent"></i>
                         </div>
                     </div>
                 </div>
@@ -103,18 +103,18 @@
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 text-slate-300 text-sm leading-relaxed">
                     <div>
                         <p class="mb-3">
-                            Kroz karijeru razvio sam snažnu radnu etiku i analitički pristup. Izvan svijeta tehnologije i podataka, velika strast su mi trčanje i sportovi izdržljivosti. 
+                            Kroz karijeru razvio sam analitički pristup i fokus na detalje. Izvan svijeta tehnologije i analitike podataka, strastveni sam trkač i sportaš izdržljivosti.
                         </p>
                         <p>
-                            Vjerujem da se disciplina i ustrajnost iz sporta izravno preslikavaju na uspješno rješavanje kompleksnih poslovnih problema.
+                            Disciplinu i ustrajnost proizašle iz sporta direktno primjenjujem pri rješavanju zahtjevnih i kompleksnih poslovnih problema.
                         </p>
                     </div>
                     <div>
                         <h4 class="font-semibold text-white mb-2">Glavne kompetencije:</h4>
                         <ul class="space-y-2 text-slate-400">
-                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-accent text-xs"></i> Poslovna analitika &vizualizacija podataka</li>
-                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-accent text-xs"></i> Optimizacija i automatizacija procesa</li>
-                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-accent text-xs"></i> Upravljanje ključnim klijentima i projektima</li>
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-accent text-xs"></i> Poslovna analitika & Izrada Power BI nadzornih ploča</li>
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-accent text-xs"></i> Modeliranje podataka i DAX optimizacija</li>
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-accent text-xs"></i> Upravljanje ključnim klijentima i procesima</li>
                         </ul>
                     </div>
                 </div>
@@ -128,14 +128,14 @@
                         <i class="fa-solid fa-chart-line text-accent text-xl"></i>
                         <div>
                             <div class="font-semibold text-sm text-white">Power BI</div>
-                            <div class="text-xs text-slate-400">DAX & Izveštaji</div>
+                            <div class="text-xs text-slate-400">DAX & Power Query</div>
                         </div>
                     </div>
                     <div class="bg-cardBg border border-slate-800 p-4 rounded-xl flex items-center gap-3 hover:border-accent/50 transition-colors">
                         <i class="fa-solid fa-database text-accent text-xl"></i>
                         <div>
                             <div class="font-semibold text-sm text-white">SQL / Baze</div>
-                            <div class="text-xs text-slate-400">Upiti i modeliranje</div>
+                            <div class="text-xs text-slate-400">Modeliranje & Upiti</div>
                         </div>
                     </div>
                     <div class="bg-cardBg border border-slate-800 p-4 rounded-xl flex items-center gap-3 hover:border-accent/50 transition-colors">
@@ -146,10 +146,10 @@
                         </div>
                     </div>
                     <div class="bg-cardBg border border-slate-800 p-4 rounded-xl flex items-center gap-3 hover:border-accent/50 transition-colors">
-                        <i class="fa-solid fa-code text-accent text-xl"></i>
+                        <i class="fa-solid fa-file-excel text-accent text-xl"></i>
                         <div>
-                            <div class="font-semibold text-sm text-white">HTML / CSS / JS</div>
-                            <div class="text-xs text-slate-400">Web osnove</div>
+                            <div class="font-semibold text-sm text-white">Excel</div>
+                            <div class="text-xs text-slate-400">Napredne analize</div>
                         </div>
                     </div>
                 </div>
@@ -160,7 +160,7 @@
         <section x-show="activeTab === 'experience'" x-transition.opacity.duration.300ms class="space-y-8" style="display: none;">
             <div>
                 <h2 class="text-3xl font-extrabold text-white mb-2">Radno iskustvo</h2>
-                <p class="text-slate-400">Pregled dosadašnjih profesionalnih uloga i postignuća.</p>
+                <p class="text-slate-400">Pregled profesionalnih uloga i poslovnih postignuća.</p>
             </div>
 
             <div class="border-l-2 border-slate-800 ml-4 space-y-10 pl-6">
@@ -174,7 +174,7 @@
                         </div>
                         <div class="text-sm text-slate-400 mb-4">Naziv Tvrtke</div>
                         <p class="text-sm text-slate-300 leading-relaxed">
-                            Vodstvo ključnih računa, implementacija analitičkih rješenja i optimizacija poslovnih procesa kroz napredne alate izvještavanja i automatizaciju podataka.
+                            Vođenje relacija s ključnim klijentima, izrada i implementacija Power BI analitičkih sustava te optimizacija poslovnog izvještavanja.
                         </p>
                     </div>
                 </div>
@@ -184,12 +184,12 @@
                     <span class="absolute -left-[31px] top-1.5 w-4 h-4 rounded-full bg-slate-700 ring-4 ring-darkBg"></span>
                     <div class="bg-cardBg border border-slate-800 rounded-2xl p-6 shadow-sm">
                         <div class="flex flex-col sm:flex-row sm:items-center justify-between mb-2">
-                            <h3 class="text-lg font-bold text-white">Data Analyst & Process Specialist</h3>
+                            <h3 class="text-lg font-bold text-white">Data Analyst</h3>
                             <span class="text-xs font-medium px-2.5 py-1 rounded-full bg-slate-800 text-slate-300 w-fit mt-1 sm:mt-0">2021. – 2023.</span>
                         </div>
                         <div class="text-sm text-slate-400 mb-4">Prethodna Tvrtka</div>
                         <p class="text-sm text-slate-300 leading-relaxed">
-                            Izrada interaktivnih dashboarda, rad s bazama podataka, analiza performansi i suradnja s upravom na strateškim odlukama temeljenim na podacima.
+                            Priprema i obrada podataka u SQL-u, razvoj interaktivnih izvještaja i automatizacija ponavljajućih analiza.
                         </p>
                     </div>
                 </div>
@@ -197,60 +197,103 @@
         </section>
 
         <!-- TAB 3: PROJEKTI -->
-        <section x-show="activeTab === 'projects'" x-transition.opacity.duration.300ms class="space-y-8" style="display: none;">
+        <section x-show="activeTab === 'projects'" x-transition.opacity.duration.300ms class="space-y-10" style="display: none;">
             <div>
-                <h2 class="text-3xl font-extrabold text-white mb-2">Moji projekti</h2>
-                <p class="text-slate-400">Istaknuti radovi, aplikacije i interaktivni Power BI izvještaji.</p>
+                <h2 class="text-3xl font-extrabold text-white mb-2">Power BI Projekti</h2>
+                <p class="text-slate-400">Listaj kroz slajdove i pregledaj stranice pojedinih izvještaja.</p>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <!-- Projekt 1: Power BI (Spreman za embed) -->
-                <div class="bg-cardBg border border-slate-800 rounded-2xl p-6 flex flex-col justify-between hover:border-slate-700 transition-all">
-                    <div>
-                        <div class="flex items-center justify-between mb-4">
-                            <div class="w-10 h-10 rounded-xl bg-accent/10 flex items-center justify-center text-accent">
-                                <i class="fa-solid fa-chart-pie text-lg"></i>
-                            </div>
-                            <div class="flex gap-2">
-                                <span class="text-xs px-2.5 py-1 rounded-md bg-slate-800 text-slate-300">Power BI</span>
-                                <span class="text-xs px-2.5 py-1 rounded-md bg-slate-800 text-slate-300">SQL</span>
-                            </div>
+            <!-- PROJEKT 1: Slajder -->
+            <div class="bg-cardBg border border-slate-800 rounded-2xl p-6 shadow-xl" x-data="{ currentSlide: 0, totalSlides: 3 }">
+                <div class="mb-4">
+                    <h3 class="text-xl font-bold text-white">Financijski & Prodajni Dashboard</h3>
+                    <p class="text-sm text-slate-400">Sveobuhvatna analiza prodajnih rezultata i profitabilnosti po regijama.</p>
+                </div>
+
+                <!-- Karusel kontejner -->
+                <div class="relative overflow-hidden rounded-xl border border-slate-700/80 bg-slate-900 group">
+                    <div class="flex transition-transform duration-300 ease-in-out" :style="'transform: translateX(-' + (currentSlide * 100) + '%)'">
+                        <!-- Slika 1 -->
+                        <div class="w-full flex-shrink-0">
+                            <img src="https://via.placeholder.com/1200x675/1e293b/3b82f6?text=Power+BI+Stranica+1+-+Executive+Summary" alt="Stranica 1" class="w-full h-auto object-cover">
                         </div>
-                        <h3 class="text-lg font-bold text-white mb-2">Financijski Dashboard & Analiza</h3>
-                        <p class="text-sm text-slate-300 leading-relaxed mb-4">
-                            Interaktivni sustav za praćenje ključnih financijskih pokazatelja s automatskim osvježavanjem podataka i naprednim filtriranjem po regijama.
-                        </p>
+                        <!-- Slika 2 -->
+                        <div class="w-full flex-shrink-0">
+                            <img src="https://via.placeholder.com/1200x675/0f172a/3b82f6?text=Power+BI+Stranica+2+-+Sales+Analysis" alt="Stranica 2" class="w-full h-auto object-cover">
+                        </div>
+                        <!-- Slika 3 -->
+                        <div class="w-full flex-shrink-0">
+                            <img src="https://via.placeholder.com/1200x675/1e293b/3b82f6?text=Power+BI+Stranica+3+-+Data+Model+%26+DAX" alt="Stranica 3" class="w-full h-auto object-cover">
+                        </div>
                     </div>
-                    <div class="pt-4 border-t border-slate-800 flex items-center justify-between">
-                        <a href="#" class="text-xs font-semibold text-accent hover:underline flex items-center gap-1.5">
-                            <i class="fa-solid fa-arrow-up-right-from-square"></i> Otvori izvještaj
-                        </a>
-                        <span class="text-xs text-slate-500">Power BI Online</span>
+
+                    <!-- Lijevi gumb -->
+                    <button @click="currentSlide = (currentSlide - 1 + totalSlides) % totalSlides" class="absolute left-3 top-1/2 -translate-y-1/2 bg-slate-900/80 hover:bg-slate-800 text-white w-10 h-10 rounded-full flex items-center justify-center border border-slate-700 transition opacity-80 hover:opacity-100">
+                        <i class="fa-solid fa-chevron-left"></i>
+                    </button>
+
+                    <!-- Desni gumb -->
+                    <button @click="currentSlide = (currentSlide + 1) % totalSlides" class="absolute right-3 top-1/2 -translate-y-1/2 bg-slate-900/80 hover:bg-slate-800 text-white w-10 h-10 rounded-full flex items-center justify-center border border-slate-700 transition opacity-80 hover:opacity-100">
+                        <i class="fa-solid fa-chevron-right"></i>
+                    </button>
+
+                    <!-- Indikator stranica -->
+                    <div class="absolute bottom-3 left-1/2 -translate-x-1/2 bg-slate-900/80 px-3 py-1 rounded-full text-xs text-slate-300 border border-slate-700">
+                        Stranica <span x-text="currentSlide + 1"></span> / <span x-text="totalSlides"></span>
                     </div>
                 </div>
 
-                <!-- Projekt 2 -->
-                <div class="bg-cardBg border border-slate-800 rounded-2xl p-6 flex flex-col justify-between hover:border-slate-700 transition-all">
-                    <div>
-                        <div class="flex items-center justify-between mb-4">
-                            <div class="w-10 h-10 rounded-xl bg-accent/10 flex items-center justify-center text-accent">
-                                <i class="fa-solid fa-bolt text-lg"></i>
-                            </div>
-                            <div class="flex gap-2">
-                                <span class="text-xs px-2.5 py-1 rounded-md bg-slate-800 text-slate-300">Automation</span>
-                                <span class="text-xs px-2.5 py-1 rounded-md bg-slate-800 text-slate-300">Power Automate</span>
-                            </div>
-                        </div>
-                        <h3 class="text-lg font-bold text-white mb-2">Optimizacija Poslovnih Procesa</h3>
-                        <p class="text-sm text-slate-300 leading-relaxed mb-4">
-                            Rješenje za automatsko prikupljanje i obradu dokumentacije iz različitih izvora uz integraciju obavijesti u realnom vremenu.
-                        </p>
+                <!-- Oznake i Preuzimanje -->
+                <div class="mt-6 flex flex-wrap items-center justify-between gap-4">
+                    <div class="flex gap-2">
+                        <span class="px-2.5 py-1 bg-blue-500/10 text-blue-400 text-xs font-semibold rounded-md border border-blue-500/20">Power BI</span>
+                        <span class="px-2.5 py-1 bg-cyan-500/10 text-cyan-400 text-xs font-semibold rounded-md border border-cyan-500/20">DAX</span>
+                        <span class="px-2.5 py-1 bg-emerald-500/10 text-emerald-400 text-xs font-semibold rounded-md border border-emerald-500/20">SQL</span>
                     </div>
-                    <div class="pt-4 border-t border-slate-800 flex items-center justify-between">
-                        <a href="https://github.com/antoniopetak" target="_blank" class="text-xs font-semibold text-accent hover:underline flex items-center gap-1.5">
-                            <i class="fa-brands fa-github"></i> Pogledaj kod
-                        </a>
-                        <span class="text-xs text-slate-500">Završeno</span>
+                </div>
+            </div>
+
+            <!-- PROJEKT 2: Slajder -->
+            <div class="bg-cardBg border border-slate-800 rounded-2xl p-6 shadow-xl" x-data="{ currentSlide: 0, totalSlides: 2 }">
+                <div class="mb-4">
+                    <h3 class="text-xl font-bold text-white">Analiza Opskrbnog Lanca & Zaliha</h3>
+                    <p class="text-sm text-slate-400">Pratite KPI pokazatelje dostave, zalihu i koeficijent obrtaja robe.</p>
+                </div>
+
+                <!-- Karusel kontejner -->
+                <div class="relative overflow-hidden rounded-xl border border-slate-700/80 bg-slate-900 group">
+                    <div class="flex transition-transform duration-300 ease-in-out" :style="'transform: translateX(-' + (currentSlide * 100) + '%)'">
+                        <!-- Slika 1 -->
+                        <div class="w-full flex-shrink-0">
+                            <img src="https://via.placeholder.com/1200x675/0f172a/3b82f6?text=Power+BI+Stranica+1+-+Inventory+Overview" alt="Stranica 1" class="w-full h-auto object-cover">
+                        </div>
+                        <!-- Slika 2 -->
+                        <div class="w-full flex-shrink-0">
+                            <img src="https://via.placeholder.com/1200x675/1e293b/3b82f6?text=Power+BI+Stranica+2+-+Supplier+Performance" alt="Stranica 2" class="w-full h-auto object-cover">
+                        </div>
+                    </div>
+
+                    <!-- Lijevi gumb -->
+                    <button @click="currentSlide = (currentSlide - 1 + totalSlides) % totalSlides" class="absolute left-3 top-1/2 -translate-y-1/2 bg-slate-900/80 hover:bg-slate-800 text-white w-10 h-10 rounded-full flex items-center justify-center border border-slate-700 transition opacity-80 hover:opacity-100">
+                        <i class="fa-solid fa-chevron-left"></i>
+                    </button>
+
+                    <!-- Desni gumb -->
+                    <button @click="currentSlide = (currentSlide + 1) % totalSlides" class="absolute right-3 top-1/2 -translate-y-1/2 bg-slate-900/80 hover:bg-slate-800 text-white w-10 h-10 rounded-full flex items-center justify-center border border-slate-700 transition opacity-80 hover:opacity-100">
+                        <i class="fa-solid fa-chevron-right"></i>
+                    </button>
+
+                    <!-- Indikator stranica -->
+                    <div class="absolute bottom-3 left-1/2 -translate-x-1/2 bg-slate-900/80 px-3 py-1 rounded-full text-xs text-slate-300 border border-slate-700">
+                        Stranica <span x-text="currentSlide + 1"></span> / <span x-text="totalSlides"></span>
+                    </div>
+                </div>
+
+                <!-- Oznake i Preuzimanje -->
+                <div class="mt-6 flex flex-wrap items-center justify-between gap-4">
+                    <div class="flex gap-2">
+                        <span class="px-2.5 py-1 bg-blue-500/10 text-blue-400 text-xs font-semibold rounded-md border border-blue-500/20">Power BI</span>
+                        <span class="px-2.5 py-1 bg-purple-500/10 text-purple-400 text-xs font-semibold rounded-md border border-purple-500/20">Power Query</span>
                     </div>
                 </div>
             </div>
