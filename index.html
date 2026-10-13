@@ -117,11 +117,14 @@
                 </div>
             </div>
 
-            <!-- Profesionalni profil & Kompetencije -->
-            <div class="bg-cardBg border border-slate-800 rounded-2xl p-6 sm:p-8 text-left">
+            <!-- Profesionalni fokus & Područja interesa (U ISTOM OKVIRU) -->
+            <div class="bg-cardBg border border-slate-800 rounded-2xl p-6 sm:p-8 text-left space-y-6">
+                <!-- Profesionalni fokus -->
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 text-slate-300 text-sm leading-relaxed">
                     <div>
-                        <h4 class="font-bold text-white mb-2 text-base">Professional Focus</h4>
+                        <h4 class="font-bold text-white mb-2 text-base flex items-center gap-2">
+                            <i class="fa-solid fa-briefcase text-accent"></i> Professional Focus
+                        </h4>
                         <p class="mb-3">
                             Driven by a deep passion for turning raw data into meaningful business value. Throughout my career, I have cultivated a rigorous, detail-oriented analytical approach designed to eliminate bottlenecks, optimize ETL pipelines, and empower executive decision-making.
                         </p>
@@ -130,7 +133,9 @@
                         </p>
                     </div>
                     <div>
-                        <h4 class="font-bold text-white mb-2 text-base">Core Competencies:</h4>
+                        <h4 class="font-bold text-white mb-2 text-base flex items-center gap-2">
+                            <i class="fa-solid fa-list-check text-accent"></i> Core Competencies:
+                        </h4>
                         <ul class="space-y-2 text-slate-400 list-disc list-inside">
                             <li>Business Analytics & Executive Power BI Dashboard Development</li>
                             <li>Advanced Data Modeling & DAX / SQL Optimization</li>
@@ -138,27 +143,29 @@
                         </ul>
                     </div>
                 </div>
-            </div>
 
-            <!-- Područja interesa / Areas of Interest -->
-            <div class="text-left">
-                <h3 class="text-xl font-bold text-white mb-4">Areas of Interest & Specialization</h3>
-                <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
-                    <div class="bg-cardBg border border-slate-800 p-4 rounded-xl">
-                        <div class="font-semibold text-sm text-white mb-1"><i class="fa-solid fa-layer-group text-accent mr-1.5"></i> Data Analytics</div>
-                        <div class="text-xs text-slate-400">Reporting & KPI Tracking</div>
-                    </div>
-                    <div class="bg-cardBg border border-slate-800 p-4 rounded-xl">
-                        <div class="font-semibold text-sm text-white mb-1"><i class="fa-solid fa-gears text-accent mr-1.5"></i> Power Platform</div>
-                        <div class="text-xs text-slate-400">Automate & Integration</div>
-                    </div>
-                    <div class="bg-cardBg border border-slate-800 p-4 rounded-xl">
-                        <div class="font-semibold text-sm text-white mb-1"><i class="fa-solid fa-database text-accent mr-1.5"></i> Data Engineering</div>
-                        <div class="text-xs text-slate-400">ETL Pipelines & Azure</div>
-                    </div>
-                    <div class="bg-cardBg border border-slate-800 p-4 rounded-xl">
-                        <div class="font-semibold text-sm text-white mb-1"><i class="fa-solid fa-brain text-accent mr-1.5"></i> Data Science & AI</div>
-                        <div class="text-xs text-slate-400">AI-driven Problem Solving</div>
+                <!-- Unutarnja linija za razdvajanje -->
+                <div class="border-t border-slate-700/60 pt-6">
+                    <h4 class="font-bold text-white mb-4 text-base flex items-center gap-2">
+                        <i class="fa-solid fa-compass text-accent"></i> Areas of Interest & Specialization
+                    </h4>
+                    <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
+                        <div class="bg-slate-900/60 border border-slate-800 p-3.5 rounded-xl">
+                            <div class="font-semibold text-sm text-white mb-1"><i class="fa-solid fa-layer-group text-accent mr-1.5"></i> Data Analytics</div>
+                            <div class="text-xs text-slate-400">Reporting & KPI Tracking</div>
+                        </div>
+                        <div class="bg-slate-900/60 border border-slate-800 p-3.5 rounded-xl">
+                            <div class="font-semibold text-sm text-white mb-1"><i class="fa-solid fa-gears text-accent mr-1.5"></i> Power Platform</div>
+                            <div class="text-xs text-slate-400">Automate & Integration</div>
+                        </div>
+                        <div class="bg-slate-900/60 border border-slate-800 p-3.5 rounded-xl">
+                            <div class="font-semibold text-sm text-white mb-1"><i class="fa-solid fa-database text-accent mr-1.5"></i> Data Engineering</div>
+                            <div class="text-xs text-slate-400">ETL Pipelines & Azure</div>
+                        </div>
+                        <div class="bg-slate-900/60 border border-slate-800 p-3.5 rounded-xl">
+                            <div class="font-semibold text-sm text-white mb-1"><i class="fa-solid fa-brain text-accent mr-1.5"></i> Data Science & AI</div>
+                            <div class="text-xs text-slate-400">AI-driven Problem Solving</div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -226,13 +233,13 @@
                 </div>
             </div>
 
-            <!-- OSOBNA POZADINA / PERSONAL BACKGROUND (Manje bitni detalji) -->
+            <!-- OSOBNA POZADINA / PERSONAL BACKGROUND (Hobiji i interesi) -->
             <div class="bg-cardBg/50 border border-slate-800/80 rounded-2xl p-6 text-left">
                 <h4 class="font-semibold text-white mb-2 text-sm flex items-center gap-2">
                     <i class="fa-solid fa-person-running text-accent"></i> Personal Background & Mindset
                 </h4>
                 <p class="text-xs text-slate-400 leading-relaxed">
-                    Outside of technical environments, I am an avid endurance runner and sports enthusiast. The discipline, resilience, and long-term focus required in endurance sports directly translate into how I approach troubleshooting, complex data architecture, and persistent problem-solving in business.
+                    Outside of technical environments, I am an active sports enthusiast who regularly competes in triathlons and plays amateur football. The discipline, resilience, and strategic focus required in endurance sports directly translate into how I approach troubleshooting, complex data architecture, and persistent problem-solving. In my free time, I also enjoy reading books, playing video games, and watching movies and TV series.
                 </p>
             </div>
         </section>
