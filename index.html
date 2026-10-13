@@ -200,7 +200,6 @@
         <section x-show="activeTab === 'projects'" x-transition.opacity.duration.300ms class="space-y-12" style="display: none;">
             <div>
                 <h2 class="text-3xl font-extrabold text-white mb-2">Power BI Projects</h2>
-                <p class="text-slate-400">Pregled realiziranih analitičkih rješenja i nadzornih ploča.</p>
             </div>
 
             <!-- PROJEKT 1: Project 1 -->
@@ -242,6 +241,7 @@
                     <div class="flex gap-2">
                         <span class="px-2.5 py-1 bg-blue-500/10 text-blue-400 text-xs font-semibold rounded-md border border-blue-500/20">Power BI</span>
                         <span class="px-2.5 py-1 bg-cyan-500/10 text-cyan-400 text-xs font-semibold rounded-md border border-cyan-500/20">DAX</span>
+                        <span class="px-2.5 py-1 bg-amber-500/10 text-amber-400 text-xs font-semibold rounded-md border border-amber-500/20">MySQL</span>
                     </div>
                     <!-- Suautor -->
                     <a href="https://www.linkedin.com/in/smikulec03/" target="_blank" class="text-xs text-slate-400 hover:text-accent flex items-center gap-1.5 transition-colors">
@@ -282,7 +282,6 @@
                     <div class="flex gap-2">
                         <span class="px-2.5 py-1 bg-blue-500/10 text-blue-400 text-xs font-semibold rounded-md border border-blue-500/20">Power BI</span>
                         <span class="px-2.5 py-1 bg-cyan-500/10 text-cyan-400 text-xs font-semibold rounded-md border border-cyan-500/20">DAX</span>
-                        <span class="px-2.5 py-1 bg-emerald-500/10 text-emerald-400 text-xs font-semibold rounded-md border border-emerald-500/20">SQL</span>
                     </div>
                 </div>
             </div>
@@ -323,7 +322,10 @@
                 <div class="mt-6 flex flex-wrap items-center justify-between gap-4">
                     <div class="flex gap-2">
                         <span class="px-2.5 py-1 bg-blue-500/10 text-blue-400 text-xs font-semibold rounded-md border border-blue-500/20">Power BI</span>
-                        <span class="px-2.5 py-1 bg-purple-500/10 text-purple-400 text-xs font-semibold rounded-md border border-purple-500/20">Power Query</span>
+                        <span class="px-2.5 py-1 bg-cyan-500/10 text-cyan-400 text-xs font-semibold rounded-md border border-cyan-500/20">DAX</span>
+                        <span class="px-2.5 py-1 bg-purple-500/10 text-purple-400 text-xs font-semibold rounded-md border border-purple-500/20">LinkedIn</span>
+                        <span class="px-2.5 py-1 bg-amber-500/10 text-amber-400 text-xs font-semibold rounded-md border border-amber-500/20">HubSpot</span>
+                        <span class="px-2.5 py-1 bg-green-500/10 text-green-400 text-xs font-semibold rounded-md border border-green-500/20">Google Analytics 4</span>
                     </div>
                     <!-- Suautor (ako postoji) -->
                     <a href="https://www.linkedin.com/in/smikulec03/" target="_blank" class="text-xs text-slate-400 hover:text-accent flex items-center gap-1.5 transition-colors">
@@ -363,7 +365,7 @@
                 <div class="mt-6 flex flex-wrap items-center justify-between gap-4">
                     <div class="flex gap-2">
                         <span class="px-2.5 py-1 bg-blue-500/10 text-blue-400 text-xs font-semibold rounded-md border border-blue-500/20">Power BI</span>
-                        <span class="px-2.5 py-1 bg-emerald-500/10 text-emerald-400 text-xs font-semibold rounded-md border border-emerald-500/20">SQL</span>
+                        <span class="px-2.5 py-1 bg-cyan-500/10 text-cyan-400 text-xs font-semibold rounded-md border border-cyan-500/20">DAX</span>
                     </div>
                 </div>
             </div>
@@ -399,7 +401,7 @@
                 <div class="mt-6 flex flex-wrap items-center justify-between gap-4">
                     <div class="flex gap-2">
                         <span class="px-2.5 py-1 bg-blue-500/10 text-blue-400 text-xs font-semibold rounded-md border border-blue-500/20">Power BI</span>
-                        <span class="px-2.5 py-1 bg-amber-500/10 text-amber-400 text-xs font-semibold rounded-md border border-amber-500/20">ArcGIS</span>
+                        <span class="px-2.5 py-1 bg-cyan-500/10 text-cyan-400 text-xs font-semibold rounded-md border border-cyan-500/20">DAX</span>
                     </div>
                     <!-- Suautor (ako postoji) -->
                     <a href="https://www.linkedin.com/in/smikulec03/" target="_blank" class="text-xs text-slate-400 hover:text-accent flex items-center gap-1.5 transition-colors">
@@ -409,17 +411,15 @@
             </div>
 
             <!-- PROJEKT 6: Project 6 -->
-            <div class="bg-cardBg border border-slate-800 rounded-2xl p-6 shadow-xl" x-data="{ currentSlide: 0, totalSlides: 3 }">
+            <div class="bg-cardBg border border-slate-800 rounded-2xl p-6 shadow-xl" x-data="{ currentSlide: 0, totalSlides: 1 }">
                 <div class="mb-4">
-                    <h3 class="text-xl font-bold text-white">Project 6</h3>
-                    <p class="text-sm text-slate-400">Opis novog projekta. Ovdje upiši detalje, ciljeve i funkcionalnosti tvog šestog projekta.</p>
+                    <h3 class="text-xl font-bold text-white">Dynamic Multi-Tenant API ETL Engine & Data Pipeline</h3>
+                    <p class="text-sm text-slate-400">A highly scalable, modular ETL pipeline developed entirely in Power Query (M Language) to automate data ingestion from a REST API across multiple dynamic targets. Built around DRY (Don't Repeat Yourself) architecture, the engine utilizes secure environment parameters (pApiUser, pApiPassword, pApiBaseUrl) and a flexible configuration dataset (ConfigDatabases) to drive pagination and data extraction. A custom M function (fnGetApiView) handles dynamic HTTP requests, pagination loops, response parsing, and error handling. The function iteratively executes for each configured country/database, dynamically combining disparate payload views into unified, reporting-ready data tables (Views 1–5).</p>
                 </div>
 
                 <div class="relative overflow-hidden rounded-xl border border-slate-700/80 bg-slate-900 group">
                     <div class="flex transition-transform duration-300 ease-in-out" :style="'transform: translateX(-' + (currentSlide * 100) + '%)'">
-                        <div class="w-full flex-shrink-0"><img src="images/Project 6/1.png" alt="Project 6" class="w-full h-auto object-cover"></div>
-                        <div class="w-full flex-shrink-0"><img src="images/Project 6/2.png" alt="Project 6" class="w-full h-auto object-cover"></div>
-                        <div class="w-full flex-shrink-0"><img src="images/Project 6/3.png" alt="Project 6" class="w-full h-auto object-cover"></div>
+                        <div class="w-full flex-shrink-0"><img src="images/backend/1.png" alt="Dynamic Multi-Tenant API ETL Engine & Data Pipeline" class="w-full h-auto object-cover"></div>
                     </div>
 
                     <button @click="currentSlide = (currentSlide - 1 + totalSlides) % totalSlides" class="absolute left-3 top-1/2 -translate-y-1/2 bg-slate-900/80 hover:bg-slate-800 text-white w-10 h-10 rounded-full flex items-center justify-center border border-slate-700 transition opacity-80 hover:opacity-100">
