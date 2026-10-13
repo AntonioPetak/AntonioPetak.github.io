@@ -28,14 +28,42 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         body { font-family: 'Inter', sans-serif; }
+        [x-cloak] { display: none !important; }
+        .lightbox-img {
+            max-width: 100%;
+            max-height: 85vh;
+            object-fit: contain;
+        }
     </style>
 </head>
 <body class="bg-darkBg text-slate-100 min-h-screen flex flex-col justify-between" 
-      x-data="{ activeTab: 'about', modalOpen: false, modalImgSrc: '', modalImgAlt: '' }"
-      @keydown.escape.window="modalOpen = false">
+      x-data="{ 
+          activeTab: 'about', 
+          modalOpen: false, 
+          modalImages: [], 
+          modalIndex: 0,
+          openModal(imagesArray, index) {
+              this.modalImages = imagesArray;
+              this.modalIndex = index;
+              this.modalOpen = true;
+          },
+          nextModalImg() {
+              if (this.modalImages.length > 0) {
+                  this.modalIndex = (this.modalIndex + 1) % this.modalImages.length;
+              }
+          },
+          prevModalImg() {
+              if (this.modalImages.length > 0) {
+                  this.modalIndex = (this.modalIndex - 1 + this.modalImages.length) % this.modalImages.length;
+              }
+          }
+      }"
+      @keydown.escape.window="modalOpen = false"
+      @keydown.right.window="if(modalOpen) nextModalImg()"
+      @keydown.left.window="if(modalOpen) prevModalImg()">
 
     <!-- Zaglavlje / Navigacija -->
-    <header class="sticky top-0 z-50 bg-darkBg/80 backdrop-blur-md border-b border-slate-800">
+    <header class="sticky top-0 z-50 bg-darkBg/85 backdrop-blur-md border-b border-slate-800">
         <div class="max-w-5xl mx-auto px-6 h-16 flex items-center justify-between">
             <a href="#" class="font-bold text-xl tracking-tight bg-gradient-to-r from-accent to-indigo-400 bg-clip-text text-transparent">
                 Antonio Petak
@@ -159,7 +187,7 @@
         </section>
 
         <!-- TAB 2: RADNO ISKUSTVO -->
-        <section x-show="activeTab === 'experience'" x-transition.opacity.duration.300ms class="space-y-8" style="display: none;">
+        <section x-show="activeTab === 'experience'" x-transition.opacity.duration.300ms class="space-y-8" x-cloak>
             <div>
                 <h2 class="text-3xl font-extrabold text-white mb-2">Radno iskustvo</h2>
                 <p class="text-slate-400">Pregled profesionalnih uloga i poslovnih postignuća.</p>
@@ -199,12 +227,20 @@
         </section>
 
         <!-- TAB 3: PROJEKTI -->
-        <section x-show="activeTab === 'projects'" x-transition.opacity.duration.300ms class="space-y-12" style="display: none;">
+        <section x-show="activeTab === 'projects'" x-transition.opacity.duration.300ms class="space-y-12" x-cloak
+                 x-data="{
+                     p1: ['images/AIS/1.png', 'images/AIS/2.png', 'images/AIS/3.png', 'images/AIS/4.png', 'images/AIS/5.png', 'images/AIS/6.png', 'images/AIS/7.png', 'images/AIS/8.png', 'images/AIS/9.png', 'images/AIS/10.png', 'images/AIS/11.png', 'images/AIS/12.png'],
+                     p2: Array.from({length: 9}, (_, i) => `images/Insurance Claims/${i + 1}.png`),
+                     p3: ['images/Social Metrics/1.png', 'images/Social Metrics/11.png', 'images/Social Metrics/2.png', 'images/Social Metrics/3.png', 'images/Social Metrics/4.png', 'images/Social Metrics/5.png', 'images/Social Metrics/6.png', 'images/Social Metrics/66.png', 'images/Social Metrics/7.png', 'images/Social Metrics/8.png'],
+                     p4: ['images/Designer Clothing Budgeting/1.png', 'images/Designer Clothing Budgeting/2.png', 'images/Designer Clothing Budgeting/3.png', 'images/Designer Clothing Budgeting/4.png', 'images/Designer Clothing Budgeting/5.png'],
+                     p5: ['images/Insurance Risk/1.png', 'images/Insurance Risk/2.png', 'images/Insurance Risk/3.png', 'images/Insurance Risk/4.png', 'images/Insurance Risk/5.png'],
+                     p6: ['images/backend/1.png']
+                 }">
             <div>
                 <h2 class="text-3xl font-extrabold text-white mb-2">Power BI Projects</h2>
             </div>
 
-            <!-- PROJEKT 1: Project 1 -->
+            <!-- PROJEKT 1 -->
             <div class="bg-cardBg border border-slate-800 rounded-2xl p-6 shadow-xl" x-data="{ currentSlide: 0, totalSlides: 12 }">
                 <div class="mb-4">
                     <h3 class="text-xl font-bold text-white">Insurance Operations & Executive Scorecard Dashboard</h3>
@@ -213,18 +249,11 @@
 
                 <div class="relative overflow-hidden rounded-xl border border-slate-700/80 bg-slate-900 group">
                     <div class="flex transition-transform duration-300 ease-in-out" :style="'transform: translateX(-' + (currentSlide * 100) + '%)'">
-                        <div class="w-full flex-shrink-0"><img src="images/AIS/1.png" alt="Insurance Operations & Executive Scorecard Dashboard" class="w-full h-auto object-cover cursor-pointer hover:opacity-95 transition" @click="modalOpen = true; modalImgSrc = $el.src; modalImgAlt = $el.alt"></div>
-                        <div class="w-full flex-shrink-0"><img src="images/AIS/2.png" alt="Insurance Operations & Executive Scorecard Dashboard" class="w-full h-auto object-cover cursor-pointer hover:opacity-95 transition" @click="modalOpen = true; modalImgSrc = $el.src; modalImgAlt = $el.alt"></div>
-                        <div class="w-full flex-shrink-0"><img src="images/AIS/3.png" alt="Insurance Operations & Executive Scorecard Dashboard" class="w-full h-auto object-cover cursor-pointer hover:opacity-95 transition" @click="modalOpen = true; modalImgSrc = $el.src; modalImgAlt = $el.alt"></div>
-                        <div class="w-full flex-shrink-0"><img src="images/AIS/4.png" alt="Insurance Operations & Executive Scorecard Dashboard" class="w-full h-auto object-cover cursor-pointer hover:opacity-95 transition" @click="modalOpen = true; modalImgSrc = $el.src; modalImgAlt = $el.alt"></div>
-                        <div class="w-full flex-shrink-0"><img src="images/AIS/5.png" alt="Insurance Operations & Executive Scorecard Dashboard" class="w-full h-auto object-cover cursor-pointer hover:opacity-95 transition" @click="modalOpen = true; modalImgSrc = $el.src; modalImgAlt = $el.alt"></div>
-                        <div class="w-full flex-shrink-0"><img src="images/AIS/6.png" alt="Insurance Operations & Executive Scorecard Dashboard" class="w-full h-auto object-cover cursor-pointer hover:opacity-95 transition" @click="modalOpen = true; modalImgSrc = $el.src; modalImgAlt = $el.alt"></div>
-                        <div class="w-full flex-shrink-0"><img src="images/AIS/7.png" alt="Insurance Operations & Executive Scorecard Dashboard" class="w-full h-auto object-cover cursor-pointer hover:opacity-95 transition" @click="modalOpen = true; modalImgSrc = $el.src; modalImgAlt = $el.alt"></div>
-                        <div class="w-full flex-shrink-0"><img src="images/AIS/8.png" alt="Insurance Operations & Executive Scorecard Dashboard" class="w-full h-auto object-cover cursor-pointer hover:opacity-95 transition" @click="modalOpen = true; modalImgSrc = $el.src; modalImgAlt = $el.alt"></div>
-                        <div class="w-full flex-shrink-0"><img src="images/AIS/9.png" alt="Insurance Operations & Executive Scorecard Dashboard" class="w-full h-auto object-cover cursor-pointer hover:opacity-95 transition" @click="modalOpen = true; modalImgSrc = $el.src; modalImgAlt = $el.alt"></div>
-                        <div class="w-full flex-shrink-0"><img src="images/AIS/10.png" alt="Insurance Operations & Executive Scorecard Dashboard" class="w-full h-auto object-cover cursor-pointer hover:opacity-95 transition" @click="modalOpen = true; modalImgSrc = $el.src; modalImgAlt = $el.alt"></div>
-                        <div class="w-full flex-shrink-0"><img src="images/AIS/11.png" alt="Insurance Operations & Executive Scorecard Dashboard" class="w-full h-auto object-cover cursor-pointer hover:opacity-95 transition" @click="modalOpen = true; modalImgSrc = $el.src; modalImgAlt = $el.alt"></div>
-                        <div class="w-full flex-shrink-0"><img src="images/AIS/12.png" alt="Insurance Operations & Executive Scorecard Dashboard" class="w-full h-auto object-cover cursor-pointer hover:opacity-95 transition" @click="modalOpen = true; modalImgSrc = $el.src; modalImgAlt = $el.alt"></div>
+                        <template x-for="(img, idx) in p1">
+                            <div class="w-full flex-shrink-0">
+                                <img :src="img" alt="Insurance Operations & Executive Scorecard Dashboard" class="w-full h-auto object-cover cursor-pointer hover:opacity-95 transition" @click="openModal(p1, idx)">
+                            </div>
+                        </template>
                     </div>
 
                     <button @click="currentSlide = (currentSlide - 1 + totalSlides) % totalSlides" class="absolute left-3 top-1/2 -translate-y-1/2 bg-slate-900/80 hover:bg-slate-800 text-white w-10 h-10 rounded-full flex items-center justify-center border border-slate-700 transition opacity-80 hover:opacity-100">
@@ -245,14 +274,13 @@
                         <span class="px-2.5 py-1 bg-cyan-500/10 text-cyan-400 text-xs font-semibold rounded-md border border-cyan-500/20">DAX</span>
                         <span class="px-2.5 py-1 bg-amber-500/10 text-amber-400 text-xs font-semibold rounded-md border border-amber-500/20">MySQL</span>
                     </div>
-                    <!-- Suautor -->
                     <a href="https://www.linkedin.com/in/smikulec03/" target="_blank" class="text-xs text-slate-400 hover:text-accent flex items-center gap-1.5 transition-colors">
                         <i class="fa-brands fa-linkedin text-accent text-sm"></i> Co-author: <span class="font-medium text-slate-300">Slavko Mikulec</span>
                     </a>
                 </div>
             </div>
 
-            <!-- PROJEKT 2: Insurance Claims Dashboard -->
+            <!-- PROJEKT 2 -->
             <div class="bg-cardBg border border-slate-800 rounded-2xl p-6 shadow-xl" x-data="{ currentSlide: 0, totalSlides: 9 }">
                 <div class="mb-4">
                     <h3 class="text-xl font-bold text-white">Insurance Claims Dashboard</h3>
@@ -261,9 +289,9 @@
 
                 <div class="relative overflow-hidden rounded-xl border border-slate-700/80 bg-slate-900 group">
                     <div class="flex transition-transform duration-300 ease-in-out" :style="'transform: translateX(-' + (currentSlide * 100) + '%)'">
-                        <template x-for="i in totalSlides">
+                        <template x-for="(img, idx) in p2">
                             <div class="w-full flex-shrink-0">
-                                <img :src="'images/Insurance Claims/' + i + '.png'" alt="Insurance Claims" class="w-full h-auto object-cover cursor-pointer hover:opacity-95 transition" @click="modalOpen = true; modalImgSrc = $el.src; modalImgAlt = $el.alt">
+                                <img :src="img" alt="Insurance Claims" class="w-full h-auto object-cover cursor-pointer hover:opacity-95 transition" @click="openModal(p2, idx)">
                             </div>
                         </template>
                     </div>
@@ -288,7 +316,7 @@
                 </div>
             </div>
 
-            <!-- PROJEKT 3: Social Metrics Dashboard -->
+            <!-- PROJEKT 3 -->
             <div class="bg-cardBg border border-slate-800 rounded-2xl p-6 shadow-xl" x-data="{ currentSlide: 0, totalSlides: 10 }">
                 <div class="mb-4">
                     <h3 class="text-xl font-bold text-white">Social Metrics Dashboard</h3>
@@ -297,16 +325,11 @@
 
                 <div class="relative overflow-hidden rounded-xl border border-slate-700/80 bg-slate-900 group">
                     <div class="flex transition-transform duration-300 ease-in-out" :style="'transform: translateX(-' + (currentSlide * 100) + '%)'">
-                        <div class="w-full flex-shrink-0"><img src="images/Social Metrics/1.png" alt="Social Metrics" class="w-full h-auto object-cover cursor-pointer hover:opacity-95 transition" @click="modalOpen = true; modalImgSrc = $el.src; modalImgAlt = $el.alt"></div>
-                        <div class="w-full flex-shrink-0"><img src="images/Social Metrics/11.png" alt="Social Metrics" class="w-full h-auto object-cover cursor-pointer hover:opacity-95 transition" @click="modalOpen = true; modalImgSrc = $el.src; modalImgAlt = $el.alt"></div>
-                        <div class="w-full flex-shrink-0"><img src="images/Social Metrics/2.png" alt="Social Metrics" class="w-full h-auto object-cover cursor-pointer hover:opacity-95 transition" @click="modalOpen = true; modalImgSrc = $el.src; modalImgAlt = $el.alt"></div>
-                        <div class="w-full flex-shrink-0"><img src="images/Social Metrics/3.png" alt="Social Metrics" class="w-full h-auto object-cover cursor-pointer hover:opacity-95 transition" @click="modalOpen = true; modalImgSrc = $el.src; modalImgAlt = $el.alt"></div>
-                        <div class="w-full flex-shrink-0"><img src="images/Social Metrics/4.png" alt="Social Metrics" class="w-full h-auto object-cover cursor-pointer hover:opacity-95 transition" @click="modalOpen = true; modalImgSrc = $el.src; modalImgAlt = $el.alt"></div>
-                        <div class="w-full flex-shrink-0"><img src="images/Social Metrics/5.png" alt="Social Metrics" class="w-full h-auto object-cover cursor-pointer hover:opacity-95 transition" @click="modalOpen = true; modalImgSrc = $el.src; modalImgAlt = $el.alt"></div>
-                        <div class="w-full flex-shrink-0"><img src="images/Social Metrics/6.png" alt="Social Metrics" class="w-full h-auto object-cover cursor-pointer hover:opacity-95 transition" @click="modalOpen = true; modalImgSrc = $el.src; modalImgAlt = $el.alt"></div>
-                        <div class="w-full flex-shrink-0"><img src="images/Social Metrics/66.png" alt="Social Metrics" class="w-full h-auto object-cover cursor-pointer hover:opacity-95 transition" @click="modalOpen = true; modalImgSrc = $el.src; modalImgAlt = $el.alt"></div>
-                        <div class="w-full flex-shrink-0"><img src="images/Social Metrics/7.png" alt="Social Metrics" class="w-full h-auto object-cover cursor-pointer hover:opacity-95 transition" @click="modalOpen = true; modalImgSrc = $el.src; modalImgAlt = $el.alt"></div>
-                        <div class="w-full flex-shrink-0"><img src="images/Social Metrics/8.png" alt="Social Metrics" class="w-full h-auto object-cover cursor-pointer hover:opacity-95 transition" @click="modalOpen = true; modalImgSrc = $el.src; modalImgAlt = $el.alt"></div>
+                        <template x-for="(img, idx) in p3">
+                            <div class="w-full flex-shrink-0">
+                                <img :src="img" alt="Social Metrics" class="w-full h-auto object-cover cursor-pointer hover:opacity-95 transition" @click="openModal(p3, idx)">
+                            </div>
+                        </template>
                     </div>
 
                     <button @click="currentSlide = (currentSlide - 1 + totalSlides) % totalSlides" class="absolute left-3 top-1/2 -translate-y-1/2 bg-slate-900/80 hover:bg-slate-800 text-white w-10 h-10 rounded-full flex items-center justify-center border border-slate-700 transition opacity-80 hover:opacity-100">
@@ -329,14 +352,13 @@
                         <span class="px-2.5 py-1 bg-amber-500/10 text-amber-400 text-xs font-semibold rounded-md border border-amber-500/20">HubSpot</span>
                         <span class="px-2.5 py-1 bg-green-500/10 text-green-400 text-xs font-semibold rounded-md border border-green-500/20">Google Analytics 4</span>
                     </div>
-                    <!-- Suautor (ako postoji) -->
                     <a href="https://www.linkedin.com/in/smikulec03/" target="_blank" class="text-xs text-slate-400 hover:text-accent flex items-center gap-1.5 transition-colors">
                         <i class="fa-brands fa-linkedin text-accent text-sm"></i> Co-author: <span class="font-medium text-slate-300">Slavko Mikulec</span>
                     </a>
                 </div>
             </div>
 
-            <!-- PROJEKT 4: Designer Clothing Budgeting Dashboard -->
+            <!-- PROJEKT 4 -->
             <div class="bg-cardBg border border-slate-800 rounded-2xl p-6 shadow-xl" x-data="{ currentSlide: 0, totalSlides: 5 }">
                 <div class="mb-4">
                     <h3 class="text-xl font-bold text-white">Designer Clothing Budgeting Dashboard</h3>
@@ -345,11 +367,11 @@
 
                 <div class="relative overflow-hidden rounded-xl border border-slate-700/80 bg-slate-900 group">
                     <div class="flex transition-transform duration-300 ease-in-out" :style="'transform: translateX(-' + (currentSlide * 100) + '%)'">
-                        <div class="w-full flex-shrink-0"><img src="images/Designer Clothing Budgeting/1.png" alt="Designer Clothing Budgeting" class="w-full h-auto object-cover cursor-pointer hover:opacity-95 transition" @click="modalOpen = true; modalImgSrc = $el.src; modalImgAlt = $el.alt"></div>
-                        <div class="w-full flex-shrink-0"><img src="images/Designer Clothing Budgeting/2.png" alt="Designer Clothing Budgeting" class="w-full h-auto object-cover cursor-pointer hover:opacity-95 transition" @click="modalOpen = true; modalImgSrc = $el.src; modalImgAlt = $el.alt"></div>
-                        <div class="w-full flex-shrink-0"><img src="images/Designer Clothing Budgeting/3.png" alt="Designer Clothing Budgeting" class="w-full h-auto object-cover cursor-pointer hover:opacity-95 transition" @click="modalOpen = true; modalImgSrc = $el.src; modalImgAlt = $el.alt"></div>
-                        <div class="w-full flex-shrink-0"><img src="images/Designer Clothing Budgeting/4.png" alt="Designer Clothing Budgeting" class="w-full h-auto object-cover cursor-pointer hover:opacity-95 transition" @click="modalOpen = true; modalImgSrc = $el.src; modalImgAlt = $el.alt"></div>
-                        <div class="w-full flex-shrink-0"><img src="images/Designer Clothing Budgeting/5.png" alt="Designer Clothing Budgeting" class="w-full h-auto object-cover cursor-pointer hover:opacity-95 transition" @click="modalOpen = true; modalImgSrc = $el.src; modalImgAlt = $el.alt"></div>
+                        <template x-for="(img, idx) in p4">
+                            <div class="w-full flex-shrink-0">
+                                <img :src="img" alt="Designer Clothing Budgeting" class="w-full h-auto object-cover cursor-pointer hover:opacity-95 transition" @click="openModal(p4, idx)">
+                            </div>
+                        </template>
                     </div>
 
                     <button @click="currentSlide = (currentSlide - 1 + totalSlides) % totalSlides" class="absolute left-3 top-1/2 -translate-y-1/2 bg-slate-900/80 hover:bg-slate-800 text-white w-10 h-10 rounded-full flex items-center justify-center border border-slate-700 transition opacity-80 hover:opacity-100">
@@ -372,7 +394,7 @@
                 </div>
             </div>
 
-            <!-- PROJEKT 5: Insurance Risk & Actuarial Analytics Dashboard -->
+            <!-- PROJEKT 5 -->
             <div class="bg-cardBg border border-slate-800 rounded-2xl p-6 shadow-xl" x-data="{ currentSlide: 0, totalSlides: 5 }">
                 <div class="mb-4">
                     <h3 class="text-xl font-bold text-white">Insurance Risk & Actuarial Analytics Dashboard</h3>
@@ -381,11 +403,11 @@
 
                 <div class="relative overflow-hidden rounded-xl border border-slate-700/80 bg-slate-900 group">
                     <div class="flex transition-transform duration-300 ease-in-out" :style="'transform: translateX(-' + (currentSlide * 100) + '%)'">
-                        <div class="w-full flex-shrink-0"><img src="images/Insurance Risk/1.png" alt="Insurance Risk" class="w-full h-auto object-cover cursor-pointer hover:opacity-95 transition" @click="modalOpen = true; modalImgSrc = $el.src; modalImgAlt = $el.alt"></div>
-                        <div class="w-full flex-shrink-0"><img src="images/Insurance Risk/2.png" alt="Insurance Risk" class="w-full h-auto object-cover cursor-pointer hover:opacity-95 transition" @click="modalOpen = true; modalImgSrc = $el.src; modalImgAlt = $el.alt"></div>
-                        <div class="w-full flex-shrink-0"><img src="images/Insurance Risk/3.png" alt="Insurance Risk" class="w-full h-auto object-cover cursor-pointer hover:opacity-95 transition" @click="modalOpen = true; modalImgSrc = $el.src; modalImgAlt = $el.alt"></div>
-                        <div class="w-full flex-shrink-0"><img src="images/Insurance Risk/4.png" alt="Insurance Risk" class="w-full h-auto object-cover cursor-pointer hover:opacity-95 transition" @click="modalOpen = true; modalImgSrc = $el.src; modalImgAlt = $el.alt"></div>
-                        <div class="w-full flex-shrink-0"><img src="images/Insurance Risk/5.png" alt="Insurance Risk" class="w-full h-auto object-cover cursor-pointer hover:opacity-95 transition" @click="modalOpen = true; modalImgSrc = $el.src; modalImgAlt = $el.alt"></div>
+                        <template x-for="(img, idx) in p5">
+                            <div class="w-full flex-shrink-0">
+                                <img :src="img" alt="Insurance Risk" class="w-full h-auto object-cover cursor-pointer hover:opacity-95 transition" @click="openModal(p5, idx)">
+                            </div>
+                        </template>
                     </div>
 
                     <button @click="currentSlide = (currentSlide - 1 + totalSlides) % totalSlides" class="absolute left-3 top-1/2 -translate-y-1/2 bg-slate-900/80 hover:bg-slate-800 text-white w-10 h-10 rounded-full flex items-center justify-center border border-slate-700 transition opacity-80 hover:opacity-100">
@@ -405,14 +427,13 @@
                         <span class="px-2.5 py-1 bg-blue-500/10 text-blue-400 text-xs font-semibold rounded-md border border-blue-500/20">Power BI</span>
                         <span class="px-2.5 py-1 bg-cyan-500/10 text-cyan-400 text-xs font-semibold rounded-md border border-cyan-500/20">DAX</span>
                     </div>
-                    <!-- Suautor (ako postoji) -->
                     <a href="https://www.linkedin.com/in/smikulec03/" target="_blank" class="text-xs text-slate-400 hover:text-accent flex items-center gap-1.5 transition-colors">
                         <i class="fa-brands fa-linkedin text-accent text-sm"></i> Co-author: <span class="font-medium text-slate-300">Slavko Mikulec</span>
                     </a>
                 </div>
             </div>
 
-            <!-- PROJEKT 6: Project 6 -->
+            <!-- PROJEKT 6 -->
             <div class="bg-cardBg border border-slate-800 rounded-2xl p-6 shadow-xl" x-data="{ currentSlide: 0, totalSlides: 1 }">
                 <div class="mb-4">
                     <h3 class="text-xl font-bold text-white">Dynamic Multi-Tenant API ETL Engine & Data Pipeline</h3>
@@ -421,7 +442,11 @@
 
                 <div class="relative overflow-hidden rounded-xl border border-slate-700/80 bg-slate-900 group">
                     <div class="flex transition-transform duration-300 ease-in-out" :style="'transform: translateX(-' + (currentSlide * 100) + '%)'">
-                        <div class="w-full flex-shrink-0"><img src="images/backend/1.png" alt="Dynamic Multi-Tenant API ETL Engine & Data Pipeline" class="w-full h-auto object-cover cursor-pointer hover:opacity-95 transition" @click="modalOpen = true; modalImgSrc = $el.src; modalImgAlt = $el.alt"></div>
+                        <template x-for="(img, idx) in p6">
+                            <div class="w-full flex-shrink-0">
+                                <img :src="img" alt="Dynamic Multi-Tenant API ETL Engine & Data Pipeline" class="w-full h-auto object-cover cursor-pointer hover:opacity-95 transition" @click="openModal(p6, idx)">
+                            </div>
+                        </template>
                     </div>
 
                     <button @click="currentSlide = (currentSlide - 1 + totalSlides) % totalSlides" class="absolute left-3 top-1/2 -translate-y-1/2 bg-slate-900/80 hover:bg-slate-800 text-white w-10 h-10 rounded-full flex items-center justify-center border border-slate-700 transition opacity-80 hover:opacity-100">
@@ -443,7 +468,6 @@
                         <span class="px-2.5 py-1 bg-purple-500/10 text-purple-400 text-xs font-semibold rounded-md border border-purple-500/20">ETL</span>
                         <span class="px-2.5 py-1 bg-amber-500/10 text-amber-400 text-xs font-semibold rounded-md border border-amber-500/20">REST API</span>
                     </div>
-                    <!-- Suautor -->
                     <a href="https://linkedin.com/in/profil-kolege" target="_blank" class="text-xs text-slate-400 hover:text-accent flex items-center gap-1.5 transition-colors">
                         <i class="fa-brands fa-linkedin text-accent text-sm"></i> Co-author: <span class="font-medium text-slate-300">Ime Prezime</span>
                     </a>
@@ -454,23 +478,43 @@
 
     </main>
 
-    <!-- FULLSCREEN MODAL (LIGHTBOX) -->
+    <!-- FULLSCREEN MODAL (LIGHTBOX SA STRELICAMA) -->
     <div x-show="modalOpen" 
          x-transition.opacity.duration.200ms
          class="fixed inset-0 z-50 bg-black/90 backdrop-blur-sm flex items-center justify-center p-4 sm:p-8"
-         style="display: none;"
+         x-cloak
          @click="modalOpen = false">
         
-        <!-- Kontejner za sliku i gumb za zatvaranje -->
-        <div class="relative max-w-7xl max-h-full flex items-center justify-center" @click.stop>
+        <!-- Kontejner za modal -->
+        <div class="relative max-w-7xl max-h-full flex items-center justify-center w-full h-full" @click.stop>
+            
             <!-- Gumb za zatvaranje (X) -->
             <button @click="modalOpen = false" 
-                    class="absolute -top-12 right-0 text-slate-300 hover:text-white bg-slate-800/80 hover:bg-slate-700 w-10 h-10 rounded-full flex items-center justify-center border border-slate-700 transition shadow-lg">
-                <i class="fa-solid fa-xmark text-lg"></i>
+                    class="absolute top-4 right-4 z-50 text-slate-300 hover:text-white bg-slate-900/80 hover:bg-slate-800 w-11 h-11 rounded-full flex items-center justify-center border border-slate-700 transition shadow-lg">
+                <i class="fa-solid fa-xmark text-xl"></i>
+            </button>
+
+            <!-- Lijeva strelica za modal -->
+            <button @click="prevModalImg()" 
+                    class="absolute left-4 z-50 bg-slate-900/80 hover:bg-slate-800 text-white w-12 h-12 rounded-full flex items-center justify-center border border-slate-700 transition shadow-lg">
+                <i class="fa-solid fa-chevron-left text-lg"></i>
             </button>
             
             <!-- Slika u punoj veličini -->
-            <img :src="modalImgSrc" :alt="modalImgAlt" class="max-w-full max-h-[85vh] object-contain rounded-xl shadow-2xl border border-slate-700">
+            <div class="max-w-5xl max-h-[85vh] flex items-center justify-center overflow-hidden px-12">
+                <img :src="modalImages[modalIndex]" class="lightbox-img rounded-xl shadow-2xl border border-slate-700">
+            </div>
+
+            <!-- Desna strelica za modal -->
+            <button @click="nextModalImg()" 
+                    class="absolute right-4 z-50 bg-slate-900/80 hover:bg-slate-800 text-white w-12 h-12 rounded-full flex items-center justify-center border border-slate-700 transition shadow-lg">
+                <i class="fa-solid fa-chevron-right text-lg"></i>
+            </button>
+
+            <!-- Indikator stranica u modalu -->
+            <div class="absolute bottom-4 left-1/2 -translate-x-1/2 bg-slate-900/90 px-4 py-1.5 rounded-full text-xs text-slate-300 border border-slate-700 shadow-lg">
+                <span x-text="modalIndex + 1"></span> / <span x-text="modalImages.length"></span>
+            </div>
         </div>
     </div>
 
