@@ -67,17 +67,17 @@
                 <button @click="activeTab = 'about'" 
                     :class="activeTab === 'about' ? 'bg-accent text-white shadow-lg shadow-accent/20' : 'text-slate-400 hover:text-white hover:bg-slate-800'"
                     class="px-3 sm:px-4 py-2 rounded-lg text-xs sm:text-sm font-medium transition-all duration-200">
-                    <i class="fa-solid fa-user mr-1.5"></i> O meni
+                    <i class="fa-solid fa-user mr-1.5"></i> About me
                 </button>
                 <button @click="activeTab = 'experience'" 
                     :class="activeTab === 'experience' ? 'bg-accent text-white shadow-lg shadow-accent/20' : 'text-slate-400 hover:text-white hover:bg-slate-800'"
                     class="px-3 sm:px-4 py-2 rounded-lg text-xs sm:text-sm font-medium transition-all duration-200">
-                    <i class="fa-solid fa-briefcase mr-1.5"></i> Iskustvo
+                    <i class="fa-solid fa-briefcase mr-1.5"></i> Work experience
                 </button>
                 <button @click="activeTab = 'projects'" 
                     :class="activeTab === 'projects' ? 'bg-accent text-white shadow-lg shadow-accent/20' : 'text-slate-400 hover:text-white hover:bg-slate-800'"
                     class="px-3 sm:px-4 py-2 rounded-lg text-xs sm:text-sm font-medium transition-all duration-200">
-                    <i class="fa-solid fa-chart-pie mr-1.5"></i> Projekti
+                    <i class="fa-solid fa-chart-pie mr-1.5"></i> Projects
                 </button>
             </nav>
         </div>
@@ -185,36 +185,60 @@
         <section x-show="activeTab === 'experience'" x-transition.opacity.duration.300ms class="space-y-8" x-cloak>
             <div>
                 <h2 class="text-3xl font-extrabold text-white mb-2">Radno iskustvo</h2>
-                <p class="text-slate-400">Pregled profesionalnih uloga i poslovnih postignuća.</p>
+                <p class="text-slate-400">Pregled profesionalnih uloga i ključnih postignuća.</p>
             </div>
 
             <div class="border-l-2 border-slate-800 ml-4 space-y-10 pl-6">
-                <!-- Pozicija 1 -->
+                <!-- Pozicija 1: Media-soft -->
                 <div class="relative">
                     <span class="absolute -left-[31px] top-1.5 w-4 h-4 rounded-full bg-accent ring-4 ring-darkBg"></span>
-                    <div class="bg-cardBg border border-slate-800 rounded-2xl p-6 shadow-sm">
-                        <div class="flex flex-col sm:flex-row sm:items-center justify-between mb-2">
-                            <h3 class="text-lg font-bold text-white">Key Account Manager / BI Consultant</h3>
-                            <span class="text-xs font-medium px-2.5 py-1 rounded-full bg-accent/10 text-accent w-fit mt-1 sm:mt-0">2026. – Danas</span>
+                    <div class="bg-cardBg border border-slate-800 rounded-2xl p-6 shadow-sm text-left">
+                        <div class="flex flex-col sm:flex-row sm:items-center justify-between mb-1">
+                            <h3 class="text-lg font-bold text-white">Key Account Manager</h3>
+                            <span class="text-xs font-medium text-slate-400 mt-1 sm:mt-0">01/2026. – Danas</span>
                         </div>
-                        <div class="text-sm text-slate-400 mb-4">Media-soft d.o.o.</div>
+                        <div class="text-sm text-accent mb-3 font-medium">Media-soft d.o.o.</div>
+                        <p class="text-sm text-slate-300 leading-relaxed mb-3">
+                            Odgovoran za vođenje odnosa s ključnim klijentima, prikupljanje poslovnih zahtjeva, testiranje CRM modula te izradu tehničke i korisničke dokumentacije.
+                        </p>
                         <p class="text-sm text-slate-300 leading-relaxed">
-                            Sudjelovanje u implementaciji CRM sustava, testiranju i izradi tehničke dokumentacije, te vođenju odnosa s ključnim klijentima.
+                            <strong class="text-white">Ključni utjecaj:</strong> Kroz proaktivnu podršku i brzu dijagnostiku tehničkih upita izbjegnut je potencijalni downtime kod klijenata, čime je osiguran kontinuiran rad CRM sustava bez prekida u poslovnim procesima.
                         </p>
                     </div>
                 </div>
 
-                <!-- Pozicija 2 -->
+                <!-- Pozicija 2: Petak BI Solutions -->
                 <div class="relative">
                     <span class="absolute -left-[31px] top-1.5 w-4 h-4 rounded-full bg-slate-700 ring-4 ring-darkBg"></span>
-                    <div class="bg-cardBg border border-slate-800 rounded-2xl p-6 shadow-sm">
-                        <div class="flex flex-col sm:flex-row sm:items-center justify-between mb-2">
-                            <h3 class="text-lg font-bold text-white">Freelance BI Consultant & Owner</h3>
-                            <span class="text-xs font-medium px-2.5 py-1 rounded-full bg-slate-800 text-slate-300 w-fit mt-1 sm:mt-0">Prethodno razdoblje</span>
+                    <div class="bg-cardBg border border-slate-800 rounded-2xl p-6 shadow-sm text-left">
+                        <div class="flex flex-col sm:flex-row sm:items-center justify-between mb-1">
+                            <h3 class="text-lg font-bold text-white">BI Consultant & Owner</h3>
+                            <span class="text-xs font-medium text-slate-400 mt-1 sm:mt-0">06/2025. – 12/2025.</span>
                         </div>
-                        <div class="text-sm text-slate-400 mb-4">Petak BI Solutions / Decision Crew B.V.</div>
+                        <div class="text-sm text-accent mb-3 font-medium">Petak BI Solutions</div>
+                        <p class="text-sm text-slate-300 leading-relaxed mb-3">
+                            Upravljanje cjelokupnim životnim ciklusom BI projekata, izrada prilagođenih Power BI nadzornih ploča te arhitektura end-to-end ETL procesa za analitiku malih i srednjih poduzeća.
+                        </p>
                         <p class="text-sm text-slate-300 leading-relaxed">
-                            Razvoj poslovne inteligencije, ETL cjevovoda, naprednih Power BI izvještaja i podatkovnih modela za klijente.
+                            <strong class="text-white">Ključni utjecaj:</strong> Automatizacijom ručnih izvještajnih procesa značajno je smanjeno vrijeme obrade podataka i eliminiran rizik od ljudske pogreške u poslovnom izvještavanju klijenata.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Pozicija 3: Decision Crew B.V. -->
+                <div class="relative">
+                    <span class="absolute -left-[31px] top-1.5 w-4 h-4 rounded-full bg-slate-700 ring-4 ring-darkBg"></span>
+                    <div class="bg-cardBg border border-slate-800 rounded-2xl p-6 shadow-sm text-left">
+                        <div class="flex flex-col sm:flex-row sm:items-center justify-between mb-1">
+                            <h3 class="text-lg font-bold text-white">Junior BI Consultant (Freelance)</h3>
+                            <span class="text-xs font-medium text-slate-400 mt-1 sm:mt-0">10/2024. – 12/2025.</span>
+                        </div>
+                        <div class="text-sm text-accent mb-3 font-medium">Decision Crew B.V., Nizozemska</div>
+                        <p class="text-sm text-slate-300 leading-relaxed mb-3">
+                            Razvoj integracija podataka u oblaku na Azure infrastrukturi, izrada naprednih DAX modela i automatizacija kompleksnih radnih tokova (Procesio, Boost.space, Power Automate).
+                        </p>
+                        <p class="text-sm text-slate-300 leading-relaxed">
+                            <strong class="text-white">Ključni utjecaj:</strong> Optimizacijom podatkovnih cjevovoda i DAX izračuna omogućeno je stabilno skaliranje izvještaja za međunarodne klijente uz znatno brže osvježavanje podataka.
                         </p>
                     </div>
                 </div>
@@ -516,7 +540,7 @@
     <!-- Podnožje -->
     <footer class="border-t border-slate-800 py-6 mt-12 bg-darkBg">
         <div class="max-w-5xl mx-auto px-6 text-center text-xs text-slate-500">
-            &copy; 2026 Antonio Petak. Hosted on GitHub Pages.
+            &copy; 2026 Antonio Petak.
         </div>
     </footer>
 
