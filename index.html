@@ -31,7 +31,7 @@
         [x-cloak] { display: none !important; }
     </style>
 </head>
-<body class="bg-darkBg text-slate-100 min-h-screen flex flex-col justify-between" 
+<body class="bg-darkBg text-slate-100 min-h-screen flex flex-col justify-between overflow-x-hidden" 
       x-data="{ 
           activeTab: 'about', 
           modalOpen: false, 
@@ -58,25 +58,25 @@
       @keydown.left.window="if(modalOpen) prevModalImg()">
 
     <!-- Zaglavlje / Navigacija -->
-    <header class="sticky top-0 z-50 bg-darkBg/85 backdrop-blur-md border-b border-slate-800">
-        <div class="max-w-5xl mx-auto px-6 h-16 flex items-center justify-between">
-            <a href="#" class="font-extrabold text-xl tracking-tight text-blue-400 hover:text-blue-300 transition-colors">
+    <header class="sticky top-0 z-50 bg-darkBg/90 backdrop-blur-md border-b border-slate-800">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 h-auto sm:h-16 py-3 sm:py-0 flex flex-col sm:flex-row items-center justify-between gap-3 sm:gap-0">
+            <a href="#" class="font-extrabold text-lg sm:text-xl tracking-tight text-blue-400 hover:text-blue-300 transition-colors">
                 Antonio Petak
             </a>
-            <nav class="flex space-x-1 sm:space-x-2">
+            <nav class="flex flex-wrap justify-center gap-1.5 sm:space-x-2">
                 <button @click="activeTab = 'about'" 
                     :class="activeTab === 'about' ? 'bg-accent text-white shadow-lg shadow-accent/20' : 'text-slate-400 hover:text-white hover:bg-slate-800'"
-                    class="px-3 sm:px-4 py-2 rounded-lg text-xs sm:text-sm font-medium transition-all duration-200">
+                    class="px-2.5 sm:px-4 py-1.5 sm:py-2 rounded-lg text-xs sm:text-sm font-medium transition-all duration-200">
                     <i class="fa-solid fa-user mr-1.5"></i> About me
                 </button>
                 <button @click="activeTab = 'experience'" 
                     :class="activeTab === 'experience' ? 'bg-accent text-white shadow-lg shadow-accent/20' : 'text-slate-400 hover:text-white hover:bg-slate-800'"
-                    class="px-3 sm:px-4 py-2 rounded-lg text-xs sm:text-sm font-medium transition-all duration-200">
-                    <i class="fa-solid fa-briefcase mr-1.5"></i> Work experience
+                    class="px-2.5 sm:px-4 py-1.5 sm:py-2 rounded-lg text-xs sm:text-sm font-medium transition-all duration-200">
+                    <i class="fa-solid fa-briefcase mr-1.5"></i> Experience
                 </button>
                 <button @click="activeTab = 'projects'" 
                     :class="activeTab === 'projects' ? 'bg-accent text-white shadow-lg shadow-accent/20' : 'text-slate-400 hover:text-white hover:bg-slate-800'"
-                    class="px-3 sm:px-4 py-2 rounded-lg text-xs sm:text-sm font-medium transition-all duration-200">
+                    class="px-2.5 sm:px-4 py-1.5 sm:py-2 rounded-lg text-xs sm:text-sm font-medium transition-all duration-200">
                     <i class="fa-solid fa-chart-pie mr-1.5"></i> Projects
                 </button>
             </nav>
@@ -84,22 +84,22 @@
     </header>
 
     <!-- Glavni sadržaj -->
-    <main class="max-w-5xl mx-auto px-6 py-12 flex-grow w-full">
+    <main class="max-w-5xl mx-auto px-4 sm:px-6 py-8 sm:py-12 flex-grow w-full">
 
         <!-- TAB 1: O MENI -->
-        <section x-show="activeTab === 'about'" x-transition.opacity.duration.300ms class="space-y-10">
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 items-center">
-                <div class="md:col-span-2 space-y-4">
+        <section x-show="activeTab === 'about'" x-transition.opacity.duration.300ms class="space-y-8 sm:space-y-10">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8 items-center">
+                <div class="md:col-span-2 space-y-4 text-center md:text-left">
                     <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-accent/10 text-accent text-xs font-semibold uppercase tracking-wider">
                         <span class="w-2 h-2 rounded-full bg-accent animate-pulse"></span> Available for New Opportunities
                     </div>
-                    <h1 class="text-4xl sm:text-5xl font-extrabold tracking-tight text-white">
+                    <h1 class="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight text-white">
                         Hi, I'm <span class="text-accent">Antonio</span>
                     </h1>
-                    <p class="text-lg text-slate-300 leading-relaxed text-left">
+                    <p class="text-base sm:text-lg text-slate-300 leading-relaxed text-left">
                         Business Intelligence Consultant and Data Analyst focused on developing advanced Power BI reporting solutions, data modeling (DAX/SQL), and business process automation.
                     </p>
-                    <div class="flex items-center space-x-4 pt-2">
+                    <div class="flex items-center justify-center md:justify-start space-x-4 pt-2">
                         <a href="https://www.linkedin.com/in/antoniopetak/?isSelfProfile=true" target="_blank" class="w-10 h-10 rounded-lg bg-cardBg border border-slate-700 flex items-center justify-center text-slate-300 hover:text-accent hover:border-accent transition-colors">
                             <i class="fa-brands fa-linkedin-in text-lg"></i>
                         </a>
@@ -109,18 +109,18 @@
                     </div>
                 </div>
                 <div class="flex justify-center">
-                    <div class="relative w-48 h-48 sm:w-60 sm:h-60 rounded-2xl bg-gradient-to-tr from-accent to-indigo-500 p-1 shadow-xl shadow-accent/10">
-                        <div class="w-full h-full bg-cardBg rounded-2xl flex items-center justify-center text-slate-500">
+                    <div class="relative w-40 h-40 sm:w-52 sm:h-52 md:w-60 md:h-60 rounded-2xl bg-gradient-to-tr from-accent to-indigo-500 p-1 shadow-xl shadow-accent/10">
+                        <div class="w-full h-full bg-cardBg rounded-2xl overflow-hidden flex items-center justify-center">
                             <img src="images/antonio.png" alt="Antonio Petak" class="w-full h-full object-cover">
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- Profesionalni fokus & Područja interesa (U ISTOM OKVIRU) -->
-            <div class="bg-cardBg border border-slate-800 rounded-2xl p-6 sm:p-8 text-left space-y-6">
+            <!-- Profesionalni fokus & Područja interesa -->
+            <div class="bg-cardBg border border-slate-800 rounded-2xl p-5 sm:p-8 text-left space-y-6">
                 <!-- Profesionalni fokus -->
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 text-slate-300 text-sm leading-relaxed">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-slate-300 text-sm leading-relaxed">
                     <div>
                         <h4 class="font-bold text-white mb-2 text-base flex items-center gap-2">
                             <i class="fa-solid fa-briefcase text-accent"></i> Professional Focus
@@ -149,7 +149,7 @@
                     <h4 class="font-bold text-white mb-4 text-base flex items-center gap-2">
                         <i class="fa-solid fa-compass text-accent"></i> Areas of Interest & Specialization
                     </h4>
-                    <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
                         <div class="bg-slate-900/60 border border-slate-800 p-3.5 rounded-xl">
                             <div class="font-semibold text-sm text-white mb-1"><i class="fa-solid fa-layer-group text-accent mr-1.5"></i> Data Analytics</div>
                             <div class="text-xs text-slate-400">Reporting & KPI Tracking</div>
@@ -173,30 +173,30 @@
             <!-- Vještine / Tech Stack -->
             <div class="text-left">
                 <h3 class="text-xl font-bold text-white mb-6">Technologies & Tools</h3>
-                <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
                     <div class="bg-cardBg border border-slate-800 p-4 rounded-xl flex items-center gap-3 hover:border-accent/50 transition-colors">
-                        <i class="fa-solid fa-chart-line text-accent text-xl"></i>
+                        <i class="fa-solid fa-chart-line text-accent text-xl flex-shrink-0"></i>
                         <div>
                             <div class="font-semibold text-sm text-white">Power BI</div>
                             <div class="text-xs text-slate-400">DAX & Power Query</div>
                         </div>
                     </div>
                     <div class="bg-cardBg border border-slate-800 p-4 rounded-xl flex items-center gap-3 hover:border-accent/50 transition-colors">
-                        <i class="fa-solid fa-database text-accent text-xl"></i>
+                        <i class="fa-solid fa-database text-accent text-xl flex-shrink-0"></i>
                         <div>
                             <div class="font-semibold text-sm text-white">SQL / Databases</div>
                             <div class="text-xs text-slate-400">Modeling & Queries</div>
                         </div>
                     </div>
                     <div class="bg-cardBg border border-slate-800 p-4 rounded-xl flex items-center gap-3 hover:border-accent/50 transition-colors">
-                        <i class="fa-solid fa-bolt text-accent text-xl"></i>
+                        <i class="fa-solid fa-bolt text-accent text-xl flex-shrink-0"></i>
                         <div>
                             <div class="font-semibold text-sm text-white">Power Automate</div>
                             <div class="text-xs text-slate-400">Workflow Automation</div>
                         </div>
                     </div>
                     <div class="bg-cardBg border border-slate-800 p-4 rounded-xl flex items-center gap-3 hover:border-accent/50 transition-colors">
-                        <i class="fa-solid fa-wand-magic-sparkles text-accent text-xl"></i>
+                        <i class="fa-solid fa-wand-magic-sparkles text-accent text-xl flex-shrink-0"></i>
                         <div>
                             <div class="font-semibold text-sm text-white">AI & Automation</div>
                             <div class="text-xs text-slate-400">AI-Driven Problem Solving</div>
@@ -206,14 +206,14 @@
             </div>
 
             <!-- EDUKACIJA / EDUCATION -->
-            <div class="text-left bg-cardBg border border-slate-800 rounded-2xl p-6 sm:p-8">
+            <div class="text-left bg-cardBg border border-slate-800 rounded-2xl p-5 sm:p-8">
                 <h3 class="text-xl font-bold text-white mb-6 flex items-center gap-2">
                     <i class="fa-solid fa-graduation-cap text-accent"></i> Education
                 </h3>
-                <div class="border-l-2 border-slate-800 ml-4 space-y-8 pl-6">
+                <div class="border-l-2 border-slate-800 ml-2 sm:ml-4 space-y-8 pl-4 sm:pl-6">
                     <!-- Fakultet -->
                     <div class="relative">
-                        <span class="absolute -left-[31px] top-1.5 w-4 h-4 rounded-full bg-accent ring-4 ring-darkBg"></span>
+                        <span class="absolute -left-[23px] sm:-left-[31px] top-1.5 w-4 h-4 rounded-full bg-accent ring-4 ring-darkBg"></span>
                         <div class="space-y-1">
                             <div class="flex flex-col sm:flex-row sm:items-center justify-between">
                                 <h4 class="text-base font-bold text-white">Bachelor of Business Informatics</h4>
@@ -228,7 +228,7 @@
 
                     <!-- Srednja škola -->
                     <div class="relative">
-                        <span class="absolute -left-[31px] top-1.5 w-4 h-4 rounded-full bg-slate-700 ring-4 ring-darkBg"></span>
+                        <span class="absolute -left-[23px] sm:-left-[31px] top-1.5 w-4 h-4 rounded-full bg-slate-700 ring-4 ring-darkBg"></span>
                         <div class="space-y-1">
                             <div class="flex flex-col sm:flex-row sm:items-center justify-between">
                                 <h4 class="text-base font-bold text-white">Electrical Technician</h4>
@@ -247,77 +247,77 @@
                 </h3>
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
                     
-                    <!-- Certifikat 1: Google Business Intelligence -->
-                    <a href="images/certificates/Google Business Intelligence.pdf" target="_blank" class="bg-cardBg border border-slate-800 p-5 rounded-xl flex items-center gap-4 hover:border-accent/50 transition-colors group">
+                    <!-- Certifikat 1 -->
+                    <a href="images/certificates/Google Business Intelligence.pdf" target="_blank" class="bg-cardBg border border-slate-800 p-4 sm:p-5 rounded-xl flex items-center gap-4 hover:border-accent/50 transition-colors group">
                         <div class="w-12 h-12 rounded-lg bg-slate-900 border border-slate-700 flex items-center justify-center text-red-400 group-hover:text-accent transition-colors flex-shrink-0">
                             <i class="fa-solid fa-file-pdf text-2xl"></i>
                         </div>
-                        <div>
-                            <div class="font-semibold text-sm text-white group-hover:text-accent transition-colors">Google Business Intelligence</div>
+                        <div class="min-w-0 flex-1">
+                            <div class="font-semibold text-sm text-white group-hover:text-accent transition-colors truncate">Google Business Intelligence</div>
                             <div class="text-xs text-slate-400">Coursera</div>
                         </div>
                     </a>
 
-                    <!-- Certifikat 2: Data Analyst Bootcamp -->
-                    <a href="images/certificates/Data_Analyst_Bootcamp_Certificate_Udemy.pdf" target="_blank" class="bg-cardBg border border-slate-800 p-5 rounded-xl flex items-center gap-4 hover:border-accent/50 transition-colors group">
+                    <!-- Certifikat 2 -->
+                    <a href="images/certificates/Data_Analyst_Bootcamp_Certificate_Udemy.pdf" target="_blank" class="bg-cardBg border border-slate-800 p-4 sm:p-5 rounded-xl flex items-center gap-4 hover:border-accent/50 transition-colors group">
                         <div class="w-12 h-12 rounded-lg bg-slate-900 border border-slate-700 flex items-center justify-center text-red-400 group-hover:text-accent transition-colors flex-shrink-0">
                             <i class="fa-solid fa-file-pdf text-2xl"></i>
                         </div>
-                        <div>
-                            <div class="font-semibold text-sm text-white group-hover:text-accent transition-colors">Data Analyst Bootcamp</div>
+                        <div class="min-w-0 flex-1">
+                            <div class="font-semibold text-sm text-white group-hover:text-accent transition-colors truncate">Data Analyst Bootcamp</div>
                             <div class="text-xs text-slate-400">Udemy</div>
                         </div>
                     </a>
 
-                    <!-- Certifikat 3: Business Intelligence Analyst -->
-                    <a href="images/certificates/BIA_udemy.pdf" target="_blank" class="bg-cardBg border border-slate-800 p-5 rounded-xl flex items-center gap-4 hover:border-accent/50 transition-colors group">
+                    <!-- Certifikat 3 -->
+                    <a href="images/certificates/BIA_udemy.pdf" target="_blank" class="bg-cardBg border border-slate-800 p-4 sm:p-5 rounded-xl flex items-center gap-4 hover:border-accent/50 transition-colors group">
                         <div class="w-12 h-12 rounded-lg bg-slate-900 border border-slate-700 flex items-center justify-center text-red-400 group-hover:text-accent transition-colors flex-shrink-0">
                             <i class="fa-solid fa-file-pdf text-2xl"></i>
                         </div>
-                        <div>
-                            <div class="font-semibold text-sm text-white group-hover:text-accent transition-colors">Business Intelligence Analyst</div>
+                        <div class="min-w-0 flex-1">
+                            <div class="font-semibold text-sm text-white group-hover:text-accent transition-colors truncate">Business Intelligence Analyst</div>
                             <div class="text-xs text-slate-400">Udemy</div>
                         </div>
                     </a>
 
-                    <!-- Certifikat 4: Microsoft Power BI for BI -->
-                    <a href="images/certificates/MS PBI for BI(2023).pdf" target="_blank" class="bg-cardBg border border-slate-800 p-5 rounded-xl flex items-center gap-4 hover:border-accent/50 transition-colors group">
+                    <!-- Certifikat 4 -->
+                    <a href="images/certificates/MS PBI for BI(2023).pdf" target="_blank" class="bg-cardBg border border-slate-800 p-4 sm:p-5 rounded-xl flex items-center gap-4 hover:border-accent/50 transition-colors group">
                         <div class="w-12 h-12 rounded-lg bg-slate-900 border border-slate-700 flex items-center justify-center text-red-400 group-hover:text-accent transition-colors flex-shrink-0">
                             <i class="fa-solid fa-file-pdf text-2xl"></i>
                         </div>
-                        <div>
-                            <div class="font-semibold text-sm text-white group-hover:text-accent transition-colors">Microsoft Power BI for Business Intelligence</div>
+                        <div class="min-w-0 flex-1">
+                            <div class="font-semibold text-sm text-white group-hover:text-accent transition-colors truncate">Microsoft Power BI for BI</div>
                             <div class="text-xs text-slate-400">Udemy</div>
                         </div>
                     </a>
 
-                    <!-- Certifikat 5: MySQL for Data Analytics and BI -->
-                    <a href="images/certificates/MySQL for Data Analytics and BI.pdf" target="_blank" class="bg-cardBg border border-slate-800 p-5 rounded-xl flex items-center gap-4 hover:border-accent/50 transition-colors group">
+                    <!-- Certifikat 5 -->
+                    <a href="images/certificates/MySQL for Data Analytics and BI.pdf" target="_blank" class="bg-cardBg border border-slate-800 p-4 sm:p-5 rounded-xl flex items-center gap-4 hover:border-accent/50 transition-colors group">
                         <div class="w-12 h-12 rounded-lg bg-slate-900 border border-slate-700 flex items-center justify-center text-red-400 group-hover:text-accent transition-colors flex-shrink-0">
                             <i class="fa-solid fa-file-pdf text-2xl"></i>
                         </div>
-                        <div>
-                            <div class="font-semibold text-sm text-white group-hover:text-accent transition-colors">MySQL for Data Analytics & BI</div>
+                        <div class="min-w-0 flex-1">
+                            <div class="font-semibold text-sm text-white group-hover:text-accent transition-colors truncate">MySQL for Data Analytics & BI</div>
                             <div class="text-xs text-slate-400">Udemy</div>
                         </div>
                     </a>
 
-                    <!-- Certifikat 6: Data Warehouse -->
-                    <a href="images/certificates/Data Warehouse - The Ultimate Guide.pdf" target="_blank" class="bg-cardBg border border-slate-800 p-5 rounded-xl flex items-center gap-4 hover:border-accent/50 transition-colors group">
+                    <!-- Certifikat 6 -->
+                    <a href="images/certificates/Data Warehouse - The Ultimate Guide.pdf" target="_blank" class="bg-cardBg border border-slate-800 p-4 sm:p-5 rounded-xl flex items-center gap-4 hover:border-accent/50 transition-colors group">
                         <div class="w-12 h-12 rounded-lg bg-slate-900 border border-slate-700 flex items-center justify-center text-red-400 group-hover:text-accent transition-colors flex-shrink-0">
                             <i class="fa-solid fa-file-pdf text-2xl"></i>
                         </div>
-                        <div>
-                            <div class="font-semibold text-sm text-white group-hover:text-accent transition-colors">Data Warehouse: The Ultimate Guide</div>
+                        <div class="min-w-0 flex-1">
+                            <div class="font-semibold text-sm text-white group-hover:text-accent transition-colors truncate">Data Warehouse: Ultimate Guide</div>
                             <div class="text-xs text-slate-400">Udemy</div>
                         </div>
                     </a>
 
-                    <!-- Certifikat 7: EDIH AI Certificate (Slika .jpeg) -->
-                    <div class="bg-cardBg border border-slate-800 p-5 rounded-xl flex items-center gap-4 hover:border-accent/50 transition-colors cursor-pointer group" @click="openModal(['images/certificates/certifkikat AI edih_Crop.jpeg'], 0)">
+                    <!-- Certifikat 7 -->
+                    <div class="bg-cardBg border border-slate-800 p-4 sm:p-5 rounded-xl flex items-center gap-4 hover:border-accent/50 transition-colors cursor-pointer group" @click="openModal(['images/certificates/certifkikat AI edih_Crop.jpeg'], 0)">
                         <img src="images/certificates/certifkikat AI edih_Crop.jpeg" alt="EDIH Certificate" class="w-12 h-12 object-cover rounded-lg bg-slate-900 border border-slate-700 flex-shrink-0">
-                        <div>
-                            <div class="font-semibold text-sm text-white group-hover:text-accent transition-colors">Entrepreneurship & Innovative Digital Technologies</div>
+                        <div class="min-w-0 flex-1">
+                            <div class="font-semibold text-sm text-white group-hover:text-accent transition-colors truncate">Entrepreneurship & Digital Tech</div>
                             <div class="text-xs text-slate-400">EDIH (FOI)</div>
                         </div>
                     </div>
@@ -325,12 +325,12 @@
                 </div>
             </div>
 
-            <!-- OSOBNA POZADINA / PERSONAL BACKGROUND (Hobiji i interesi) -->
-            <div class="bg-cardBg/50 border border-slate-800/80 rounded-2xl p-6 text-left">
+            <!-- OSOBNA POZADINA / PERSONAL BACKGROUND -->
+            <div class="bg-cardBg/50 border border-slate-800/80 rounded-2xl p-5 sm:p-6 text-left">
                 <h4 class="font-semibold text-white mb-2 text-sm flex items-center gap-2">
                     <i class="fa-solid fa-person-running text-accent"></i> Personal Background & Mindset
                 </h4>
-                <p class="text-xs text-slate-400 leading-relaxed">
+                <p class="text-xs sm:text-sm text-slate-400 leading-relaxed">
                     Outside of technical environments, I am an active sports enthusiast who regularly competes in triathlons and plays amateur football. The discipline, resilience, and strategic focus required in endurance sports directly translate into how I approach troubleshooting, complex data architecture, and persistent problem-solving. In my free time, I also enjoy reading books, playing video games, and watching movies and TV series.
                 </p>
             </div>
@@ -342,14 +342,14 @@
                 <h2 class="text-3xl font-extrabold text-white mb-2">Work Experience</h2>
             </div>
 
-            <div class="border-l-2 border-slate-800 ml-4 space-y-10 pl-6">
+            <div class="border-l-2 border-slate-800 ml-2 sm:ml-4 space-y-10 pl-4 sm:pl-6">
                 <!-- Pozicija 1: Media-soft -->
                 <div class="relative">
-                    <span class="absolute -left-[31px] top-1.5 w-4 h-4 rounded-full bg-accent ring-4 ring-darkBg"></span>
-                    <div class="bg-cardBg border border-slate-800 rounded-2xl p-6 shadow-sm text-left">
-                        <div class="flex flex-col sm:flex-row sm:items-center justify-between mb-1">
-                            <h3 class="text-lg font-bold text-white">Key Account Manager / Junior Consultant</h3>
-                            <span class="text-xs font-medium text-slate-400 mt-1 sm:mt-0">01/2026 – Present | Croatia</span>
+                    <span class="absolute -left-[23px] sm:-left-[31px] top-1.5 w-4 h-4 rounded-full bg-accent ring-4 ring-darkBg"></span>
+                    <div class="bg-cardBg border border-slate-800 rounded-2xl p-5 sm:p-6 shadow-sm text-left">
+                        <div class="flex flex-col sm:flex-row sm:items-center justify-between mb-1 gap-1 sm:gap-0">
+                            <h3 class="text-base sm:text-lg font-bold text-white">Key Account Manager / Junior Consultant</h3>
+                            <span class="text-xs font-medium text-slate-400">01/2026 – Present | Croatia</span>
                         </div>
                         <div class="text-sm text-accent mb-3 font-medium">Media-soft d.o.o., Čakovec</div>
                         <p class="text-sm text-slate-300 leading-relaxed mb-4">
@@ -368,11 +368,11 @@
 
                 <!-- Pozicija 2: Petak BI Solutions -->
                 <div class="relative">
-                    <span class="absolute -left-[31px] top-1.5 w-4 h-4 rounded-full bg-slate-700 ring-4 ring-darkBg"></span>
-                    <div class="bg-cardBg border border-slate-800 rounded-2xl p-6 shadow-sm text-left">
-                        <div class="flex flex-col sm:flex-row sm:items-center justify-between mb-1">
-                            <h3 class="text-lg font-bold text-white">BI Consultant & Owner</h3>
-                            <span class="text-xs font-medium text-slate-400 mt-1 sm:mt-0">06/2025 – 12/2025 | Croatia</span>
+                    <span class="absolute -left-[23px] sm:-left-[31px] top-1.5 w-4 h-4 rounded-full bg-slate-700 ring-4 ring-darkBg"></span>
+                    <div class="bg-cardBg border border-slate-800 rounded-2xl p-5 sm:p-6 shadow-sm text-left">
+                        <div class="flex flex-col sm:flex-row sm:items-center justify-between mb-1 gap-1 sm:gap-0">
+                            <h3 class="text-base sm:text-lg font-bold text-white">BI Consultant & Owner</h3>
+                            <span class="text-xs font-medium text-slate-400">06/2025 – 12/2025 | Croatia</span>
                         </div>
                         <div class="text-sm text-accent mb-3 font-medium">Petak BI Solutions, Priles</div>
                         <p class="text-sm text-slate-300 leading-relaxed mb-4">
@@ -390,13 +390,13 @@
 
                 <!-- Pozicija 3: Decision Crew B.V. -->
                 <div class="relative">
-                    <span class="absolute -left-[31px] top-1.5 w-4 h-4 rounded-full bg-slate-700 ring-4 ring-darkBg"></span>
-                    <div class="bg-cardBg border border-slate-800 rounded-2xl p-6 shadow-sm text-left">
-                        <div class="flex flex-col sm:flex-row sm:items-center justify-between mb-1">
-                            <h3 class="text-lg font-bold text-white">Junior BI Consultant (Freelance), Baarn</h3>
-                            <span class="text-xs font-medium text-slate-400 mt-1 sm:mt-0">10/2024 – 12/2025 | Netherlands</span>
+                    <span class="absolute -left-[23px] sm:-left-[31px] top-1.5 w-4 h-4 rounded-full bg-slate-700 ring-4 ring-darkBg"></span>
+                    <div class="bg-cardBg border border-slate-800 rounded-2xl p-5 sm:p-6 shadow-sm text-left">
+                        <div class="flex flex-col sm:flex-row sm:items-center justify-between mb-1 gap-1 sm:gap-0">
+                            <h3 class="text-base sm:text-lg font-bold text-white">Junior BI Consultant (Freelance)</h3>
+                            <span class="text-xs font-medium text-slate-400">10/2024 – 12/2025 | Netherlands</span>
                         </div>
-                        <div class="text-sm text-accent mb-3 font-medium">Decision Crew B.V.</div>
+                        <div class="text-sm text-accent mb-3 font-medium">Decision Crew B.V., Baarn</div>
                         <p class="text-sm text-slate-300 leading-relaxed mb-4">
                             Engineered advanced cloud data integration solutions and optimized complex data models to support large-scale enterprise analytics for international clients.
                         </p>
@@ -428,10 +428,10 @@
             </div>
 
             <!-- PROJEKT 1 -->
-            <div class="bg-cardBg border border-slate-800 rounded-2xl p-6 shadow-xl" x-data="{ currentSlide: 0, totalSlides: 12 }">
+            <div class="bg-cardBg border border-slate-800 rounded-2xl p-5 sm:p-6 shadow-xl" x-data="{ currentSlide: 0, totalSlides: 12 }">
                 <div class="mb-4">
-                    <h3 class="text-xl font-bold text-white">Insurance Operations & Executive Scorecard Dashboard</h3>
-                    <p class="text-sm text-slate-400">A multi-page Power BI executive scorecard designed for insurance management to monitor portfolio performance, premium trends, and claims servicing efficiency. Tracks top-level KPIs including Total Net Premium (€1.50M), Total Policies (1,500), Loss Ratio (30%), and Claims Severity (€5,000). Features deep-dive analytics for Claims Exposure (analyzing repair vs. replacement costs), Claims Servicing (SLA %, Resolution Times, and Aging analysis), and Premium Performance with dynamic forecasting and regional heatmaps. Includes side-panel slicers, KPI switchers, and drill-through table views.</p>
+                    <h3 class="text-lg sm:text-xl font-bold text-white">Insurance Operations & Executive Scorecard Dashboard</h3>
+                    <p class="text-xs sm:text-sm text-slate-400">A multi-page Power BI executive scorecard designed for insurance management to monitor portfolio performance, premium trends, and claims servicing efficiency. Tracks top-level KPIs including Total Net Premium (€1.50M), Total Policies (1,500), Loss Ratio (30%), and Claims Severity (€5,000). Features deep-dive analytics for Claims Exposure (analyzing repair vs. replacement costs), Claims Servicing (SLA %, Resolution Times, and Aging analysis), and Premium Performance with dynamic forecasting and regional heatmaps. Includes side-panel slicers, KPI switchers, and drill-through table views.</p>
                 </div>
 
                 <div class="relative overflow-hidden rounded-xl border border-slate-700/80 bg-slate-900 group">
@@ -443,11 +443,11 @@
                         </template>
                     </div>
 
-                    <button @click="currentSlide = (currentSlide - 1 + totalSlides) % totalSlides" class="absolute left-3 top-1/2 -translate-y-1/2 bg-slate-900/80 hover:bg-slate-800 text-white w-10 h-10 rounded-full flex items-center justify-center border border-slate-700 transition opacity-80 hover:opacity-100">
-                        <i class="fa-solid fa-chevron-left"></i>
+                    <button @click="currentSlide = (currentSlide - 1 + totalSlides) % totalSlides" class="absolute left-2 sm:left-3 top-1/2 -translate-y-1/2 bg-slate-900/80 hover:bg-slate-800 text-white w-8 h-8 sm:w-10 sm:h-10 rounded-full flex items-center justify-center border border-slate-700 transition opacity-80 hover:opacity-100">
+                        <i class="fa-solid fa-chevron-left text-xs sm:text-sm"></i>
                     </button>
-                    <button @click="currentSlide = (currentSlide + 1) % totalSlides" class="absolute right-3 top-1/2 -translate-y-1/2 bg-slate-900/80 hover:bg-slate-800 text-white w-10 h-10 rounded-full flex items-center justify-center border border-slate-700 transition opacity-80 hover:opacity-100">
-                        <i class="fa-solid fa-chevron-right"></i>
+                    <button @click="currentSlide = (currentSlide + 1) % totalSlides" class="absolute right-2 sm:right-3 top-1/2 -translate-y-1/2 bg-slate-900/80 hover:bg-slate-800 text-white w-8 h-8 sm:w-10 sm:h-10 rounded-full flex items-center justify-center border border-slate-700 transition opacity-80 hover:opacity-100">
+                        <i class="fa-solid fa-chevron-right text-xs sm:text-sm"></i>
                     </button>
 
                     <div class="absolute bottom-3 left-1/2 -translate-x-1/2 bg-slate-900/80 px-3 py-1 rounded-full text-xs text-slate-300 border border-slate-700">
@@ -456,7 +456,7 @@
                 </div>
 
                 <div class="mt-6 flex flex-wrap items-center justify-between gap-4">
-                    <div class="flex gap-2">
+                    <div class="flex flex-wrap gap-2">
                         <span class="px-2.5 py-1 bg-blue-500/10 text-blue-400 text-xs font-semibold rounded-md border border-blue-500/20">Power BI</span>
                         <span class="px-2.5 py-1 bg-cyan-500/10 text-cyan-400 text-xs font-semibold rounded-md border border-cyan-500/20">DAX</span>
                         <span class="px-2.5 py-1 bg-amber-500/10 text-amber-400 text-xs font-semibold rounded-md border border-amber-500/20">MySQL</span>
@@ -468,10 +468,10 @@
             </div>
 
             <!-- PROJEKT 2 -->
-            <div class="bg-cardBg border border-slate-800 rounded-2xl p-6 shadow-xl" x-data="{ currentSlide: 0, totalSlides: 9 }">
+            <div class="bg-cardBg border border-slate-800 rounded-2xl p-5 sm:p-6 shadow-xl" x-data="{ currentSlide: 0, totalSlides: 9 }">
                 <div class="mb-4">
-                    <h3 class="text-xl font-bold text-white">Insurance Claims Dashboard</h3>
-                    <p class="text-sm text-slate-400">An end-to-end Power BI reporting solution built for property and casualty insurance management to monitor, analyze, and optimize claim settlement workflows. The dashboard consolidates key financial metrics including Total Payable ($3.67M), Dwelling Coverage ($6.1M), Total Deductibles ($230.5K), and High-Value Claims (> $20k), while tracking operational efficiency from claim receipt through inspection. It delivers regional claims distribution across major urban centers in Croatia, categorizes financial losses by cause (Storm/Wind, Vehicle Impact, Water Damage, Fire, Vandalism), and evaluates adjusting firm performance. Includes granular line-item repair cost breakdowns, statement-of-loss statement analysis comparing ACV vs. RCV and Depreciation, interactive slide-out filter panels, custom anomaly detection, and root-cause analysis via Power BI Decomposition Trees.</p>
+                    <h3 class="text-lg sm:text-xl font-bold text-white">Insurance Claims Dashboard</h3>
+                    <p class="text-xs sm:text-sm text-slate-400">An end-to-end Power BI reporting solution built for property and casualty insurance management to monitor, analyze, and optimize claim settlement workflows. The dashboard consolidates key financial metrics including Total Payable ($3.67M), Dwelling Coverage ($6.1M), Total Deductibles ($230.5K), and High-Value Claims (> $20k), while tracking operational efficiency from claim receipt through inspection. It delivers regional claims distribution across major urban centers in Croatia, categorizes financial losses by cause (Storm/Wind, Vehicle Impact, Water Damage, Fire, Vandalism), and evaluates adjusting firm performance. Includes granular line-item repair cost breakdowns, statement-of-loss statement analysis comparing ACV vs. RCV and Depreciation, interactive slide-out filter panels, custom anomaly detection, and root-cause analysis via Power BI Decomposition Trees.</p>
                 </div>
 
                 <div class="relative overflow-hidden rounded-xl border border-slate-700/80 bg-slate-900 group">
@@ -483,11 +483,11 @@
                         </template>
                     </div>
 
-                    <button @click="currentSlide = (currentSlide - 1 + totalSlides) % totalSlides" class="absolute left-3 top-1/2 -translate-y-1/2 bg-slate-900/80 hover:bg-slate-800 text-white w-10 h-10 rounded-full flex items-center justify-center border border-slate-700 transition opacity-80 hover:opacity-100">
-                        <i class="fa-solid fa-chevron-left"></i>
+                    <button @click="currentSlide = (currentSlide - 1 + totalSlides) % totalSlides" class="absolute left-2 sm:left-3 top-1/2 -translate-y-1/2 bg-slate-900/80 hover:bg-slate-800 text-white w-8 h-8 sm:w-10 sm:h-10 rounded-full flex items-center justify-center border border-slate-700 transition opacity-80 hover:opacity-100">
+                        <i class="fa-solid fa-chevron-left text-xs sm:text-sm"></i>
                     </button>
-                    <button @click="currentSlide = (currentSlide + 1) % totalSlides" class="absolute right-3 top-1/2 -translate-y-1/2 bg-slate-900/80 hover:bg-slate-800 text-white w-10 h-10 rounded-full flex items-center justify-center border border-slate-700 transition opacity-80 hover:opacity-100">
-                        <i class="fa-solid fa-chevron-right"></i>
+                    <button @click="currentSlide = (currentSlide + 1) % totalSlides" class="absolute right-2 sm:right-3 top-1/2 -translate-y-1/2 bg-slate-900/80 hover:bg-slate-800 text-white w-8 h-8 sm:w-10 sm:h-10 rounded-full flex items-center justify-center border border-slate-700 transition opacity-80 hover:opacity-100">
+                        <i class="fa-solid fa-chevron-right text-xs sm:text-sm"></i>
                     </button>
 
                     <div class="absolute bottom-3 left-1/2 -translate-x-1/2 bg-slate-900/80 px-3 py-1 rounded-full text-xs text-slate-300 border border-slate-700">
@@ -496,7 +496,7 @@
                 </div>
 
                 <div class="mt-6 flex flex-wrap items-center justify-between gap-4">
-                    <div class="flex gap-2">
+                    <div class="flex flex-wrap gap-2">
                         <span class="px-2.5 py-1 bg-blue-500/10 text-blue-400 text-xs font-semibold rounded-md border border-blue-500/20">Power BI</span>
                         <span class="px-2.5 py-1 bg-cyan-500/10 text-cyan-400 text-xs font-semibold rounded-md border border-cyan-500/20">DAX</span>
                     </div>
@@ -504,10 +504,10 @@
             </div>
 
             <!-- PROJEKT 3 -->
-            <div class="bg-cardBg border border-slate-800 rounded-2xl p-6 shadow-xl" x-data="{ currentSlide: 0, totalSlides: 10 }">
+            <div class="bg-cardBg border border-slate-800 rounded-2xl p-5 sm:p-6 shadow-xl" x-data="{ currentSlide: 0, totalSlides: 10 }">
                 <div class="mb-4">
-                    <h3 class="text-xl font-bold text-white">Social Metrics Dashboard</h3>
-                    <p class="text-sm text-slate-400">A comprehensive multi-source Power BI marketing and social media analytics platform tracking performance across LinkedIn, CRM Lead Generation pipelines, and Google Analytics. Features real-time tracking of brand reach and audience engagement KPIs—including Impressions (146.16K), Reactions, Followers, and Post-level CTR/Click analytics—with demographic breakdowns by Industry (Consulting, IT Services, Finance) and geography. Integrates sales funnel analytics to monitor pipeline opportunities by both Volume (802 total, 32 won) and Revenue (€80.12M pipeline value, €2.93M won), tracking conversion velocity through each sales stage. Additionally, monitors Google Analytics web traffic (sessions, engagement duration, bounce rates), top-performing landing pages, and traffic acquisition sources (Direct, Paid, Social, Search, Email). Built with dynamic field parameter selectors, custom navigation bookmarks, and interactive Bing map visualizations.</p>
+                    <h3 class="text-lg sm:text-xl font-bold text-white">Social Metrics Dashboard</h3>
+                    <p class="text-xs sm:text-sm text-slate-400">A comprehensive multi-source Power BI marketing and social media analytics platform tracking performance across LinkedIn, CRM Lead Generation pipelines, and Google Analytics. Features real-time tracking of brand reach and audience engagement KPIs—including Impressions (146.16K), Reactions, Followers, and Post-level CTR/Click analytics—with demographic breakdowns by Industry (Consulting, IT Services, Finance) and geography. Integrates sales funnel analytics to monitor pipeline opportunities by both Volume (802 total, 32 won) and Revenue (€80.12M pipeline value, €2.93M won), tracking conversion velocity through each sales stage. Additionally, monitors Google Analytics web traffic (sessions, engagement duration, bounce rates), top-performing landing pages, and traffic acquisition sources (Direct, Paid, Social, Search, Email). Built with dynamic field parameter selectors, custom navigation bookmarks, and interactive Bing map visualizations.</p>
                 </div>
 
                 <div class="relative overflow-hidden rounded-xl border border-slate-700/80 bg-slate-900 group">
@@ -519,11 +519,11 @@
                         </template>
                     </div>
 
-                    <button @click="currentSlide = (currentSlide - 1 + totalSlides) % totalSlides" class="absolute left-3 top-1/2 -translate-y-1/2 bg-slate-900/80 hover:bg-slate-800 text-white w-10 h-10 rounded-full flex items-center justify-center border border-slate-700 transition opacity-80 hover:opacity-100">
-                        <i class="fa-solid fa-chevron-left"></i>
+                    <button @click="currentSlide = (currentSlide - 1 + totalSlides) % totalSlides" class="absolute left-2 sm:left-3 top-1/2 -translate-y-1/2 bg-slate-900/80 hover:bg-slate-800 text-white w-8 h-8 sm:w-10 sm:h-10 rounded-full flex items-center justify-center border border-slate-700 transition opacity-80 hover:opacity-100">
+                        <i class="fa-solid fa-chevron-left text-xs sm:text-sm"></i>
                     </button>
-                    <button @click="currentSlide = (currentSlide + 1) % totalSlides" class="absolute right-3 top-1/2 -translate-y-1/2 bg-slate-900/80 hover:bg-slate-800 text-white w-10 h-10 rounded-full flex items-center justify-center border border-slate-700 transition opacity-80 hover:opacity-100">
-                        <i class="fa-solid fa-chevron-right"></i>
+                    <button @click="currentSlide = (currentSlide + 1) % totalSlides" class="absolute right-2 sm:right-3 top-1/2 -translate-y-1/2 bg-slate-900/80 hover:bg-slate-800 text-white w-8 h-8 sm:w-10 sm:h-10 rounded-full flex items-center justify-center border border-slate-700 transition opacity-80 hover:opacity-100">
+                        <i class="fa-solid fa-chevron-right text-xs sm:text-sm"></i>
                     </button>
 
                     <div class="absolute bottom-3 left-1/2 -translate-x-1/2 bg-slate-900/80 px-3 py-1 rounded-full text-xs text-slate-300 border border-slate-700">
@@ -532,7 +532,7 @@
                 </div>
 
                 <div class="mt-6 flex flex-wrap items-center justify-between gap-4">
-                    <div class="flex gap-2">
+                    <div class="flex flex-wrap gap-2">
                         <span class="px-2.5 py-1 bg-blue-500/10 text-blue-400 text-xs font-semibold rounded-md border border-blue-500/20">Power BI</span>
                         <span class="px-2.5 py-1 bg-cyan-500/10 text-cyan-400 text-xs font-semibold rounded-md border border-cyan-500/20">DAX</span>
                         <span class="px-2.5 py-1 bg-purple-500/10 text-purple-400 text-xs font-semibold rounded-md border border-purple-500/20">LinkedIn</span>
@@ -546,10 +546,10 @@
             </div>
 
             <!-- PROJEKT 4 -->
-            <div class="bg-cardBg border border-slate-800 rounded-2xl p-6 shadow-xl" x-data="{ currentSlide: 0, totalSlides: 5 }">
+            <div class="bg-cardBg border border-slate-800 rounded-2xl p-5 sm:p-6 shadow-xl" x-data="{ currentSlide: 0, totalSlides: 5 }">
                 <div class="mb-4">
-                    <h3 class="text-xl font-bold text-white">Designer Clothing Budgeting Dashboard</h3>
-                    <p class="text-sm text-slate-400">A robust Power BI financial reporting and budgeting solution developed for luxury fashion retail management to control revenues, wholesale customer orders, and multi-pass budget revisions. Tracks high-level executive financial metrics comparing Actual Revenue ($14M) against initial ($20M) and second-pass ($22M) budget iterations, alongside client-level order distributions sorted from highest to lowest across major global department stores (e.g., Harrods, Galeries Lafayette, Saks Fifth Avenue, Dover Street Market). Features structured Budget vs. Actuals variance reports categorized by company groups and retail channels, stacked performance charts tracking actuals against budget passes over time, dynamic drill-downs using Decomposition Trees for regional sales breakdown analysis, and a custom slide-out filter panel for slicing data by season, gender, collection, and geographic territory.</p>
+                    <h3 class="text-lg sm:text-xl font-bold text-white">Designer Clothing Budgeting Dashboard</h3>
+                    <p class="text-xs sm:text-sm text-slate-400">A robust Power BI financial reporting and budgeting solution developed for luxury fashion retail management to control revenues, wholesale customer orders, and multi-pass budget revisions. Tracks high-level executive financial metrics comparing Actual Revenue ($14M) against initial ($20M) and second-pass ($22M) budget iterations, alongside client-level order distributions sorted from highest to lowest across major global department stores (e.g., Harrods, Galeries Lafayette, Saks Fifth Avenue, Dover Street Market). Features structured Budget vs. Actuals variance reports categorized by company groups and retail channels, stacked performance charts tracking actuals against budget passes over time, dynamic drill-downs using Decomposition Trees for regional sales breakdown analysis, and a custom slide-out filter panel for slicing data by season, gender, collection, and geographic territory.</p>
                 </div>
 
                 <div class="relative overflow-hidden rounded-xl border border-slate-700/80 bg-slate-900 group">
@@ -561,11 +561,11 @@
                         </template>
                     </div>
 
-                    <button @click="currentSlide = (currentSlide - 1 + totalSlides) % totalSlides" class="absolute left-3 top-1/2 -translate-y-1/2 bg-slate-900/80 hover:bg-slate-800 text-white w-10 h-10 rounded-full flex items-center justify-center border border-slate-700 transition opacity-80 hover:opacity-100">
-                        <i class="fa-solid fa-chevron-left"></i>
+                    <button @click="currentSlide = (currentSlide - 1 + totalSlides) % totalSlides" class="absolute left-2 sm:left-3 top-1/2 -translate-y-1/2 bg-slate-900/80 hover:bg-slate-800 text-white w-8 h-8 sm:w-10 sm:h-10 rounded-full flex items-center justify-center border border-slate-700 transition opacity-80 hover:opacity-100">
+                        <i class="fa-solid fa-chevron-left text-xs sm:text-sm"></i>
                     </button>
-                    <button @click="currentSlide = (currentSlide + 1) % totalSlides" class="absolute right-3 top-1/2 -translate-y-1/2 bg-slate-900/80 hover:bg-slate-800 text-white w-10 h-10 rounded-full flex items-center justify-center border border-slate-700 transition opacity-80 hover:opacity-100">
-                        <i class="fa-solid fa-chevron-right"></i>
+                    <button @click="currentSlide = (currentSlide + 1) % totalSlides" class="absolute right-2 sm:right-3 top-1/2 -translate-y-1/2 bg-slate-900/80 hover:bg-slate-800 text-white w-8 h-8 sm:w-10 sm:h-10 rounded-full flex items-center justify-center border border-slate-700 transition opacity-80 hover:opacity-100">
+                        <i class="fa-solid fa-chevron-right text-xs sm:text-sm"></i>
                     </button>
 
                     <div class="absolute bottom-3 left-1/2 -translate-x-1/2 bg-slate-900/80 px-3 py-1 rounded-full text-xs text-slate-300 border border-slate-700">
@@ -574,7 +574,7 @@
                 </div>
 
                 <div class="mt-6 flex flex-wrap items-center justify-between gap-4">
-                    <div class="flex gap-2">
+                    <div class="flex flex-wrap gap-2">
                         <span class="px-2.5 py-1 bg-blue-500/10 text-blue-400 text-xs font-semibold rounded-md border border-blue-500/20">Power BI</span>
                         <span class="px-2.5 py-1 bg-cyan-500/10 text-cyan-400 text-xs font-semibold rounded-md border border-cyan-500/20">DAX</span>
                     </div>
@@ -582,10 +582,10 @@
             </div>
 
             <!-- PROJEKT 5 -->
-            <div class="bg-cardBg border border-slate-800 rounded-2xl p-6 shadow-xl" x-data="{ currentSlide: 0, totalSlides: 5 }">
+            <div class="bg-cardBg border border-slate-800 rounded-2xl p-5 sm:p-6 shadow-xl" x-data="{ currentSlide: 0, totalSlides: 5 }">
                 <div class="mb-4">
-                    <h3 class="text-xl font-bold text-white">Insurance Risk & Actuarial Analytics Dashboard</h3>
-                    <p class="text-sm text-slate-400">An advanced actuarial and underwriting analytics suite designed for property insurance risk profiling, loss exposure modeling, and spatial risk distribution. Provides flexible ad-hoc reporting tools allowing custom column selection to compute critical insurance metrics including Earned Premium, Incurred Losses, Earned House Years, Loss Ratio, Severity, Frequency, and Loss Cost per 1K Total Insured Value (TIV). Features an interactive risk factor breakdown powered by Power BI Decomposition Trees to analyze underlying cost drivers such as roof age, wiring age, HVAC type, and sprinkler systems. Incorporates spatial analytics using Bing Maps and high-resolution dark-mode ArcGIS geospatial mapping to visualize claim density and regional exposure across US regions, supported by dynamic KPI switchers and custom multi-category filter panels.</p>
+                    <h3 class="text-lg sm:text-xl font-bold text-white">Insurance Risk & Actuarial Analytics Dashboard</h3>
+                    <p class="text-xs sm:text-sm text-slate-400">An advanced actuarial and underwriting analytics suite designed for property insurance risk profiling, loss exposure modeling, and spatial risk distribution. Provides flexible ad-hoc reporting tools allowing custom column selection to compute critical insurance metrics including Earned Premium, Incurred Losses, Earned House Years, Loss Ratio, Severity, Frequency, and Loss Cost per 1K Total Insured Value (TIV). Features an interactive risk factor breakdown powered by Power BI Decomposition Trees to analyze underlying cost drivers such as roof age, wiring age, HVAC type, and sprinkler systems. Incorporates spatial analytics using Bing Maps and high-resolution dark-mode ArcGIS geospatial mapping to visualize claim density and regional exposure across US regions, supported by dynamic KPI switchers and custom multi-category filter panels.</p>
                 </div>
 
                 <div class="relative overflow-hidden rounded-xl border border-slate-700/80 bg-slate-900 group">
@@ -597,11 +597,11 @@
                         </template>
                     </div>
 
-                    <button @click="currentSlide = (currentSlide - 1 + totalSlides) % totalSlides" class="absolute left-3 top-1/2 -translate-y-1/2 bg-slate-900/80 hover:bg-slate-800 text-white w-10 h-10 rounded-full flex items-center justify-center border border-slate-700 transition opacity-80 hover:opacity-100">
-                        <i class="fa-solid fa-chevron-left"></i>
+                    <button @click="currentSlide = (currentSlide - 1 + totalSlides) % totalSlides" class="absolute left-2 sm:left-3 top-1/2 -translate-y-1/2 bg-slate-900/80 hover:bg-slate-800 text-white w-8 h-8 sm:w-10 sm:h-10 rounded-full flex items-center justify-center border border-slate-700 transition opacity-80 hover:opacity-100">
+                        <i class="fa-solid fa-chevron-left text-xs sm:text-sm"></i>
                     </button>
-                    <button @click="currentSlide = (currentSlide + 1) % totalSlides" class="absolute right-3 top-1/2 -translate-y-1/2 bg-slate-900/80 hover:bg-slate-800 text-white w-10 h-10 rounded-full flex items-center justify-center border border-slate-700 transition opacity-80 hover:opacity-100">
-                        <i class="fa-solid fa-chevron-right"></i>
+                    <button @click="currentSlide = (currentSlide + 1) % totalSlides" class="absolute right-2 sm:right-3 top-1/2 -translate-y-1/2 bg-slate-900/80 hover:bg-slate-800 text-white w-8 h-8 sm:w-10 sm:h-10 rounded-full flex items-center justify-center border border-slate-700 transition opacity-80 hover:opacity-100">
+                        <i class="fa-solid fa-chevron-right text-xs sm:text-sm"></i>
                     </button>
 
                     <div class="absolute bottom-3 left-1/2 -translate-x-1/2 bg-slate-900/80 px-3 py-1 rounded-full text-xs text-slate-300 border border-slate-700">
@@ -610,7 +610,7 @@
                 </div>
 
                 <div class="mt-6 flex flex-wrap items-center justify-between gap-4">
-                    <div class="flex gap-2">
+                    <div class="flex flex-wrap gap-2">
                         <span class="px-2.5 py-1 bg-blue-500/10 text-blue-400 text-xs font-semibold rounded-md border border-blue-500/20">Power BI</span>
                         <span class="px-2.5 py-1 bg-cyan-500/10 text-cyan-400 text-xs font-semibold rounded-md border border-cyan-500/20">DAX</span>
                     </div>
@@ -621,10 +621,10 @@
             </div>
 
             <!-- PROJEKT 6 -->
-            <div class="bg-cardBg border border-slate-800 rounded-2xl p-6 shadow-xl" x-data="{ currentSlide: 0, totalSlides: 1 }">
+            <div class="bg-cardBg border border-slate-800 rounded-2xl p-5 sm:p-6 shadow-xl" x-data="{ currentSlide: 0, totalSlides: 1 }">
                 <div class="mb-4">
-                    <h3 class="text-xl font-bold text-white">Dynamic Multi-Tenant API ETL Engine & Data Pipeline</h3>
-                    <p class="text-sm text-slate-400">A highly scalable, modular ETL pipeline developed entirely in Power Query (M Language) to automate data ingestion from a REST API across multiple dynamic targets. Built around DRY (Don't Repeat Yourself) architecture, the engine utilizes secure environment parameters (pApiUser, pApiPassword, pApiBaseUrl) and a flexible configuration dataset (ConfigDatabases) to drive pagination and data extraction. A custom M function (fnGetApiView) handles dynamic HTTP requests, pagination loops, response parsing, and error handling. The function iteratively executes for each configured country/database, dynamically combining disparate payload views into unified, reporting-ready data tables (Views 1–5).</p>
+                    <h3 class="text-lg sm:text-xl font-bold text-white">Dynamic Multi-Tenant API ETL Engine & Data Pipeline</h3>
+                    <p class="text-xs sm:text-sm text-slate-400">A highly scalable, modular ETL pipeline developed entirely in Power Query (M Language) to automate data ingestion from a REST API across multiple dynamic targets. Built around DRY (Don't Repeat Yourself) architecture, the engine utilizes secure environment parameters (pApiUser, pApiPassword, pApiBaseUrl) and a flexible configuration dataset (ConfigDatabases) to drive pagination and data extraction. A custom M function (fnGetApiView) handles dynamic HTTP requests, pagination loops, response parsing, and error handling. The function iteratively executes for each configured country/database, dynamically combining disparate payload views into unified, reporting-ready data tables (Views 1–5).</p>
                 </div>
 
                 <div class="relative overflow-hidden rounded-xl border border-slate-700/80 bg-slate-900 group">
@@ -636,11 +636,11 @@
                         </template>
                     </div>
 
-                    <button @click="currentSlide = (currentSlide - 1 + totalSlides) % totalSlides" class="absolute left-3 top-1/2 -translate-y-1/2 bg-slate-900/80 hover:bg-slate-800 text-white w-10 h-10 rounded-full flex items-center justify-center border border-slate-700 transition opacity-80 hover:opacity-100">
-                        <i class="fa-solid fa-chevron-left"></i>
+                    <button @click="currentSlide = (currentSlide - 1 + totalSlides) % totalSlides" class="absolute left-2 sm:left-3 top-1/2 -translate-y-1/2 bg-slate-900/80 hover:bg-slate-800 text-white w-8 h-8 sm:w-10 sm:h-10 rounded-full flex items-center justify-center border border-slate-700 transition opacity-80 hover:opacity-100">
+                        <i class="fa-solid fa-chevron-left text-xs sm:text-sm"></i>
                     </button>
-                    <button @click="currentSlide = (currentSlide + 1) % totalSlides" class="absolute right-3 top-1/2 -translate-y-1/2 bg-slate-900/80 hover:bg-slate-800 text-white w-10 h-10 rounded-full flex items-center justify-center border border-slate-700 transition opacity-80 hover:opacity-100">
-                        <i class="fa-solid fa-chevron-right"></i>
+                    <button @click="currentSlide = (currentSlide + 1) % totalSlides" class="absolute right-2 sm:right-3 top-1/2 -translate-y-1/2 bg-slate-900/80 hover:bg-slate-800 text-white w-8 h-8 sm:w-10 sm:h-10 rounded-full flex items-center justify-center border border-slate-700 transition opacity-80 hover:opacity-100">
+                        <i class="fa-solid fa-chevron-right text-xs sm:text-sm"></i>
                     </button>
 
                     <div class="absolute bottom-3 left-1/2 -translate-x-1/2 bg-slate-900/80 px-3 py-1 rounded-full text-xs text-slate-300 border border-slate-700">
@@ -649,7 +649,7 @@
                 </div>
 
                 <div class="mt-6 flex flex-wrap items-center justify-between gap-4">
-                    <div class="flex gap-2">
+                    <div class="flex flex-wrap gap-2">
                         <span class="px-2.5 py-1 bg-blue-500/10 text-blue-400 text-xs font-semibold rounded-md border border-blue-500/20">Power BI</span>
                         <span class="px-2.5 py-1 bg-cyan-500/10 text-cyan-400 text-xs font-semibold rounded-md border border-cyan-500/20">Power Query</span>
                         <span class="px-2.5 py-1 bg-purple-500/10 text-purple-400 text-xs font-semibold rounded-md border border-purple-500/20">ETL</span>
@@ -674,25 +674,25 @@
             
             <!-- Gumb za zatvaranje (X) -->
             <button @click="modalOpen = false" 
-                    class="absolute top-4 right-4 z-50 text-slate-300 hover:text-white bg-slate-900/90 hover:bg-slate-800 w-12 h-12 rounded-full flex items-center justify-center border border-slate-700 transition shadow-xl cursor-pointer">
-                <i class="fa-solid fa-xmark text-xl"></i>
+                    class="absolute top-2 right-2 sm:top-4 sm:right-4 z-50 text-slate-300 hover:text-white bg-slate-900/90 hover:bg-slate-800 w-10 h-10 sm:w-12 sm:h-12 rounded-full flex items-center justify-center border border-slate-700 transition shadow-xl cursor-pointer">
+                <i class="fa-solid fa-xmark text-lg sm:text-xl"></i>
             </button>
 
             <!-- Lijeva strelica za modal -->
             <button @click="prevModalImg()" 
-                    class="absolute left-4 z-50 bg-slate-900/90 hover:bg-slate-800 text-white w-12 h-12 rounded-full flex items-center justify-center border border-slate-700 transition shadow-xl cursor-pointer">
-                <i class="fa-solid fa-chevron-left text-lg"></i>
+                    class="absolute left-2 sm:left-4 z-50 bg-slate-900/90 hover:bg-slate-800 text-white w-10 h-10 sm:w-12 sm:h-12 rounded-full flex items-center justify-center border border-slate-700 transition shadow-xl cursor-pointer">
+                <i class="fa-solid fa-chevron-left text-sm sm:text-lg"></i>
             </button>
             
             <!-- Slika u punoj veličini -->
-            <div class="w-full h-full flex items-center justify-center px-12 py-10">
+            <div class="w-full h-full flex items-center justify-center px-10 sm:px-12 py-10">
                 <img :src="modalImages[modalIndex]" class="w-auto h-auto max-w-[90vw] max-h-[90vh] object-contain rounded-lg shadow-2xl border border-slate-700/60">
             </div>
 
             <!-- Desna strelica za modal -->
             <button @click="nextModalImg()" 
-                    class="absolute right-4 z-50 bg-slate-900/90 hover:bg-slate-800 text-white w-12 h-12 rounded-full flex items-center justify-center border border-slate-700 transition shadow-xl cursor-pointer">
-                <i class="fa-solid fa-chevron-right text-lg"></i>
+                    class="absolute right-2 sm:right-4 z-50 bg-slate-900/90 hover:bg-slate-800 text-white w-10 h-10 sm:w-12 sm:h-12 rounded-full flex items-center justify-center border border-slate-700 transition shadow-xl cursor-pointer">
+                <i class="fa-solid fa-chevron-right text-sm sm:text-lg"></i>
             </button>
 
             <!-- Indikator stranica u modalu -->
