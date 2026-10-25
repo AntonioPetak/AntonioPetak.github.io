@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="hr" class="dark scroll-smooth">
+<html lang="en" class="dark scroll-smooth" x-data="portfolioApp()" :class="{ 'dark': darkMode }">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -15,12 +15,14 @@
                         darkBg: '#0f172a',
                         cardBg: '#1e293b',
                         accent: '#3b82f6',
+                        lightBg: '#f8fafc',
+                        lightCard: '#ffffff',
                     }
                 }
             }
         }
     </script>
-    <!-- Alpine.js za brzu i jednostavnu izmjenu tabova -->
+    <!-- Alpine.js -->
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
     <!-- Font Awesome Ikone -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -31,54 +33,76 @@
         [x-cloak] { display: none !important; }
     </style>
 </head>
-<body class="bg-darkBg text-slate-100 min-h-screen flex flex-col justify-between overflow-x-hidden" 
-      x-data="{ 
-          activeTab: 'about', 
-          modalOpen: false, 
-          modalImages: [], 
-          modalIndex: 0,
-          openModal(imagesArray, index) {
-              this.modalImages = imagesArray;
-              this.modalIndex = index;
-              this.modalOpen = true;
-          },
-          nextModalImg() {
-              if (this.modalImages.length > 0) {
-                  this.modalIndex = (this.modalIndex + 1) % this.modalImages.length;
-              }
-          },
-          prevModalImg() {
-              if (this.modalImages.length > 0) {
-                  this.modalIndex = (this.modalIndex - 1 + this.modalImages.length) % this.modalImages.length;
-              }
-          }
-      }"
+<body class="bg-slate-50 dark:bg-darkBg text-slate-800 dark:text-slate-100 min-h-screen flex flex-col justify-between overflow-x-hidden transition-colors duration-300"
       @keydown.escape.window="modalOpen = false"
       @keydown.right.window="if(modalOpen) nextModalImg()"
       @keydown.left.window="if(modalOpen) prevModalImg()">
 
     <!-- Zaglavlje / Navigacija -->
-    <header class="sticky top-0 z-50 bg-darkBg/90 backdrop-blur-md border-b border-slate-800">
+    <header class="sticky top-0 z-50 bg-white/90 dark:bg-darkBg/90 backdrop-blur-md border-b border-slate-200 dark:border-slate-800 transition-colors duration-300">
         <div class="max-w-5xl mx-auto px-4 sm:px-6 h-auto sm:h-16 py-3 sm:py-0 flex flex-col sm:flex-row items-center justify-between gap-3 sm:gap-0">
-            <a href="#" class="font-extrabold text-lg sm:text-xl tracking-tight text-blue-400 hover:text-blue-300 transition-colors">
+            <a href="#" class="font-extrabold text-lg sm:text-xl tracking-tight text-blue-600 dark:text-blue-400 hover:text-blue-500 transition-colors">
                 Antonio Petak
             </a>
-            <nav class="flex flex-wrap justify-center gap-1.5 sm:space-x-2">
+            
+            <nav class="flex flex-wrap items-center justify-center gap-1.5 sm:space-x-2">
                 <button @click="activeTab = 'about'" 
-                    :class="activeTab === 'about' ? 'bg-accent text-white shadow-lg shadow-accent/20' : 'text-slate-400 hover:text-white hover:bg-slate-800'"
+                    :class="activeTab === 'about' ? 'bg-accent text-white shadow-lg shadow-accent/20' : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:bg-slate-200 dark:hover:bg-slate-800'"
                     class="px-2.5 sm:px-4 py-1.5 sm:py-2 rounded-lg text-xs sm:text-sm font-medium transition-all duration-200">
-                    <i class="fa-solid fa-user mr-1.5"></i> About me
+                    <i class="fa-solid fa-user mr-1.5"></i> <span x-text="t('navAbout')"></span>
                 </button>
                 <button @click="activeTab = 'experience'" 
-                    :class="activeTab === 'experience' ? 'bg-accent text-white shadow-lg shadow-accent/20' : 'text-slate-400 hover:text-white hover:bg-slate-800'"
+                    :class="activeTab === 'experience' ? 'bg-accent text-white shadow-lg shadow-accent/20' : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:bg-slate-200 dark:hover:bg-slate-800'"
                     class="px-2.5 sm:px-4 py-1.5 sm:py-2 rounded-lg text-xs sm:text-sm font-medium transition-all duration-200">
-                    <i class="fa-solid fa-briefcase mr-1.5"></i> Experience
+                    <i class="fa-solid fa-briefcase mr-1.5"></i> <span x-text="t('navExperience')"></span>
                 </button>
                 <button @click="activeTab = 'projects'" 
-                    :class="activeTab === 'projects' ? 'bg-accent text-white shadow-lg shadow-accent/20' : 'text-slate-400 hover:text-white hover:bg-slate-800'"
+                    :class="activeTab === 'projects' ? 'bg-accent text-white shadow-lg shadow-accent/20' : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:bg-slate-200 dark:hover:bg-slate-800'"
                     class="px-2.5 sm:px-4 py-1.5 sm:py-2 rounded-lg text-xs sm:text-sm font-medium transition-all duration-200">
-                    <i class="fa-solid fa-chart-pie mr-1.5"></i> Projects
+                    <i class="fa-solid fa-chart-pie mr-1.5"></i> <span x-text="t('navProjects')"></span>
                 </button>
+
+                <!-- Razdjelnik -->
+                <div class="h-5 w-[1px] bg-slate-300 dark:bg-slate-700 mx-1 hidden sm:block"></div>
+
+                <!-- Kontrole za Temu i Jezik -->
+                <div class="flex items-center gap-2 mt-2 sm:mt-0">
+                    <!-- Light/Dark Mode Switcher -->
+                    <button @click="darkMode = !darkMode" 
+                            title="Toggle Theme"
+                            class="p-2 rounded-lg text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-800 transition-colors">
+                        <i x-show="!darkMode" class="fa-solid fa-moon text-base"></i>
+                        <i x-show="darkMode" class="fa-solid fa-sun text-amber-400 text-base" x-cloak></i>
+                    </button>
+
+                    <!-- Language Switcher Dropdown -->
+                    <div class="relative" x-data="{ langOpen: false }">
+                        <button @click="langOpen = !langOpen" @click.away="langOpen = false"
+                                class="flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg text-xs sm:text-sm font-medium text-slate-700 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-800 border border-slate-300 dark:border-slate-700 transition-colors">
+                            <span x-text="currentLang === 'en' ? '🇬🇧 EN' : (currentLang === 'hr' ? '🇭🇷 HR' : '🇩🇪 DE')"></span>
+                            <i class="fa-solid fa-chevron-down text-[10px] text-slate-500"></i>
+                        </button>
+
+                        <div x-show="langOpen" x-cloak x-transition
+                             class="absolute right-0 mt-2 w-32 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl shadow-xl py-1 z-50 text-xs sm:text-sm">
+                            <button @click="currentLang = 'en'; langOpen = false" 
+                                    :class="currentLang === 'en' ? 'font-bold text-accent bg-slate-100 dark:bg-slate-700/50' : 'text-slate-700 dark:text-slate-300'"
+                                    class="w-full text-left px-3 py-2 hover:bg-slate-100 dark:hover:bg-slate-700 flex items-center gap-2">
+                                <span>🇬🇧</span> English
+                            </button>
+                            <button @click="currentLang = 'hr'; langOpen = false" 
+                                    :class="currentLang === 'hr' ? 'font-bold text-accent bg-slate-100 dark:bg-slate-700/50' : 'text-slate-700 dark:text-slate-300'"
+                                    class="w-full text-left px-3 py-2 hover:bg-slate-100 dark:hover:bg-slate-700 flex items-center gap-2">
+                                <span>🇭🇷</span> Hrvatski
+                            </button>
+                            <button @click="currentLang = 'de'; langOpen = false" 
+                                    :class="currentLang === 'de' ? 'font-bold text-accent bg-slate-100 dark:bg-slate-700/50' : 'text-slate-700 dark:text-slate-300'"
+                                    class="w-full text-left px-3 py-2 hover:bg-slate-100 dark:hover:bg-slate-700 flex items-center gap-2">
+                                <span>🇩🇪</span> Deutsch
+                            </button>
+                        </div>
+                    </div>
+                </div>
             </nav>
         </div>
     </header>
@@ -91,19 +115,17 @@
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8 items-center">
                 <div class="md:col-span-2 space-y-4 text-center md:text-left">
                     <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-accent/10 text-accent text-xs font-semibold uppercase tracking-wider">
-                        <span class="w-2 h-2 rounded-full bg-accent animate-pulse"></span> Available for New Opportunities
+                        <span class="w-2 h-2 rounded-full bg-accent animate-pulse"></span> <span x-text="t('availableText')"></span>
                     </div>
-                    <h1 class="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight text-white">
-                        Hi, I'm <span class="text-accent">Antonio</span>
+                    <h1 class="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight text-slate-900 dark:text-white">
+                        <span x-text="t('heroHi')"></span> <span class="text-accent">Antonio</span>
                     </h1>
-                    <p class="text-base sm:text-lg text-slate-300 leading-relaxed text-left">
-                        Business Intelligence Consultant and Data Analyst focused on developing advanced Power BI reporting solutions, data modeling (DAX/SQL), and business process automation.
-                    </p>
+                    <p class="text-base sm:text-lg text-slate-600 dark:text-slate-300 leading-relaxed text-left" x-text="t('heroSubtitle')"></p>
                     <div class="flex items-center justify-center md:justify-start space-x-4 pt-2">
-                        <a href="https://www.linkedin.com/in/antoniopetak/?isSelfProfile=true" target="_blank" class="w-10 h-10 rounded-lg bg-cardBg border border-slate-700 flex items-center justify-center text-slate-300 hover:text-accent hover:border-accent transition-colors">
+                        <a href="https://www.linkedin.com/in/antoniopetak/?isSelfProfile=true" target="_blank" class="w-10 h-10 rounded-lg bg-white dark:bg-cardBg border border-slate-300 dark:border-slate-700 flex items-center justify-center text-slate-700 dark:text-slate-300 hover:text-accent dark:hover:text-accent hover:border-accent transition-colors shadow-sm">
                             <i class="fa-brands fa-linkedin-in text-lg"></i>
                         </a>
-                        <a href="mailto:petak218@gmail.com" class="w-10 h-10 rounded-lg bg-cardBg border border-slate-700 flex items-center justify-center text-slate-300 hover:text-accent hover:border-accent transition-colors">
+                        <a href="mailto:petak218@gmail.com" class="w-10 h-10 rounded-lg bg-white dark:bg-cardBg border border-slate-300 dark:border-slate-700 flex items-center justify-center text-slate-700 dark:text-slate-300 hover:text-accent dark:hover:text-accent hover:border-accent transition-colors shadow-sm">
                             <i class="fa-solid fa-envelope text-lg"></i>
                         </a>
                     </div>
@@ -111,53 +133,47 @@
             </div>
 
             <!-- Profesionalni fokus & Područja interesa -->
-            <div class="bg-cardBg border border-slate-800 rounded-2xl p-5 sm:p-8 text-left space-y-6">
-                <!-- Profesionalni fokus -->
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-slate-300 text-sm leading-relaxed">
+            <div class="bg-white dark:bg-cardBg border border-slate-200 dark:border-slate-800 rounded-2xl p-5 sm:p-8 text-left space-y-6 shadow-sm dark:shadow-none">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-slate-600 dark:text-slate-300 text-sm leading-relaxed">
                     <div>
-                        <h4 class="font-bold text-white mb-2 text-base flex items-center gap-2">
-                            <i class="fa-solid fa-briefcase text-accent"></i> Professional Focus
+                        <h4 class="font-bold text-slate-900 dark:text-white mb-2 text-base flex items-center gap-2">
+                            <i class="fa-solid fa-briefcase text-accent"></i> <span x-text="t('profFocusTitle')"></span>
                         </h4>
-                        <p class="mb-3">
-                            Driven by a deep passion for turning raw data into meaningful business value. Throughout my career, I have cultivated a rigorous, detail-oriented analytical approach designed to eliminate bottlenecks, optimize ETL pipelines, and empower executive decision-making.
-                        </p>
-                        <p>
-                            I thrive in fast-paced environments where translating complex operational requirements into scalable data architecture directly impacts company growth and performance.
-                        </p>
+                        <p class="mb-3" x-text="t('profFocusP1')"></p>
+                        <p x-text="t('profFocusP2')"></p>
                     </div>
                     <div>
-                        <h4 class="font-bold text-white mb-2 text-base flex items-center gap-2">
-                            <i class="fa-solid fa-list-check text-accent"></i> Core Competencies:
+                        <h4 class="font-bold text-slate-900 dark:text-white mb-2 text-base flex items-center gap-2">
+                            <i class="fa-solid fa-list-check text-accent"></i> <span x-text="t('coreCompTitle')"></span>
                         </h4>
-                        <ul class="space-y-2 text-slate-400 list-disc list-inside">
-                            <li>Business Analytics & Executive Power BI Dashboard Development</li>
-                            <li>Advanced Data Modeling & DAX / SQL Optimization</li>
-                            <li>End-to-End ETL Pipeline Architecture & Process Automation</li>
+                        <ul class="space-y-2 text-slate-600 dark:text-slate-400 list-disc list-inside">
+                            <li x-text="t('coreComp1')"></li>
+                            <li x-text="t('coreComp2')"></li>
+                            <li x-text="t('coreComp3')"></li>
                         </ul>
                     </div>
                 </div>
 
-                <!-- Unutarnja linija za razdvajanje -->
-                <div class="border-t border-slate-700/60 pt-6">
-                    <h4 class="font-bold text-white mb-4 text-base flex items-center gap-2">
-                        <i class="fa-solid fa-compass text-accent"></i> Areas of Interest & Specialization
+                <div class="border-t border-slate-200 dark:border-slate-700/60 pt-6">
+                    <h4 class="font-bold text-slate-900 dark:text-white mb-4 text-base flex items-center gap-2">
+                        <i class="fa-solid fa-compass text-accent"></i> <span x-text="t('areasOfInterestTitle')"></span>
                     </h4>
                     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
-                        <div class="bg-slate-900/60 border border-slate-800 p-3.5 rounded-xl">
-                            <div class="font-semibold text-sm text-white mb-1"><i class="fa-solid fa-layer-group text-accent mr-1.5"></i> Data Analytics</div>
-                            <div class="text-xs text-slate-400">Reporting & KPI Tracking</div>
+                        <div class="bg-slate-100 dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800 p-3.5 rounded-xl">
+                            <div class="font-semibold text-sm text-slate-900 dark:text-white mb-1"><i class="fa-solid fa-layer-group text-accent mr-1.5"></i> Data Analytics</div>
+                            <div class="text-xs text-slate-500 dark:text-slate-400" x-text="t('aoi1')"></div>
                         </div>
-                        <div class="bg-slate-900/60 border border-slate-800 p-3.5 rounded-xl">
-                            <div class="font-semibold text-sm text-white mb-1"><i class="fa-solid fa-gears text-accent mr-1.5"></i> Power Platform</div>
-                            <div class="text-xs text-slate-400">Automate & Integration</div>
+                        <div class="bg-slate-100 dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800 p-3.5 rounded-xl">
+                            <div class="font-semibold text-sm text-slate-900 dark:text-white mb-1"><i class="fa-solid fa-gears text-accent mr-1.5"></i> Power Platform</div>
+                            <div class="text-xs text-slate-500 dark:text-slate-400" x-text="t('aoi2')"></div>
                         </div>
-                        <div class="bg-slate-900/60 border border-slate-800 p-3.5 rounded-xl">
-                            <div class="font-semibold text-sm text-white mb-1"><i class="fa-solid fa-database text-accent mr-1.5"></i> Data Engineering</div>
-                            <div class="text-xs text-slate-400">ETL Pipelines & Azure</div>
+                        <div class="bg-slate-100 dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800 p-3.5 rounded-xl">
+                            <div class="font-semibold text-sm text-slate-900 dark:text-white mb-1"><i class="fa-solid fa-database text-accent mr-1.5"></i> Data Engineering</div>
+                            <div class="text-xs text-slate-500 dark:text-slate-400" x-text="t('aoi3')"></div>
                         </div>
-                        <div class="bg-slate-900/60 border border-slate-800 p-3.5 rounded-xl">
-                            <div class="font-semibold text-sm text-white mb-1"><i class="fa-solid fa-brain text-accent mr-1.5"></i> Data Science & AI</div>
-                            <div class="text-xs text-slate-400">AI-driven Problem Solving</div>
+                        <div class="bg-slate-100 dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800 p-3.5 rounded-xl">
+                            <div class="font-semibold text-sm text-slate-900 dark:text-white mb-1"><i class="fa-solid fa-brain text-accent mr-1.5"></i> Data Science & AI</div>
+                            <div class="text-xs text-slate-500 dark:text-slate-400" x-text="t('aoi4')"></div>
                         </div>
                     </div>
                 </div>
@@ -165,69 +181,65 @@
 
             <!-- Vještine / Tech Stack -->
             <div class="text-left">
-                <h3 class="text-xl font-bold text-white mb-6">Technologies & Tools</h3>
+                <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-6" x-text="t('techTitle')"></h3>
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-                    <div class="bg-cardBg border border-slate-800 p-4 rounded-xl flex items-center gap-3 hover:border-accent/50 transition-colors">
+                    <div class="bg-white dark:bg-cardBg border border-slate-200 dark:border-slate-800 p-4 rounded-xl flex items-center gap-3 hover:border-accent/50 transition-colors shadow-sm dark:shadow-none">
                         <i class="fa-solid fa-chart-line text-accent text-xl flex-shrink-0"></i>
                         <div>
-                            <div class="font-semibold text-sm text-white">Power BI</div>
-                            <div class="text-xs text-slate-400">DAX & Power Query</div>
+                            <div class="font-semibold text-sm text-slate-900 dark:text-white">Power BI</div>
+                            <div class="text-xs text-slate-500 dark:text-slate-400">DAX & Power Query</div>
                         </div>
                     </div>
-                    <div class="bg-cardBg border border-slate-800 p-4 rounded-xl flex items-center gap-3 hover:border-accent/50 transition-colors">
+                    <div class="bg-white dark:bg-cardBg border border-slate-200 dark:border-slate-800 p-4 rounded-xl flex items-center gap-3 hover:border-accent/50 transition-colors shadow-sm dark:shadow-none">
                         <i class="fa-solid fa-database text-accent text-xl flex-shrink-0"></i>
                         <div>
-                            <div class="font-semibold text-sm text-white">SQL / Databases</div>
-                            <div class="text-xs text-slate-400">Modeling & Queries</div>
+                            <div class="font-semibold text-sm text-slate-900 dark:text-white">SQL / Databases</div>
+                            <div class="text-xs text-slate-500 dark:text-slate-400">Modeling & Queries</div>
                         </div>
                     </div>
-                    <div class="bg-cardBg border border-slate-800 p-4 rounded-xl flex items-center gap-3 hover:border-accent/50 transition-colors">
+                    <div class="bg-white dark:bg-cardBg border border-slate-200 dark:border-slate-800 p-4 rounded-xl flex items-center gap-3 hover:border-accent/50 transition-colors shadow-sm dark:shadow-none">
                         <i class="fa-solid fa-bolt text-accent text-xl flex-shrink-0"></i>
                         <div>
-                            <div class="font-semibold text-sm text-white">Power Automate</div>
-                            <div class="text-xs text-slate-400">Workflow Automation</div>
+                            <div class="font-semibold text-sm text-slate-900 dark:text-white">Power Automate</div>
+                            <div class="text-xs text-slate-500 dark:text-slate-400">Workflow Automation</div>
                         </div>
                     </div>
-                    <div class="bg-cardBg border border-slate-800 p-4 rounded-xl flex items-center gap-3 hover:border-accent/50 transition-colors">
+                    <div class="bg-white dark:bg-cardBg border border-slate-200 dark:border-slate-800 p-4 rounded-xl flex items-center gap-3 hover:border-accent/50 transition-colors shadow-sm dark:shadow-none">
                         <i class="fa-solid fa-wand-magic-sparkles text-accent text-xl flex-shrink-0"></i>
                         <div>
-                            <div class="font-semibold text-sm text-white">AI & Automation</div>
-                            <div class="text-xs text-slate-400">AI-Driven Problem Solving</div>
+                            <div class="font-semibold text-sm text-slate-900 dark:text-white">AI & Automation</div>
+                            <div class="text-xs text-slate-500 dark:text-slate-400" x-text="t('techAiSub')"></div>
                         </div>
                     </div>
                 </div>
             </div>
 
             <!-- EDUKACIJA / EDUCATION -->
-            <div class="text-left bg-cardBg border border-slate-800 rounded-2xl p-5 sm:p-8">
-                <h3 class="text-xl font-bold text-white mb-6 flex items-center gap-2">
-                    <i class="fa-solid fa-graduation-cap text-accent"></i> Education
+            <div class="text-left bg-white dark:bg-cardBg border border-slate-200 dark:border-slate-800 rounded-2xl p-5 sm:p-8 shadow-sm dark:shadow-none">
+                <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-6 flex items-center gap-2">
+                    <i class="fa-solid fa-graduation-cap text-accent"></i> <span x-text="t('educationTitle')"></span>
                 </h3>
-                <div class="border-l-2 border-slate-800 ml-2 sm:ml-4 space-y-8 pl-4 sm:pl-6">
-                    <!-- Fakultet -->
+                <div class="border-l-2 border-slate-200 dark:border-slate-800 ml-2 sm:ml-4 space-y-8 pl-4 sm:pl-6">
                     <div class="relative">
-                        <span class="absolute -left-[23px] sm:-left-[31px] top-1.5 w-4 h-4 rounded-full bg-accent ring-4 ring-darkBg"></span>
+                        <span class="absolute -left-[23px] sm:-left-[31px] top-1.5 w-4 h-4 rounded-full bg-accent ring-4 ring-slate-50 dark:ring-darkBg"></span>
                         <div class="space-y-1">
                             <div class="flex flex-col sm:flex-row sm:items-center justify-between">
-                                <h4 class="text-base font-bold text-white">Bachelor of Business Informatics</h4>
-                                <span class="text-xs font-medium text-slate-400 mt-1 sm:mt-0">2021 – 2025</span>
+                                <h4 class="text-base font-bold text-slate-900 dark:text-white" x-text="t('degreeTitle')"></h4>
+                                <span class="text-xs font-medium text-slate-500 dark:text-slate-400 mt-1 sm:mt-0">2021 – 2025</span>
                             </div>
-                            <div class="text-sm text-accent font-medium">University of Zagreb, Faculty of Organization and Informatics (FOI) Varaždin</div>
-                            <p class="text-xs text-slate-400 pt-1">
-                                Focused on business informatics, data modeling, database management systems, and analytical problem-solving.
-                            </p>
+                            <div class="text-sm text-accent font-medium" x-text="t('degreeSchool')"></div>
+                            <p class="text-xs text-slate-500 dark:text-slate-400 pt-1" x-text="t('degreeDesc')"></p>
                         </div>
                     </div>
 
-                    <!-- Srednja škola -->
                     <div class="relative">
-                        <span class="absolute -left-[23px] sm:-left-[31px] top-1.5 w-4 h-4 rounded-full bg-slate-700 ring-4 ring-darkBg"></span>
+                        <span class="absolute -left-[23px] sm:-left-[31px] top-1.5 w-4 h-4 rounded-full bg-slate-400 dark:bg-slate-700 ring-4 ring-slate-50 dark:ring-darkBg"></span>
                         <div class="space-y-1">
                             <div class="flex flex-col sm:flex-row sm:items-center justify-between">
-                                <h4 class="text-base font-bold text-white">Electrical Technician</h4>
-                                <span class="text-xs font-medium text-slate-400 mt-1 sm:mt-0">2016 – 2020</span>
+                                <h4 class="text-base font-bold text-slate-900 dark:text-white" x-text="t('highSchoolTitle')"></h4>
+                                <span class="text-xs font-medium text-slate-500 dark:text-slate-400 mt-1 sm:mt-0">2016 – 2020</span>
                             </div>
-                            <div class="text-sm text-accent font-medium">Electrical Engineering School Varaždin</div>
+                            <div class="text-sm text-accent font-medium" x-text="t('highSchoolName')"></div>
                         </div>
                     </div>
                 </div>
@@ -235,171 +247,148 @@
 
             <!-- CERTIFIKATI -->
             <div class="text-left">
-                <h3 class="text-xl font-bold text-white mb-6 flex items-center gap-2">
-                    <i class="fa-solid fa-certificate text-accent"></i> Certificates & Training
+                <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-6 flex items-center gap-2">
+                    <i class="fa-solid fa-certificate text-accent"></i> <span x-text="t('certTitle')"></span>
                 </h3>
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                    
-                    <!-- Certifikat 1 -->
-                    <a href="images/certificates/Google Business Intelligence.pdf" target="_blank" class="bg-cardBg border border-slate-800 p-4 sm:p-5 rounded-xl flex items-center gap-4 hover:border-accent/50 transition-colors group">
-                        <div class="w-12 h-12 rounded-lg bg-slate-900 border border-slate-700 flex items-center justify-center text-red-400 group-hover:text-accent transition-colors flex-shrink-0">
+                    <a href="images/certificates/Google Business Intelligence.pdf" target="_blank" class="bg-white dark:bg-cardBg border border-slate-200 dark:border-slate-800 p-4 sm:p-5 rounded-xl flex items-center gap-4 hover:border-accent/50 transition-colors group shadow-sm dark:shadow-none">
+                        <div class="w-12 h-12 rounded-lg bg-slate-100 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 flex items-center justify-center text-red-500 group-hover:text-accent transition-colors flex-shrink-0">
                             <i class="fa-solid fa-file-pdf text-2xl"></i>
                         </div>
                         <div class="min-w-0 flex-1">
-                            <div class="font-semibold text-sm text-white group-hover:text-accent transition-colors truncate">Google Business Intelligence</div>
-                            <div class="text-xs text-slate-400">Coursera</div>
+                            <div class="font-semibold text-sm text-slate-900 dark:text-white group-hover:text-accent transition-colors truncate">Google Business Intelligence</div>
+                            <div class="text-xs text-slate-500 dark:text-slate-400">Coursera</div>
                         </div>
                     </a>
-
-                    <!-- Certifikat 2 -->
-                    <a href="images/certificates/Data_Analyst_Bootcamp_Certificate_Udemy.pdf" target="_blank" class="bg-cardBg border border-slate-800 p-4 sm:p-5 rounded-xl flex items-center gap-4 hover:border-accent/50 transition-colors group">
-                        <div class="w-12 h-12 rounded-lg bg-slate-900 border border-slate-700 flex items-center justify-center text-red-400 group-hover:text-accent transition-colors flex-shrink-0">
+                    <a href="images/certificates/Data_Analyst_Bootcamp_Certificate_Udemy.pdf" target="_blank" class="bg-white dark:bg-cardBg border border-slate-200 dark:border-slate-800 p-4 sm:p-5 rounded-xl flex items-center gap-4 hover:border-accent/50 transition-colors group shadow-sm dark:shadow-none">
+                        <div class="w-12 h-12 rounded-lg bg-slate-100 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 flex items-center justify-center text-red-500 group-hover:text-accent transition-colors flex-shrink-0">
                             <i class="fa-solid fa-file-pdf text-2xl"></i>
                         </div>
                         <div class="min-w-0 flex-1">
-                            <div class="font-semibold text-sm text-white group-hover:text-accent transition-colors truncate">Data Analyst Bootcamp</div>
-                            <div class="text-xs text-slate-400">Udemy</div>
+                            <div class="font-semibold text-sm text-slate-900 dark:text-white group-hover:text-accent transition-colors truncate">Data Analyst Bootcamp</div>
+                            <div class="text-xs text-slate-500 dark:text-slate-400">Udemy</div>
                         </div>
                     </a>
-
-                    <!-- Certifikat 3 -->
-                    <a href="images/certificates/BIA_udemy.pdf" target="_blank" class="bg-cardBg border border-slate-800 p-4 sm:p-5 rounded-xl flex items-center gap-4 hover:border-accent/50 transition-colors group">
-                        <div class="w-12 h-12 rounded-lg bg-slate-900 border border-slate-700 flex items-center justify-center text-red-400 group-hover:text-accent transition-colors flex-shrink-0">
+                    <a href="images/certificates/BIA_udemy.pdf" target="_blank" class="bg-white dark:bg-cardBg border border-slate-200 dark:border-slate-800 p-4 sm:p-5 rounded-xl flex items-center gap-4 hover:border-accent/50 transition-colors group shadow-sm dark:shadow-none">
+                        <div class="w-12 h-12 rounded-lg bg-slate-100 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 flex items-center justify-center text-red-500 group-hover:text-accent transition-colors flex-shrink-0">
                             <i class="fa-solid fa-file-pdf text-2xl"></i>
                         </div>
                         <div class="min-w-0 flex-1">
-                            <div class="font-semibold text-sm text-white group-hover:text-accent transition-colors truncate">Business Intelligence Analyst</div>
-                            <div class="text-xs text-slate-400">Udemy</div>
+                            <div class="font-semibold text-sm text-slate-900 dark:text-white group-hover:text-accent transition-colors truncate">Business Intelligence Analyst</div>
+                            <div class="text-xs text-slate-500 dark:text-slate-400">Udemy</div>
                         </div>
                     </a>
-
-                    <!-- Certifikat 4 -->
-                    <a href="images/certificates/MS PBI for BI(2023).pdf" target="_blank" class="bg-cardBg border border-slate-800 p-4 sm:p-5 rounded-xl flex items-center gap-4 hover:border-accent/50 transition-colors group">
-                        <div class="w-12 h-12 rounded-lg bg-slate-900 border border-slate-700 flex items-center justify-center text-red-400 group-hover:text-accent transition-colors flex-shrink-0">
+                    <a href="images/certificates/MS PBI for BI(2023).pdf" target="_blank" class="bg-white dark:bg-cardBg border border-slate-200 dark:border-slate-800 p-4 sm:p-5 rounded-xl flex items-center gap-4 hover:border-accent/50 transition-colors group shadow-sm dark:shadow-none">
+                        <div class="w-12 h-12 rounded-lg bg-slate-100 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 flex items-center justify-center text-red-500 group-hover:text-accent transition-colors flex-shrink-0">
                             <i class="fa-solid fa-file-pdf text-2xl"></i>
                         </div>
                         <div class="min-w-0 flex-1">
-                            <div class="font-semibold text-sm text-white group-hover:text-accent transition-colors truncate">Microsoft Power BI for BI</div>
-                            <div class="text-xs text-slate-400">Udemy</div>
+                            <div class="font-semibold text-sm text-slate-900 dark:text-white group-hover:text-accent transition-colors truncate">Microsoft Power BI for BI</div>
+                            <div class="text-xs text-slate-500 dark:text-slate-400">Udemy</div>
                         </div>
                     </a>
-
-                    <!-- Certifikat 5 -->
-                    <a href="images/certificates/MySQL for Data Analytics and BI.pdf" target="_blank" class="bg-cardBg border border-slate-800 p-4 sm:p-5 rounded-xl flex items-center gap-4 hover:border-accent/50 transition-colors group">
-                        <div class="w-12 h-12 rounded-lg bg-slate-900 border border-slate-700 flex items-center justify-center text-red-400 group-hover:text-accent transition-colors flex-shrink-0">
+                    <a href="images/certificates/MySQL for Data Analytics and BI.pdf" target="_blank" class="bg-white dark:bg-cardBg border border-slate-200 dark:border-slate-800 p-4 sm:p-5 rounded-xl flex items-center gap-4 hover:border-accent/50 transition-colors group shadow-sm dark:shadow-none">
+                        <div class="w-12 h-12 rounded-lg bg-slate-100 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 flex items-center justify-center text-red-500 group-hover:text-accent transition-colors flex-shrink-0">
                             <i class="fa-solid fa-file-pdf text-2xl"></i>
                         </div>
                         <div class="min-w-0 flex-1">
-                            <div class="font-semibold text-sm text-white group-hover:text-accent transition-colors truncate">MySQL for Data Analytics & BI</div>
-                            <div class="text-xs text-slate-400">Udemy</div>
+                            <div class="font-semibold text-sm text-slate-900 dark:text-white group-hover:text-accent transition-colors truncate">MySQL for Data Analytics & BI</div>
+                            <div class="text-xs text-slate-500 dark:text-slate-400">Udemy</div>
                         </div>
                     </a>
-
-                    <!-- Certifikat 6 -->
-                    <a href="images/certificates/Data Warehouse - The Ultimate Guide.pdf" target="_blank" class="bg-cardBg border border-slate-800 p-4 sm:p-5 rounded-xl flex items-center gap-4 hover:border-accent/50 transition-colors group">
-                        <div class="w-12 h-12 rounded-lg bg-slate-900 border border-slate-700 flex items-center justify-center text-red-400 group-hover:text-accent transition-colors flex-shrink-0">
+                    <a href="images/certificates/Data Warehouse - The Ultimate Guide.pdf" target="_blank" class="bg-white dark:bg-cardBg border border-slate-200 dark:border-slate-800 p-4 sm:p-5 rounded-xl flex items-center gap-4 hover:border-accent/50 transition-colors group shadow-sm dark:shadow-none">
+                        <div class="w-12 h-12 rounded-lg bg-slate-100 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 flex items-center justify-center text-red-500 group-hover:text-accent transition-colors flex-shrink-0">
                             <i class="fa-solid fa-file-pdf text-2xl"></i>
                         </div>
                         <div class="min-w-0 flex-1">
-                            <div class="font-semibold text-sm text-white group-hover:text-accent transition-colors truncate">Data Warehouse: Ultimate Guide</div>
-                            <div class="text-xs text-slate-400">Udemy</div>
+                            <div class="font-semibold text-sm text-slate-900 dark:text-white group-hover:text-accent transition-colors truncate">Data Warehouse: Ultimate Guide</div>
+                            <div class="text-xs text-slate-500 dark:text-slate-400">Udemy</div>
                         </div>
                     </a>
-
-                    <!-- Certifikat 7 -->
-                    <div class="bg-cardBg border border-slate-800 p-4 sm:p-5 rounded-xl flex items-center gap-4 hover:border-accent/50 transition-colors cursor-pointer group" @click="openModal(['images/certificates/certifkikat AI edih_Crop.jpeg'], 0)">
-                        <img src="images/certificates/certifkikat AI edih_Crop.jpeg" alt="EDIH Certificate" class="w-12 h-12 object-cover rounded-lg bg-slate-900 border border-slate-700 flex-shrink-0">
+                    <div class="bg-white dark:bg-cardBg border border-slate-200 dark:border-slate-800 p-4 sm:p-5 rounded-xl flex items-center gap-4 hover:border-accent/50 transition-colors cursor-pointer group shadow-sm dark:shadow-none" @click="openModal(['images/certificates/certifkikat AI edih_Crop.jpeg'], 0)">
+                        <img src="images/certificates/certifkikat AI edih_Crop.jpeg" alt="EDIH Certificate" class="w-12 h-12 object-cover rounded-lg bg-slate-100 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 flex-shrink-0">
                         <div class="min-w-0 flex-1">
-                            <div class="font-semibold text-sm text-white group-hover:text-accent transition-colors truncate">Entrepreneurship & Digital Tech</div>
-                            <div class="text-xs text-slate-400">EDIH (FOI)</div>
+                            <div class="font-semibold text-sm text-slate-900 dark:text-white group-hover:text-accent transition-colors truncate">Entrepreneurship & Digital Tech</div>
+                            <div class="text-xs text-slate-500 dark:text-slate-400">EDIH (FOI)</div>
                         </div>
                     </div>
-
                 </div>
             </div>
 
             <!-- OSOBNA POZADINA / PERSONAL BACKGROUND -->
-            <div class="bg-cardBg/50 border border-slate-800/80 rounded-2xl p-5 sm:p-6 text-left">
-                <h4 class="font-semibold text-white mb-2 text-sm flex items-center gap-2">
-                    <i class="fa-solid fa-person-running text-accent"></i> Personal Background & Mindset
+            <div class="bg-slate-100 dark:bg-cardBg/50 border border-slate-200 dark:border-slate-800/80 rounded-2xl p-5 sm:p-6 text-left">
+                <h4 class="font-semibold text-slate-900 dark:text-white mb-2 text-sm flex items-center gap-2">
+                    <i class="fa-solid fa-person-running text-accent"></i> <span x-text="t('personalBgTitle')"></span>
                 </h4>
-                <p class="text-xs sm:text-sm text-slate-400 leading-relaxed">
-                    Outside of technical environments, I am an active sports enthusiast who regularly competes in triathlons and plays amateur football. The discipline, resilience, and strategic focus required in endurance sports directly translate into how I approach troubleshooting, complex data architecture, and persistent problem-solving. In my free time, I also enjoy reading books, playing video games, and watching movies and TV series.
-                </p>
+                <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-400 leading-relaxed" x-text="t('personalBgDesc')"></p>
             </div>
         </section>
 
         <!-- TAB 2: RADNO ISKUSTVO -->
         <section x-show="activeTab === 'experience'" x-transition.opacity.duration.300ms class="space-y-8" x-cloak>
             <div>
-                <h2 class="text-3xl font-extrabold text-white mb-2">Work Experience</h2>
+                <h2 class="text-3xl font-extrabold text-slate-900 dark:text-white mb-2" x-text="t('expHeader')"></h2>
             </div>
 
-            <div class="border-l-2 border-slate-800 ml-2 sm:ml-4 space-y-10 pl-4 sm:pl-6">
+            <div class="border-l-2 border-slate-200 dark:border-slate-800 ml-2 sm:ml-4 space-y-10 pl-4 sm:pl-6">
                 <!-- Pozicija 1: Media-soft -->
                 <div class="relative">
-                    <span class="absolute -left-[23px] sm:-left-[31px] top-1.5 w-4 h-4 rounded-full bg-accent ring-4 ring-darkBg"></span>
-                    <div class="bg-cardBg border border-slate-800 rounded-2xl p-5 sm:p-6 shadow-sm text-left">
+                    <span class="absolute -left-[23px] sm:-left-[31px] top-1.5 w-4 h-4 rounded-full bg-accent ring-4 ring-slate-50 dark:ring-darkBg"></span>
+                    <div class="bg-white dark:bg-cardBg border border-slate-200 dark:border-slate-800 rounded-2xl p-5 sm:p-6 shadow-sm text-left">
                         <div class="flex flex-col sm:flex-row sm:items-center justify-between mb-1 gap-1 sm:gap-0">
-                            <h3 class="text-base sm:text-lg font-bold text-white">Key Account Manager / Junior Consultant</h3>
-                            <span class="text-xs font-medium text-slate-400">01/2026 – Present | Croatia</span>
+                            <h3 class="text-base sm:text-lg font-bold text-slate-900 dark:text-white" x-text="t('job1Title')"></h3>
+                            <span class="text-xs font-medium text-slate-500 dark:text-slate-400" x-text="t('job1Date')"></span>
                         </div>
                         <div class="text-sm text-accent mb-3 font-medium">Media-soft d.o.o., Čakovec</div>
-                        <p class="text-sm text-slate-300 leading-relaxed mb-4">
-                            Delivered comprehensive client relationship management and system testing solutions that transformed technical requirements into stable, high-availability CRM operations for international clients.
-                        </p>
+                        <p class="text-sm text-slate-600 dark:text-slate-300 leading-relaxed mb-4" x-text="t('job1Desc')"></p>
                         
-                        <div class="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-2">Selected achievements & responsibilities</div>
-                        <ul class="space-y-2 text-sm text-slate-300 list-disc list-inside">
-                            <li>Led the rollout and rigorous module testing of enterprise CRM systems to guarantee seamless end-user functionality and data integrity.</li>
-                            <li>Provided proactive technical support and rapid issue resolution, successfully avoiding potential client downtime and ensuring uninterrupted, continuous business operations.</li>
-                            <li>Authored and maintained detailed technical documentation, system specifications, and structured user guides for both internal teams and end-users.</li>
-                            <li>Managed daily client interactions and requirement-gathering sessions, ensuring custom technical implementations perfectly aligned with business goals.</li>
+                        <div class="text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider mb-2" x-text="t('achievementsLabel')"></div>
+                        <ul class="space-y-2 text-sm text-slate-600 dark:text-slate-300 list-disc list-inside">
+                            <li x-text="t('job1Bullet1')"></li>
+                            <li x-text="t('job1Bullet2')"></li>
+                            <li x-text="t('job1Bullet3')"></li>
+                            <li x-text="t('job1Bullet4')"></li>
                         </ul>
                     </div>
                 </div>
 
                 <!-- Pozicija 2: Petak BI Solutions -->
                 <div class="relative">
-                    <span class="absolute -left-[23px] sm:-left-[31px] top-1.5 w-4 h-4 rounded-full bg-slate-700 ring-4 ring-darkBg"></span>
-                    <div class="bg-cardBg border border-slate-800 rounded-2xl p-5 sm:p-6 shadow-sm text-left">
+                    <span class="absolute -left-[23px] sm:-left-[31px] top-1.5 w-4 h-4 rounded-full bg-slate-400 dark:bg-slate-700 ring-4 ring-slate-50 dark:ring-darkBg"></span>
+                    <div class="bg-white dark:bg-cardBg border border-slate-200 dark:border-slate-800 rounded-2xl p-5 sm:p-6 shadow-sm text-left">
                         <div class="flex flex-col sm:flex-row sm:items-center justify-between mb-1 gap-1 sm:gap-0">
-                            <h3 class="text-base sm:text-lg font-bold text-white">BI Consultant & Owner</h3>
-                            <span class="text-xs font-medium text-slate-400">06/2025 – 12/2025 | Croatia</span>
+                            <h3 class="text-base sm:text-lg font-bold text-slate-900 dark:text-white" x-text="t('job2Title')"></h3>
+                            <span class="text-xs font-medium text-slate-500 dark:text-slate-400" x-text="t('job2Date')"></span>
                         </div>
                         <div class="text-sm text-accent mb-3 font-medium">Petak BI Solutions, Priles</div>
-                        <p class="text-sm text-slate-300 leading-relaxed mb-4">
-                            Managed the full lifecycle of business intelligence projects, translating raw enterprise data into interactive analytical solutions that drove data-informed decision-making.
-                        </p>
+                        <p class="text-sm text-slate-600 dark:text-slate-300 leading-relaxed mb-4" x-text="t('job2Desc')"></p>
                         
-                        <div class="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-2">Selected achievements & responsibilities</div>
-                        <ul class="space-y-2 text-sm text-slate-300 list-disc list-inside">
-                            <li>Designed and deployed high-impact Power BI executive dashboards to monitor critical performance indicators (KPIs) across various business sectors.</li>
-                            <li>Architected robust end-to-end ETL data pipelines tailored specifically to streamline data ingestion for small and medium-sized enterprises.</li>
-                            <li>Replaced error-prone manual reporting workflows with fully automated data architectures, drastically reducing processing time and human error.</li>
+                        <div class="text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider mb-2" x-text="t('achievementsLabel')"></div>
+                        <ul class="space-y-2 text-sm text-slate-600 dark:text-slate-300 list-disc list-inside">
+                            <li x-text="t('job2Bullet1')"></li>
+                            <li x-text="t('job2Bullet2')"></li>
+                            <li x-text="t('job2Bullet3')"></li>
                         </ul>
                     </div>
                 </div>
 
                 <!-- Pozicija 3: Decision Crew B.V. -->
                 <div class="relative">
-                    <span class="absolute -left-[23px] sm:-left-[31px] top-1.5 w-4 h-4 rounded-full bg-slate-700 ring-4 ring-darkBg"></span>
-                    <div class="bg-cardBg border border-slate-800 rounded-2xl p-5 sm:p-6 shadow-sm text-left">
+                    <span class="absolute -left-[23px] sm:-left-[31px] top-1.5 w-4 h-4 rounded-full bg-slate-400 dark:bg-slate-700 ring-4 ring-slate-50 dark:ring-darkBg"></span>
+                    <div class="bg-white dark:bg-cardBg border border-slate-200 dark:border-slate-800 rounded-2xl p-5 sm:p-6 shadow-sm text-left">
                         <div class="flex flex-col sm:flex-row sm:items-center justify-between mb-1 gap-1 sm:gap-0">
-                            <h3 class="text-base sm:text-lg font-bold text-white">Junior BI Consultant (Freelance)</h3>
-                            <span class="text-xs font-medium text-slate-400">10/2024 – 12/2025 | Netherlands</span>
+                            <h3 class="text-base sm:text-lg font-bold text-slate-900 dark:text-white" x-text="t('job3Title')"></h3>
+                            <span class="text-xs font-medium text-slate-500 dark:text-slate-400" x-text="t('job3Date')"></span>
                         </div>
                         <div class="text-sm text-accent mb-3 font-medium">Decision Crew B.V., Baarn</div>
-                        <p class="text-sm text-slate-300 leading-relaxed mb-4">
-                            Engineered advanced cloud data integration solutions and optimized complex data models to support large-scale enterprise analytics for international clients.
-                        </p>
+                        <p class="text-sm text-slate-600 dark:text-slate-300 leading-relaxed mb-4" x-text="t('job3Desc')"></p>
                         
-                        <div class="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-2">Selected achievements & responsibilities</div>
-                        <ul class="space-y-2 text-sm text-slate-300 list-disc list-inside">
-                            <li>Built end-to-end workflow automation systems utilizing Procesio, Boost.space, and Power Automate to optimize complex operational processes.</li>
-                            <li>Leveraged Azure cloud infrastructure to develop scalable, reliable data pipelines ensuring secure and efficient enterprise data storage.</li>
-                            <li>Developed and fine-tuned complex tabular data models and optimized DAX measures to empower high-performance business intelligence reporting.</li>
-                            <li>Collaborated within an international consultant team to maintain rigorous documentation standards and deliver top-tier data engineering solutions.</li>
+                        <div class="text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider mb-2" x-text="t('achievementsLabel')"></div>
+                        <ul class="space-y-2 text-sm text-slate-600 dark:text-slate-300 list-disc list-inside">
+                            <li x-text="t('job3Bullet1')"></li>
+                            <li x-text="t('job3Bullet2')"></li>
+                            <li x-text="t('job3Bullet3')"></li>
+                            <li x-text="t('job3Bullet4')"></li>
                         </ul>
                     </div>
                 </div>
@@ -417,17 +406,17 @@
                      p6: ['images/backend/1.png']
                  }">
             <div>
-                <h2 class="text-3xl font-extrabold text-white mb-2">Power BI Projects</h2>
+                <h2 class="text-3xl font-extrabold text-slate-900 dark:text-white mb-2" x-text="t('projHeader')"></h2>
             </div>
 
             <!-- PROJEKT 1 -->
-            <div class="bg-cardBg border border-slate-800 rounded-2xl p-5 sm:p-6 shadow-xl" x-data="{ currentSlide: 0, totalSlides: 12 }">
-                <div class="mb-4">
-                    <h3 class="text-lg sm:text-xl font-bold text-white">Insurance Operations & Executive Scorecard Dashboard</h3>
-                    <p class="text-xs sm:text-sm text-slate-400">A multi-page Power BI executive scorecard designed for insurance management to monitor portfolio performance, premium trends, and claims servicing efficiency. Tracks top-level KPIs including Total Net Premium (€1.50M), Total Policies (1,500), Loss Ratio (30%), and Claims Severity (€5,000). Features deep-dive analytics for Claims Exposure (analyzing repair vs. replacement costs), Claims Servicing (SLA %, Resolution Times, and Aging analysis), and Premium Performance with dynamic forecasting and regional heatmaps. Includes side-panel slicers, KPI switchers, and drill-through table views.</p>
+            <div class="bg-white dark:bg-cardBg border border-slate-200 dark:border-slate-800 rounded-2xl p-5 sm:p-6 shadow-xl" x-data="{ currentSlide: 0, totalSlides: 12 }">
+                <div class="mb-4 text-left">
+                    <h3 class="text-lg sm:text-xl font-bold text-slate-900 dark:text-white" x-text="t('p1Title')"></h3>
+                    <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-400" x-text="t('p1Desc')"></p>
                 </div>
 
-                <div class="relative overflow-hidden rounded-xl border border-slate-700/80 bg-slate-900 group">
+                <div class="relative overflow-hidden rounded-xl border border-slate-300 dark:border-slate-700/80 bg-slate-900 group">
                     <div class="flex transition-transform duration-300 ease-in-out" :style="'transform: translateX(-' + (currentSlide * 100) + '%)'">
                         <template x-for="(img, idx) in p1">
                             <div class="w-full flex-shrink-0">
@@ -444,30 +433,30 @@
                     </button>
 
                     <div class="absolute bottom-3 left-1/2 -translate-x-1/2 bg-slate-900/80 px-3 py-1 rounded-full text-xs text-slate-300 border border-slate-700">
-                        Page <span x-text="currentSlide + 1"></span> / <span x-text="totalSlides"></span>
+                        <span x-text="t('pageWord')"></span> <span x-text="currentSlide + 1"></span> / <span x-text="totalSlides"></span>
                     </div>
                 </div>
 
                 <div class="mt-6 flex flex-wrap items-center justify-between gap-4">
                     <div class="flex flex-wrap gap-2">
-                        <span class="px-2.5 py-1 bg-blue-500/10 text-blue-400 text-xs font-semibold rounded-md border border-blue-500/20">Power BI</span>
-                        <span class="px-2.5 py-1 bg-cyan-500/10 text-cyan-400 text-xs font-semibold rounded-md border border-cyan-500/20">DAX</span>
-                        <span class="px-2.5 py-1 bg-amber-500/10 text-amber-400 text-xs font-semibold rounded-md border border-amber-500/20">MySQL</span>
+                        <span class="px-2.5 py-1 bg-blue-500/10 text-blue-600 dark:text-blue-400 text-xs font-semibold rounded-md border border-blue-500/20">Power BI</span>
+                        <span class="px-2.5 py-1 bg-cyan-500/10 text-cyan-600 dark:text-cyan-400 text-xs font-semibold rounded-md border border-cyan-500/20">DAX</span>
+                        <span class="px-2.5 py-1 bg-amber-500/10 text-amber-600 dark:text-amber-400 text-xs font-semibold rounded-md border border-amber-500/20">MySQL</span>
                     </div>
-                    <a href="https://www.linkedin.com/in/smikulec03/" target="_blank" class="text-xs text-slate-400 hover:text-accent flex items-center gap-1.5 transition-colors">
-                        <i class="fa-brands fa-linkedin text-accent text-sm"></i> Co-author: <span class="font-medium text-slate-300">Slavko Mikulec</span>
+                    <a href="https://www.linkedin.com/in/smikulec03/" target="_blank" class="text-xs text-slate-500 dark:text-slate-400 hover:text-accent flex items-center gap-1.5 transition-colors">
+                        <i class="fa-brands fa-linkedin text-accent text-sm"></i> <span x-text="t('coAuthorLabel')"></span> <span class="font-medium text-slate-700 dark:text-slate-300">Slavko Mikulec</span>
                     </a>
                 </div>
             </div>
 
             <!-- PROJEKT 2 -->
-            <div class="bg-cardBg border border-slate-800 rounded-2xl p-5 sm:p-6 shadow-xl" x-data="{ currentSlide: 0, totalSlides: 9 }">
-                <div class="mb-4">
-                    <h3 class="text-lg sm:text-xl font-bold text-white">Insurance Claims Dashboard</h3>
-                    <p class="text-xs sm:text-sm text-slate-400">An end-to-end Power BI reporting solution built for property and casualty insurance management to monitor, analyze, and optimize claim settlement workflows. The dashboard consolidates key financial metrics including Total Payable ($3.67M), Dwelling Coverage ($6.1M), Total Deductibles ($230.5K), and High-Value Claims (> $20k), while tracking operational efficiency from claim receipt through inspection. It delivers regional claims distribution across major urban centers in Croatia, categorizes financial losses by cause (Storm/Wind, Vehicle Impact, Water Damage, Fire, Vandalism), and evaluates adjusting firm performance. Includes granular line-item repair cost breakdowns, statement-of-loss statement analysis comparing ACV vs. RCV and Depreciation, interactive slide-out filter panels, custom anomaly detection, and root-cause analysis via Power BI Decomposition Trees.</p>
+            <div class="bg-white dark:bg-cardBg border border-slate-200 dark:border-slate-800 rounded-2xl p-5 sm:p-6 shadow-xl" x-data="{ currentSlide: 0, totalSlides: 9 }">
+                <div class="mb-4 text-left">
+                    <h3 class="text-lg sm:text-xl font-bold text-slate-900 dark:text-white" x-text="t('p2Title')"></h3>
+                    <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-400" x-text="t('p2Desc')"></p>
                 </div>
 
-                <div class="relative overflow-hidden rounded-xl border border-slate-700/80 bg-slate-900 group">
+                <div class="relative overflow-hidden rounded-xl border border-slate-300 dark:border-slate-700/80 bg-slate-900 group">
                     <div class="flex transition-transform duration-300 ease-in-out" :style="'transform: translateX(-' + (currentSlide * 100) + '%)'">
                         <template x-for="(img, idx) in p2">
                             <div class="w-full flex-shrink-0">
@@ -484,26 +473,26 @@
                     </button>
 
                     <div class="absolute bottom-3 left-1/2 -translate-x-1/2 bg-slate-900/80 px-3 py-1 rounded-full text-xs text-slate-300 border border-slate-700">
-                        Page <span x-text="currentSlide + 1"></span> / <span x-text="totalSlides"></span>
+                        <span x-text="t('pageWord')"></span> <span x-text="currentSlide + 1"></span> / <span x-text="totalSlides"></span>
                     </div>
                 </div>
 
                 <div class="mt-6 flex flex-wrap items-center justify-between gap-4">
                     <div class="flex flex-wrap gap-2">
-                        <span class="px-2.5 py-1 bg-blue-500/10 text-blue-400 text-xs font-semibold rounded-md border border-blue-500/20">Power BI</span>
-                        <span class="px-2.5 py-1 bg-cyan-500/10 text-cyan-400 text-xs font-semibold rounded-md border border-cyan-500/20">DAX</span>
+                        <span class="px-2.5 py-1 bg-blue-500/10 text-blue-600 dark:text-blue-400 text-xs font-semibold rounded-md border border-blue-500/20">Power BI</span>
+                        <span class="px-2.5 py-1 bg-cyan-500/10 text-cyan-600 dark:text-cyan-400 text-xs font-semibold rounded-md border border-cyan-500/20">DAX</span>
                     </div>
                 </div>
             </div>
 
             <!-- PROJEKT 3 -->
-            <div class="bg-cardBg border border-slate-800 rounded-2xl p-5 sm:p-6 shadow-xl" x-data="{ currentSlide: 0, totalSlides: 10 }">
-                <div class="mb-4">
-                    <h3 class="text-lg sm:text-xl font-bold text-white">Social Metrics Dashboard</h3>
-                    <p class="text-xs sm:text-sm text-slate-400">A comprehensive multi-source Power BI marketing and social media analytics platform tracking performance across LinkedIn, CRM Lead Generation pipelines, and Google Analytics. Features real-time tracking of brand reach and audience engagement KPIs—including Impressions (146.16K), Reactions, Followers, and Post-level CTR/Click analytics—with demographic breakdowns by Industry (Consulting, IT Services, Finance) and geography. Integrates sales funnel analytics to monitor pipeline opportunities by both Volume (802 total, 32 won) and Revenue (€80.12M pipeline value, €2.93M won), tracking conversion velocity through each sales stage. Additionally, monitors Google Analytics web traffic (sessions, engagement duration, bounce rates), top-performing landing pages, and traffic acquisition sources (Direct, Paid, Social, Search, Email). Built with dynamic field parameter selectors, custom navigation bookmarks, and interactive Bing map visualizations.</p>
+            <div class="bg-white dark:bg-cardBg border border-slate-200 dark:border-slate-800 rounded-2xl p-5 sm:p-6 shadow-xl" x-data="{ currentSlide: 0, totalSlides: 10 }">
+                <div class="mb-4 text-left">
+                    <h3 class="text-lg sm:text-xl font-bold text-slate-900 dark:text-white" x-text="t('p3Title')"></h3>
+                    <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-400" x-text="t('p3Desc')"></p>
                 </div>
 
-                <div class="relative overflow-hidden rounded-xl border border-slate-700/80 bg-slate-900 group">
+                <div class="relative overflow-hidden rounded-xl border border-slate-300 dark:border-slate-700/80 bg-slate-900 group">
                     <div class="flex transition-transform duration-300 ease-in-out" :style="'transform: translateX(-' + (currentSlide * 100) + '%)'">
                         <template x-for="(img, idx) in p3">
                             <div class="w-full flex-shrink-0">
@@ -520,32 +509,32 @@
                     </button>
 
                     <div class="absolute bottom-3 left-1/2 -translate-x-1/2 bg-slate-900/80 px-3 py-1 rounded-full text-xs text-slate-300 border border-slate-700">
-                        Page <span x-text="currentSlide + 1"></span> / <span x-text="totalSlides"></span>
+                        <span x-text="t('pageWord')"></span> <span x-text="currentSlide + 1"></span> / <span x-text="totalSlides"></span>
                     </div>
                 </div>
 
                 <div class="mt-6 flex flex-wrap items-center justify-between gap-4">
                     <div class="flex flex-wrap gap-2">
-                        <span class="px-2.5 py-1 bg-blue-500/10 text-blue-400 text-xs font-semibold rounded-md border border-blue-500/20">Power BI</span>
-                        <span class="px-2.5 py-1 bg-cyan-500/10 text-cyan-400 text-xs font-semibold rounded-md border border-cyan-500/20">DAX</span>
-                        <span class="px-2.5 py-1 bg-purple-500/10 text-purple-400 text-xs font-semibold rounded-md border border-purple-500/20">LinkedIn</span>
-                        <span class="px-2.5 py-1 bg-amber-500/10 text-amber-400 text-xs font-semibold rounded-md border border-amber-500/20">HubSpot</span>
-                        <span class="px-2.5 py-1 bg-green-500/10 text-green-400 text-xs font-semibold rounded-md border border-green-500/20">Google Analytics 4</span>
+                        <span class="px-2.5 py-1 bg-blue-500/10 text-blue-600 dark:text-blue-400 text-xs font-semibold rounded-md border border-blue-500/20">Power BI</span>
+                        <span class="px-2.5 py-1 bg-cyan-500/10 text-cyan-600 dark:text-cyan-400 text-xs font-semibold rounded-md border border-cyan-500/20">DAX</span>
+                        <span class="px-2.5 py-1 bg-purple-500/10 text-purple-600 dark:text-purple-400 text-xs font-semibold rounded-md border border-purple-500/20">LinkedIn</span>
+                        <span class="px-2.5 py-1 bg-amber-500/10 text-amber-600 dark:text-amber-400 text-xs font-semibold rounded-md border border-amber-500/20">HubSpot</span>
+                        <span class="px-2.5 py-1 bg-green-500/10 text-green-600 dark:text-green-400 text-xs font-semibold rounded-md border border-green-500/20">Google Analytics 4</span>
                     </div>
-                    <a href="https://www.linkedin.com/in/smikulec03/" target="_blank" class="text-xs text-slate-400 hover:text-accent flex items-center gap-1.5 transition-colors">
-                        <i class="fa-brands fa-linkedin text-accent text-sm"></i> Co-author: <span class="font-medium text-slate-300">Slavko Mikulec</span>
+                    <a href="https://www.linkedin.com/in/smikulec03/" target="_blank" class="text-xs text-slate-500 dark:text-slate-400 hover:text-accent flex items-center gap-1.5 transition-colors">
+                        <i class="fa-brands fa-linkedin text-accent text-sm"></i> <span x-text="t('coAuthorLabel')"></span> <span class="font-medium text-slate-700 dark:text-slate-300">Slavko Mikulec</span>
                     </a>
                 </div>
             </div>
 
             <!-- PROJEKT 4 -->
-            <div class="bg-cardBg border border-slate-800 rounded-2xl p-5 sm:p-6 shadow-xl" x-data="{ currentSlide: 0, totalSlides: 5 }">
-                <div class="mb-4">
-                    <h3 class="text-lg sm:text-xl font-bold text-white">Designer Clothing Budgeting Dashboard</h3>
-                    <p class="text-xs sm:text-sm text-slate-400">A robust Power BI financial reporting and budgeting solution developed for luxury fashion retail management to control revenues, wholesale customer orders, and multi-pass budget revisions. Tracks high-level executive financial metrics comparing Actual Revenue ($14M) against initial ($20M) and second-pass ($22M) budget iterations, alongside client-level order distributions sorted from highest to lowest across major global department stores (e.g., Harrods, Galeries Lafayette, Saks Fifth Avenue, Dover Street Market). Features structured Budget vs. Actuals variance reports categorized by company groups and retail channels, stacked performance charts tracking actuals against budget passes over time, dynamic drill-downs using Decomposition Trees for regional sales breakdown analysis, and a custom slide-out filter panel for slicing data by season, gender, collection, and geographic territory.</p>
+            <div class="bg-white dark:bg-cardBg border border-slate-200 dark:border-slate-800 rounded-2xl p-5 sm:p-6 shadow-xl" x-data="{ currentSlide: 0, totalSlides: 5 }">
+                <div class="mb-4 text-left">
+                    <h3 class="text-lg sm:text-xl font-bold text-slate-900 dark:text-white" x-text="t('p4Title')"></h3>
+                    <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-400" x-text="t('p4Desc')"></p>
                 </div>
 
-                <div class="relative overflow-hidden rounded-xl border border-slate-700/80 bg-slate-900 group">
+                <div class="relative overflow-hidden rounded-xl border border-slate-300 dark:border-slate-700/80 bg-slate-900 group">
                     <div class="flex transition-transform duration-300 ease-in-out" :style="'transform: translateX(-' + (currentSlide * 100) + '%)'">
                         <template x-for="(img, idx) in p4">
                             <div class="w-full flex-shrink-0">
@@ -562,26 +551,26 @@
                     </button>
 
                     <div class="absolute bottom-3 left-1/2 -translate-x-1/2 bg-slate-900/80 px-3 py-1 rounded-full text-xs text-slate-300 border border-slate-700">
-                        Page <span x-text="currentSlide + 1"></span> / <span x-text="totalSlides"></span>
+                        <span x-text="t('pageWord')"></span> <span x-text="currentSlide + 1"></span> / <span x-text="totalSlides"></span>
                     </div>
                 </div>
 
                 <div class="mt-6 flex flex-wrap items-center justify-between gap-4">
                     <div class="flex flex-wrap gap-2">
-                        <span class="px-2.5 py-1 bg-blue-500/10 text-blue-400 text-xs font-semibold rounded-md border border-blue-500/20">Power BI</span>
-                        <span class="px-2.5 py-1 bg-cyan-500/10 text-cyan-400 text-xs font-semibold rounded-md border border-cyan-500/20">DAX</span>
+                        <span class="px-2.5 py-1 bg-blue-500/10 text-blue-600 dark:text-blue-400 text-xs font-semibold rounded-md border border-blue-500/20">Power BI</span>
+                        <span class="px-2.5 py-1 bg-cyan-500/10 text-cyan-600 dark:text-cyan-400 text-xs font-semibold rounded-md border border-cyan-500/20">DAX</span>
                     </div>
                 </div>
             </div>
 
             <!-- PROJEKT 5 -->
-            <div class="bg-cardBg border border-slate-800 rounded-2xl p-5 sm:p-6 shadow-xl" x-data="{ currentSlide: 0, totalSlides: 5 }">
-                <div class="mb-4">
-                    <h3 class="text-lg sm:text-xl font-bold text-white">Insurance Risk & Actuarial Analytics Dashboard</h3>
-                    <p class="text-xs sm:text-sm text-slate-400">An advanced actuarial and underwriting analytics suite designed for property insurance risk profiling, loss exposure modeling, and spatial risk distribution. Provides flexible ad-hoc reporting tools allowing custom column selection to compute critical insurance metrics including Earned Premium, Incurred Losses, Earned House Years, Loss Ratio, Severity, Frequency, and Loss Cost per 1K Total Insured Value (TIV). Features an interactive risk factor breakdown powered by Power BI Decomposition Trees to analyze underlying cost drivers such as roof age, wiring age, HVAC type, and sprinkler systems. Incorporates spatial analytics using Bing Maps and high-resolution dark-mode ArcGIS geospatial mapping to visualize claim density and regional exposure across US regions, supported by dynamic KPI switchers and custom multi-category filter panels.</p>
+            <div class="bg-white dark:bg-cardBg border border-slate-200 dark:border-slate-800 rounded-2xl p-5 sm:p-6 shadow-xl" x-data="{ currentSlide: 0, totalSlides: 5 }">
+                <div class="mb-4 text-left">
+                    <h3 class="text-lg sm:text-xl font-bold text-slate-900 dark:text-white" x-text="t('p5Title')"></h3>
+                    <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-400" x-text="t('p5Desc')"></p>
                 </div>
 
-                <div class="relative overflow-hidden rounded-xl border border-slate-700/80 bg-slate-900 group">
+                <div class="relative overflow-hidden rounded-xl border border-slate-300 dark:border-slate-700/80 bg-slate-900 group">
                     <div class="flex transition-transform duration-300 ease-in-out" :style="'transform: translateX(-' + (currentSlide * 100) + '%)'">
                         <template x-for="(img, idx) in p5">
                             <div class="w-full flex-shrink-0">
@@ -598,29 +587,29 @@
                     </button>
 
                     <div class="absolute bottom-3 left-1/2 -translate-x-1/2 bg-slate-900/80 px-3 py-1 rounded-full text-xs text-slate-300 border border-slate-700">
-                        Page <span x-text="currentSlide + 1"></span> / <span x-text="totalSlides"></span>
+                        <span x-text="t('pageWord')"></span> <span x-text="currentSlide + 1"></span> / <span x-text="totalSlides"></span>
                     </div>
                 </div>
 
                 <div class="mt-6 flex flex-wrap items-center justify-between gap-4">
                     <div class="flex flex-wrap gap-2">
-                        <span class="px-2.5 py-1 bg-blue-500/10 text-blue-400 text-xs font-semibold rounded-md border border-blue-500/20">Power BI</span>
-                        <span class="px-2.5 py-1 bg-cyan-500/10 text-cyan-400 text-xs font-semibold rounded-md border border-cyan-500/20">DAX</span>
+                        <span class="px-2.5 py-1 bg-blue-500/10 text-blue-600 dark:text-blue-400 text-xs font-semibold rounded-md border border-blue-500/20">Power BI</span>
+                        <span class="px-2.5 py-1 bg-cyan-500/10 text-cyan-600 dark:text-cyan-400 text-xs font-semibold rounded-md border border-cyan-500/20">DAX</span>
                     </div>
-                    <a href="https://www.linkedin.com/in/smikulec03/" target="_blank" class="text-xs text-slate-400 hover:text-accent flex items-center gap-1.5 transition-colors">
-                        <i class="fa-brands fa-linkedin text-accent text-sm"></i> Co-author: <span class="font-medium text-slate-300">Slavko Mikulec</span>
+                    <a href="https://www.linkedin.com/in/smikulec03/" target="_blank" class="text-xs text-slate-500 dark:text-slate-400 hover:text-accent flex items-center gap-1.5 transition-colors">
+                        <i class="fa-brands fa-linkedin text-accent text-sm"></i> <span x-text="t('coAuthorLabel')"></span> <span class="font-medium text-slate-700 dark:text-slate-300">Slavko Mikulec</span>
                     </a>
                 </div>
             </div>
 
             <!-- PROJEKT 6 -->
-            <div class="bg-cardBg border border-slate-800 rounded-2xl p-5 sm:p-6 shadow-xl" x-data="{ currentSlide: 0, totalSlides: 1 }">
-                <div class="mb-4">
-                    <h3 class="text-lg sm:text-xl font-bold text-white">Dynamic Multi-Tenant API ETL Engine & Data Pipeline</h3>
-                    <p class="text-xs sm:text-sm text-slate-400">A highly scalable, modular ETL pipeline developed entirely in Power Query (M Language) to automate data ingestion from a REST API across multiple dynamic targets. Built around DRY (Don't Repeat Yourself) architecture, the engine utilizes secure environment parameters (pApiUser, pApiPassword, pApiBaseUrl) and a flexible configuration dataset (ConfigDatabases) to drive pagination and data extraction. A custom M function (fnGetApiView) handles dynamic HTTP requests, pagination loops, response parsing, and error handling. The function iteratively executes for each configured country/database, dynamically combining disparate payload views into unified, reporting-ready data tables (Views 1–5).</p>
+            <div class="bg-white dark:bg-cardBg border border-slate-200 dark:border-slate-800 rounded-2xl p-5 sm:p-6 shadow-xl" x-data="{ currentSlide: 0, totalSlides: 1 }">
+                <div class="mb-4 text-left">
+                    <h3 class="text-lg sm:text-xl font-bold text-slate-900 dark:text-white" x-text="t('p6Title')"></h3>
+                    <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-400" x-text="t('p6Desc')"></p>
                 </div>
 
-                <div class="relative overflow-hidden rounded-xl border border-slate-700/80 bg-slate-900 group">
+                <div class="relative overflow-hidden rounded-xl border border-slate-300 dark:border-slate-700/80 bg-slate-900 group">
                     <div class="flex transition-transform duration-300 ease-in-out" :style="'transform: translateX(-' + (currentSlide * 100) + '%)'">
                         <template x-for="(img, idx) in p6">
                             <div class="w-full flex-shrink-0">
@@ -637,16 +626,16 @@
                     </button>
 
                     <div class="absolute bottom-3 left-1/2 -translate-x-1/2 bg-slate-900/80 px-3 py-1 rounded-full text-xs text-slate-300 border border-slate-700">
-                        Page <span x-text="currentSlide + 1"></span> / <span x-text="totalSlides"></span>
+                        <span x-text="t('pageWord')"></span> <span x-text="currentSlide + 1"></span> / <span x-text="totalSlides"></span>
                     </div>
                 </div>
 
                 <div class="mt-6 flex flex-wrap items-center justify-between gap-4">
                     <div class="flex flex-wrap gap-2">
-                        <span class="px-2.5 py-1 bg-blue-500/10 text-blue-400 text-xs font-semibold rounded-md border border-blue-500/20">Power BI</span>
-                        <span class="px-2.5 py-1 bg-cyan-500/10 text-cyan-400 text-xs font-semibold rounded-md border border-cyan-500/20">Power Query</span>
-                        <span class="px-2.5 py-1 bg-purple-500/10 text-purple-400 text-xs font-semibold rounded-md border border-purple-500/20">ETL</span>
-                        <span class="px-2.5 py-1 bg-amber-500/10 text-amber-400 text-xs font-semibold rounded-md border border-amber-500/20">REST API</span>
+                        <span class="px-2.5 py-1 bg-blue-500/10 text-blue-600 dark:text-blue-400 text-xs font-semibold rounded-md border border-blue-500/20">Power BI</span>
+                        <span class="px-2.5 py-1 bg-cyan-500/10 text-cyan-600 dark:text-cyan-400 text-xs font-semibold rounded-md border border-cyan-500/20">Power Query</span>
+                        <span class="px-2.5 py-1 bg-purple-500/10 text-purple-600 dark:text-purple-400 text-xs font-semibold rounded-md border border-purple-500/20">ETL</span>
+                        <span class="px-2.5 py-1 bg-amber-500/10 text-amber-600 dark:text-amber-400 text-xs font-semibold rounded-md border border-amber-500/20">REST API</span>
                     </div>
                 </div>
             </div>
@@ -662,33 +651,27 @@
          x-cloak
          @click="modalOpen = false">
         
-        <!-- Kontejner za modal -->
         <div class="relative w-full h-full flex items-center justify-center" @click.stop>
             
-            <!-- Gumb za zatvaranje (X) -->
             <button @click="modalOpen = false" 
                     class="absolute top-2 right-2 sm:top-4 sm:right-4 z-50 text-slate-300 hover:text-white bg-slate-900/90 hover:bg-slate-800 w-10 h-10 sm:w-12 sm:h-12 rounded-full flex items-center justify-center border border-slate-700 transition shadow-xl cursor-pointer">
                 <i class="fa-solid fa-xmark text-lg sm:text-xl"></i>
             </button>
 
-            <!-- Lijeva strelica za modal -->
             <button @click="prevModalImg()" 
                     class="absolute left-2 sm:left-4 z-50 bg-slate-900/90 hover:bg-slate-800 text-white w-10 h-10 sm:w-12 sm:h-12 rounded-full flex items-center justify-center border border-slate-700 transition shadow-xl cursor-pointer">
                 <i class="fa-solid fa-chevron-left text-sm sm:text-lg"></i>
             </button>
             
-            <!-- Slika u punoj veličini -->
             <div class="w-full h-full flex items-center justify-center px-10 sm:px-12 py-10">
                 <img :src="modalImages[modalIndex]" class="w-auto h-auto max-w-[90vw] max-h-[90vh] object-contain rounded-lg shadow-2xl border border-slate-700/60">
             </div>
 
-            <!-- Desna strelica za modal -->
             <button @click="nextModalImg()" 
                     class="absolute right-2 sm:right-4 z-50 bg-slate-900/90 hover:bg-slate-800 text-white w-10 h-10 sm:w-12 sm:h-12 rounded-full flex items-center justify-center border border-slate-700 transition shadow-xl cursor-pointer">
                 <i class="fa-solid fa-chevron-right text-sm sm:text-lg"></i>
             </button>
 
-            <!-- Indikator stranica u modalu -->
             <div class="absolute bottom-4 left-1/2 -translate-x-1/2 bg-slate-900/90 px-4 py-1.5 rounded-full text-xs text-slate-300 border border-slate-700 shadow-lg">
                 <span x-text="modalIndex + 1"></span> / <span x-text="modalImages.length"></span>
             </div>
@@ -696,11 +679,251 @@
     </div>
 
     <!-- Podnožje -->
-    <footer class="border-t border-slate-800 py-6 mt-12 bg-darkBg">
-        <div class="max-w-5xl mx-auto px-6 text-center text-xs text-slate-500">
+    <footer class="border-t border-slate-200 dark:border-slate-800 py-6 mt-12 bg-slate-100 dark:bg-darkBg transition-colors duration-300">
+        <div class="max-w-5xl mx-auto px-6 text-center text-xs text-slate-500 dark:text-slate-400">
             &copy; 2026 Antonio Petak.
         </div>
     </footer>
 
+    <!-- JS Skripta s prijevodima i logika za Alpine.js -->
+    <script>
+        function portfolioApp() {
+            return {
+                activeTab: 'about',
+                darkMode: true,
+                currentLang: 'en',
+                modalOpen: false,
+                modalImages: [],
+                modalIndex: 0,
+                
+                openModal(imagesArray, index) {
+                    this.modalImages = imagesArray;
+                    this.modalIndex = index;
+                    this.modalOpen = true;
+                },
+                nextModalImg() {
+                    if (this.modalImages.length > 0) {
+                        this.modalIndex = (this.modalIndex + 1) % this.modalImages.length;
+                    }
+                },
+                prevModalImg() {
+                    if (this.modalImages.length > 0) {
+                        this.modalIndex = (this.modalIndex - 1 + this.modalImages.length) % this.modalImages.length;
+                    }
+                },
+                
+                t(key) {
+                    return translations[this.currentLang][key] || key;
+                }
+            }
+        }
+
+        const translations = {
+            en: {
+                navAbout: "About me",
+                navExperience: "Experience",
+                navProjects: "Projects",
+                availableText: "Available for New Opportunities",
+                heroHi: "Hi, I'm",
+                heroSubtitle: "Business Intelligence Consultant and Data Analyst focused on developing advanced Power BI reporting solutions, data modeling (DAX/SQL), and business process automation.",
+                profFocusTitle: "Professional Focus",
+                profFocusP1: "Driven by a deep passion for turning raw data into meaningful business value. Throughout my career, I have cultivated a rigorous, detail-oriented analytical approach designed to eliminate bottlenecks, optimize ETL pipelines, and empower executive decision-making.",
+                profFocusP2: "I thrive in fast-paced environments where translating complex operational requirements into scalable data architecture directly impacts company growth and performance.",
+                coreCompTitle: "Core Competencies:",
+                coreComp1: "Business Analytics & Executive Power BI Dashboard Development",
+                coreComp2: "Advanced Data Modeling & DAX / SQL Optimization",
+                coreComp3: "End-to-End ETL Pipeline Architecture & Process Automation",
+                areasOfInterestTitle: "Areas of Interest & Specialization",
+                aoi1: "Reporting & KPI Tracking",
+                aoi2: "Automate & Integration",
+                aoi3: "ETL Pipelines & Azure",
+                aoi4: "AI-driven Problem Solving",
+                techTitle: "Technologies & Tools",
+                techAiSub: "AI-Driven Problem Solving",
+                educationTitle: "Education",
+                degreeTitle: "Bachelor of Business Informatics",
+                degreeSchool: "University of Zagreb, Faculty of Organization and Informatics (FOI) Varaždin",
+                degreeDesc: "Focused on business informatics, data modeling, database management systems, and analytical problem-solving.",
+                highSchoolTitle: "Electrical Technician",
+                highSchoolName: "Electrical Engineering School Varaždin",
+                certTitle: "Certificates & Training",
+                personalBgTitle: "Personal Background & Mindset",
+                personalBgDesc: "Outside of technical environments, I am an active sports enthusiast who regularly competes in triathlons and plays amateur football. The discipline, resilience, and strategic focus required in endurance sports directly translate into how I approach troubleshooting, complex data architecture, and persistent problem-solving. In my free time, I also enjoy reading books, playing video games, and watching movies and TV series.",
+                expHeader: "Work Experience",
+                job1Title: "Key Account Manager / Junior Consultant",
+                job1Date: "01/2026 – Present | Croatia",
+                job1Desc: "Delivered comprehensive client relationship management and system testing solutions that transformed technical requirements into stable, high-availability CRM operations for international clients.",
+                job2Title: "BI Consultant & Owner",
+                job2Date: "06/2025 – 12/2025 | Croatia",
+                job2Desc: "Managed the full lifecycle of business intelligence projects, translating raw enterprise data into interactive analytical solutions that drove data-informed decision-making.",
+                job3Title: "Junior BI Consultant (Freelance)",
+                job3Date: "10/2024 – 12/2025 | Netherlands",
+                job3Desc: "Engineered advanced cloud data integration solutions and optimized complex data models to support large-scale enterprise analytics for international clients.",
+                achievementsLabel: "Selected achievements & responsibilities",
+                job1Bullet1: "Led the rollout and rigorous module testing of enterprise CRM systems to guarantee seamless end-user functionality and data integrity.",
+                job1Bullet2: "Provided proactive technical support and rapid issue resolution, successfully avoiding potential client downtime and ensuring uninterrupted, continuous business operations.",
+                job1Bullet3: "Authored and maintained detailed technical documentation, system specifications, and structured user guides for both internal teams and end-users.",
+                job1Bullet4: "Managed daily client interactions and requirement-gathering sessions, ensuring custom technical implementations perfectly aligned with business goals.",
+                job2Bullet1: "Designed and deployed high-impact Power BI executive dashboards to monitor critical performance indicators (KPIs) across various business sectors.",
+                job2Bullet2: "Architected robust end-to-end ETL data pipelines tailored specifically to streamline data ingestion for small and medium-sized enterprises.",
+                job2Bullet3: "Replaced error-prone manual reporting workflows with fully automated data architectures, drastically reducing processing time and human error.",
+                job3Bullet1: "Built end-to-end workflow automation systems utilizing Procesio, Boost.space, and Power Automate to optimize complex operational processes.",
+                job3Bullet2: "Leveraged Azure cloud infrastructure to develop scalable, reliable data pipelines ensuring secure and efficient enterprise data storage.",
+                job3Bullet3: "Developed and fine-tuned complex tabular data models and optimized DAX measures to empower high-performance business intelligence reporting.",
+                job3Bullet4: "Collaborated within an international consultant team to maintain rigorous documentation standards and deliver top-tier data engineering solutions.",
+                projHeader: "Power BI Projects",
+                pageWord: "Page",
+                coAuthorLabel: "Co-author:",
+                p1Title: "Insurance Operations & Executive Scorecard Dashboard",
+                p1Desc: "A multi-page Power BI executive scorecard designed for insurance management to monitor portfolio performance, premium trends, and claims servicing efficiency. Tracks top-level KPIs including Total Net Premium (€1.50M), Total Policies (1,500), Loss Ratio (30%), and Claims Severity (€5,000). Features deep-dive analytics for Claims Exposure, Claims Servicing, and Premium Performance with dynamic forecasting and regional heatmaps.",
+                p2Title: "Insurance Claims Dashboard",
+                p2Desc: "An end-to-end Power BI reporting solution built for property and casualty insurance management to monitor, analyze, and optimize claim settlement workflows. Consolidates key financial metrics including Total Payable ($3.67M), Dwelling Coverage ($6.1M), and High-Value Claims (> $20k), while evaluating regional distribution across major urban centers in Croatia.",
+                p3Title: "Social Metrics Dashboard",
+                p3Desc: "A comprehensive multi-source Power BI marketing and social media analytics platform tracking performance across LinkedIn, CRM Lead Generation pipelines, and Google Analytics. Integrates sales funnel analytics, campaign impressions, web session durations, and conversions.",
+                p4Title: "Designer Clothing Budgeting Dashboard",
+                p4Desc: "A robust Power BI financial reporting and budgeting solution developed for luxury fashion retail management to control revenues, wholesale customer orders, and multi-pass budget revisions. Compares actual revenues ($14M) against multi-iteration budgets across global department stores.",
+                p5Title: "Insurance Risk & Actuarial Analytics Dashboard",
+                p5Desc: "An advanced actuarial and underwriting analytics suite designed for property insurance risk profiling, loss exposure modeling, and spatial risk distribution using ArcGIS and Bing maps integrated with Power BI Decomposition Trees.",
+                p6Title: "Dynamic Multi-Tenant API ETL Engine & Data Pipeline",
+                p6Desc: "A highly scalable, modular ETL pipeline developed entirely in Power Query (M Language) to automate data ingestion from a REST API across multiple dynamic targets with parameterized pagination and dynamic JSON response parsing."
+            },
+            hr: {
+                navAbout: "O meni",
+                navExperience: "Iskustvo",
+                navProjects: "Projekti",
+                availableText: "Otvoren za nove poslovne prilike",
+                heroHi: "Bok, ja sam",
+                heroSubtitle: "Poslovni informatičar, BI konzultant i podatkovni analitičar usmjeren na razvoj naprednih Power BI izvještajnih rješenja, modeliranje podataka (DAX/SQL) i automatizaciju poslovnih procesa.",
+                profFocusTitle: "Profesionalni fokus",
+                profFocusP1: "Motiviran strašću prema pretvaranju sirovih podataka u konkretnu poslovnu vrijednost. Tijekom karijere razvio sam precizan i detaljan analitički pristup usmjeren na uklanjanje uskih grla, optimizaciju ETL procesa i podršku u donošenju strateških odluka.",
+                profFocusP2: "Izvrsno se snalazim u dinamičnim okruženjima gdje prevođenje složenih operativnih zahtjeva u skalabilnu podatkovnu arhitekturu izravno utječe na rast i performanse kompanije.",
+                coreCompTitle: "Ključne kompetencije:",
+                coreComp1: "Poslovna analitika i razvoj Power BI nadzornih ploča za upravu",
+                coreComp2: "Napredno modeliranje podataka i optimizacija DAX / SQL upita",
+                coreComp3: "Arhitektura cjelovitih ETL procesa i automatizacija poslovanja",
+                areasOfInterestTitle: "Područja interesa i specijalizacija",
+                aoi1: "Izvještavanje i praćenje KPI-ja",
+                aoi2: "Automatizacija i integracija",
+                aoi3: "ETL procesi i Azure oblak",
+                aoi4: "Rješavanje problema pomoću AI-ja",
+                techTitle: "Tehnologije i alati",
+                techAiSub: "Rješavanje problema uz AI",
+                educationTitle: "Obrazovanje",
+                degreeTitle: "Prvostupnik poslovne informatike (bacc. inf.)",
+                degreeSchool: "Sveučilište u Zagrebu, Fakultet organizacije i informatike (FOI) Varaždin",
+                degreeDesc: "Usmjeren na poslovnu informatiku, modeliranje podataka, sustave za upravljanje bazama podataka i analitičko rješavanje problema.",
+                highSchoolTitle: "Tehničar za računalstvo / Elektrotehničar",
+                highSchoolName: "Elektrostrojarska škola Varaždin",
+                certTitle: "Certifikati i edukacije",
+                personalBgTitle: "Osobna pozadina i mentalitet",
+                personalBgDesc: "Izvan tehničkog okruženja, strastveni sam sportaš koji se redovito natječe u triatlonu te igra amaterski nogomet. Disciplina, ustrajnost i strategija iz sportova izdržljivosti izravno se prenose na moj pristup rješavanju kompleksnih podatkovnih problema i arhitekturi sustava. U slobodno vrijeme uživam u čitanju knjiga, igranju video igara te gledanju filmova i serija.",
+                expHeader: "Radno iskustvo",
+                job1Title: "Key Account Manager / Junior Consultant",
+                job1Date: "01/2026 – Danas | Hrvatska",
+                job1Desc: "Upravljanje odnosima s ključnim klijentima i testiranje CRM sustava radi osiguranja stabilnih i visokodostupnih poslovnih procesa za međunarodne klijente.",
+                job2Title: "Vlasnik & BI Konzultant",
+                job2Date: "06/2025 – 12/2025 | Hrvatska",
+                job2Desc: "Upravljanje cjelokupnim životnim ciklusom BI projekata, pretvaranje sirovih podataka u interaktivna analitička rješenja koja olakšavaju donošenje poslovnih odluka.",
+                job3Title: "Junior BI Consultant (Freelance)",
+                job3Date: "10/2024 – 12/2025 | Nizozemska",
+                job3Desc: "Razvoj cloud rješenja za integraciju podataka i optimizacija složenih podatkovnih modela za međunarodne klijente.",
+                achievementsLabel: "Ključna postignuća i odgovornosti",
+                job1Bullet1: "Vodio uvođenje i modulsko testiranje CRM sustava kako bi se osigurala besprijekorna funkcionalnost i integritet podataka.",
+                job1Bullet2: "Pružao proaktivnu tehničku podršku i brzo rješavanje incidenata, sprečavajući zastoj u radu klijenata.",
+                job1Bullet3: "Izrađivao i održavao detaljnu tehničku dokumentaciju i korisiničke upute.",
+                job1Bullet4: "Upravljao svakodnevnom komunikacijom s klijentima i prikupljanjem korisničkih zahtjeva.",
+                job2Bullet1: "Dizajnirao i implementirao visokoefikasne Power BI nadzorne ploče za praćenje ključnih pokazatelja uspješnosti (KPI).",
+                job2Bullet2: "Izradio stabilne ETL podatkovne tokove prilagođene malim i srednjim poduzećima.",
+                job2Bullet3: "Zamijenio ručno izvještavanje automatiziranom podatkovnom arhitekturom, znatno smanjivši ljudske pogreške.",
+                job3Bullet1: "Izradio sustave za automatizaciju radnih tokova koristeći Procesio, Boost.space i Power Automate.",
+                job3Bullet2: "Koristio Azure cloud infrastrukturu za razvoj pouzdanih i sigurnih podatkovnih cjevovoda.",
+                job3Bullet3: "Razvijao i optimizirao složene tablične modele podataka i DAX mjere za izvještavanje visokih performansi.",
+                job3Bullet4: "Surađivao u međunarodnom timu konzultanata na isporuci vrhunskih data engineering rješenja.",
+                projHeader: "Power BI Projekti",
+                pageWord: "Stranica",
+                coAuthorLabel: "Koautor:",
+                p1Title: "Insurance Operations & Executive Scorecard Dashboard",
+                p1Desc: "Višestranata Power BI nadzorna ploča dizajnirana za upravljanje osiguranjem, praćenje performansi portfelja, trendova premija i učinkovitosti obrade šteta. Prati KPI-jeve poput ukupne neto premije (€1.50M) i stopu gubitaka.",
+                p2Title: "Insurance Claims Dashboard",
+                p2Desc: "Cjelovito Power BI izvještajno rješenje za osiguravajuća društva usmjereno na optimizaciju toka rješavanja odštetnih zahtjeva, analizu uzroka šteta i regionalnu distribuciju po Hrvatskoj.",
+                p3Title: "Social Metrics Dashboard",
+                p3Desc: "Višeizvorna Power BI platforma za analitiku marketinga i društvenih mreža (LinkedIn, HubSpot CRM, Google Analytics 4) s praćenjem prodajnog lijevka i konverzija.",
+                p4Title: "Designer Clothing Budgeting Dashboard",
+                p4Desc: "Power BI financijsko rješenje za upravljanje proračunom i prihodima u luksuznoj modnoj industriji, uspoređujući ostvarene prihode ($14M) s višestrukim revizijama proračuna.",
+                p5Title: "Insurance Risk & Actuarial Analytics Dashboard",
+                p5Desc: "Napredna aktuarska analitička platforma za profiliranje rizika u osiguranju imovine uz prostornu analitiku (ArcGIS/Bing) i interaktivna stabla dekompozicije uzroka troškova.",
+                p6Title: "Dynamic Multi-Tenant API ETL Engine & Data Pipeline",
+                p6Desc: "Skalabilni ETL pogon razvijen u Power Query (M jeziku) za automatiziranu konzumaciju REST API podataka iz više baza uz dinamičko parsiranje JSON odgovora."
+            },
+            de: {
+                navAbout: "Über mich",
+                navExperience: "Erfahrung",
+                navProjects: "Projekte",
+                availableText: "Offen für neue Möglichkeiten",
+                heroHi: "Hallo, ich bin",
+                heroSubtitle: "Business Intelligence Consultant und Datenanalyst mit Fokus auf Power BI-Reporting, Datenmodellierung (DAX/SQL) und Geschäftsprozessautomatisierung.",
+                profFocusTitle: "Beruflicher Fokus",
+                profFocusP1: "Angetrieben von der Leidenschaft, Rohdaten in wertvolle Geschäftserkenntnisse zu verwandeln. Im Laufe meiner Karriere habe ich einen präzisen analytischen Ansatz entwickelt, um Engpässe zu beseitigen und ETL-Pipelines zu optimieren.",
+                profFocusP2: "Ich schätze dynamische Arbeitsumgebungen, in denen die Übersetzung komplexer Anforderungen in skalierbare Datenarchitekturen direkten Einfluss auf den Unternehmenserfolg hat.",
+                coreCompTitle: "Kernkompetenzen:",
+                coreComp1: "Business Analytics & Power BI Executive Dashboard Entwicklung",
+                coreComp2: "Erweiterte Datenmodellierung & DAX / SQL Optimierung",
+                coreComp3: "End-to-End ETL-Pipeline-Architektur & Prozessautomatisierung",
+                areasOfInterestTitle: "Interessengebiete & Spezialisierung",
+                aoi1: "Reporting & KPI-Tracking",
+                aoi2: "Automatisierung & Integration",
+                aoi3: "ETL-Pipelines & Azure Cloud",
+                aoi4: "KI-gestützte Problemlösung",
+                techTitle: "Technologien & Werkzeuge",
+                techAiSub: "KI-gestützte Problemlösung",
+                educationTitle: "Ausbildung",
+                degreeTitle: "Bachelor der Wirtschaftsinformatik",
+                degreeSchool: "Universität Zagreb, Fakultät für Organisation und Informatik (FOI)",
+                degreeDesc: "Fokus auf Wirtschaftsinformatik, Datenmodellierung, Datenbanken und analytische Problemlösung.",
+                highSchoolTitle: "Elektrotechniker / Kommunikationstechnik",
+                highSchoolName: "Elektrotechnische Schule Varaždin",
+                certTitle: "Zertifikate & Schulungen",
+                personalBgTitle: "Persönlicher Hintergrund & Mentalität",
+                personalBgDesc: "Neben meiner technischen Arbeit bin ich begeisterter Sportler, nehme an Triathlons teil und spiele Fußball. Die Disziplin und Ausdauer aus dem Sport spiegeln sich direkt in meiner Arbeitsweise wider. In meiner Freizeit lese ich gerne Bücher, spiele Videospiele und schaue Filme.",
+                expHeader: "Berufserfahrung",
+                job1Title: "Key Account Manager / Junior Consultant",
+                job1Date: "01/2026 – Heute | Kroatien",
+                job1Desc: "Kundenbetreuung und CRM-Systemtests zur Sicherstellung stabiler und hochverfügbarer Geschäftsprozesse für internationale Kunden.",
+                job2Title: "BI Consultant & Inhaber",
+                job2Date: "06/2025 – 12/2025 | Kroatien",
+                job2Desc: "Verantwortlich für den gesamten Lebenszyklus von BI-Projekten und die Transformation von Rohdaten in interaktive Analyselösungen.",
+                job3Title: "Junior BI Consultant (Freelance)",
+                job3Date: "10/2024 – 12/2025 | Niederlande",
+                job3Desc: "Entwicklung von Cloud-Datenintegrationslösungen und Optimierung komplexer Datenmodelle für internationale Kunden.",
+                achievementsLabel: "Wichtige Erfolge & Aufgaben",
+                job1Bullet1: "Leitung von Modultests für enterprise CRM-Systeme zur Sicherstellung der Datenintegrität.",
+                job1Bullet2: "Proaktiver technischer Support zur Vermeidung von Ausfallzeiten bei Kunden.",
+                job1Bullet3: "Erstellung und Pflege detaillierter technischer Dokumentationen und Benutzerhandbücher.",
+                job1Bullet4: "Anforderungsanalyse und tägliche Kundenkommunikation.",
+                job2Bullet1: "Entwicklung von Power BI Executive Dashboards zur Überwachung wichtiger KPIs.",
+                job2Bullet2: "Architektur von ETL-Datenpipelines zur Optimierung der Datenverarbeitung für KMUs.",
+                job2Bullet3: "Automatisierung manueller Reporting-Prozesse zur Reduzierung von Fehlern.",
+                job3Bullet1: "Aufbau von Workflow-Automatisierungen mit Procesio, Boost.space und Power Automate.",
+                job3Bullet2: "Nutzung der Azure-Cloud-Infrastruktur für skalierbare Daten-Pipelines.",
+                job3Bullet3: "Entwicklung und Optimierung komplexer Datenmodelle und DAX-Kennzahlen.",
+                job3Bullet4: "Zusammenarbeit in einem internationalen Beraterteam.",
+                projHeader: "Power BI Projekte",
+                pageWord: "Seite",
+                coAuthorLabel: "Koautor:",
+                p1Title: "Insurance Operations & Executive Scorecard Dashboard",
+                p1Desc: "Mehrseitiges Power BI Executive Dashboard zur Überwachung von Portfolio-Performance, Prämiends und Schadenabwicklungs-Effizienz.",
+                p2Title: "Insurance Claims Dashboard",
+                p2Desc: "Power BI-Reporting-Lösung zur Analyse und Optimierung von Schadenregulierungs-Workflows und regionalen Schadensverteilungen.",
+                p3Title: "Social Metrics Dashboard",
+                p3Desc: "Multi-Source Power BI Marketing-Plattform zur Verfolgung von LinkedIn, HubSpot CRM und Google Analytics 4 Performance-Kennzahlen.",
+                p4Title: "Designer Clothing Budgeting Dashboard",
+                p4Desc: "Finanz-Reporting- und Budgetierungslösung für die Luxusmodebranche zum Vergleich von Ist-Einnahmen ($14M) mit Budget-Szenarien.",
+                p5Title: "Insurance Risk & Actuarial Analytics Dashboard",
+                p5Desc: "Aktuarische Analyselösung zur Risikoprofilierung in der Sachversicherung mit Geodaten-Visualisierung (ArcGIS/Bing).",
+                p6Title: "Dynamic Multi-Tenant API ETL Engine & Data Pipeline",
+                p6Desc: "Skalierbare ETL-Engine in Power Query (M-Sprache) zur automatisierten Erfassung von REST-API-Daten aus mehreren Quellen."
+            }
+        };
+    </script>
 </body>
 </html>
